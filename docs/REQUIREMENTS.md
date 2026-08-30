@@ -1,8 +1,8 @@
 # VOA Level 2 Player — 产品需求（MVP）
 
-版本：0.1
+版本：0.2
 日期：2026-08-30
-状态：开发中
+状态：可用，课程数据已补齐
 
 ## 1. 背景
 
@@ -59,12 +59,12 @@ MVP 明确不做：
 - 可以从下拉框选择课程。
 - 支持上一课和下一课。
 - URL 应包含 `?lesson=N`，便于收藏和返回。
-- MVP 首批数据为 Lesson 1–3；验证完成后导入全部 30 课。
+- 课程目录包含连续的 Lesson 1–30，不包含 Review 页面。
 
 ### FR-02 视频播放
 
 - 使用浏览器原生 `<video controls playsinline>`。
-- 首选 VOA 360p MP4，降低移动流量。
+- 使用 VOA 提供的 1080p MP4；数据中记录 `videoQuality: 1080`。
 - 能拖动进度、暂停和继续。
 - 播放视频时自动暂停音频。
 - 记录每课视频播放位置。
@@ -148,6 +148,7 @@ MVP 明确不做：
   "title": "Budget Cuts",
   "sourceUrl": "https://learningenglish.voanews.com/...",
   "videoUrl": "https://...mp4?cb=...",
+  "videoQuality": 1080,
   "audioUrl": "https://...mp3",
   "transcriptStatus": "complete",
   "transcript": [
@@ -187,7 +188,7 @@ data/lessons.generated.json
 ### 桌面浏览器
 
 - [ ] 页面通过静态 HTTP 服务器正常打开；
-- [ ] Lesson 1–3 均可选择；
+- [ ] Lesson 1–30 均可选择，上一课/下一课连续；
 - [ ] 视频和音频不会同时播放；
 - [ ] 0.70、0.80、0.90、1.00 快捷速度生效；
 - [ ] 加减按钮以 0.05 调整；
@@ -208,7 +209,7 @@ data/lessons.generated.json
 - [ ] 1 分钟、15 分钟和 30 分钟定时分别测试；
 - [ ] 记录“完全准时 / 有延迟 / 仅解锁后停止”的真实结果。
 
-只有前三课通过上述真机验证，才批量导入剩余 27 课。
+Lesson 1–30 已完成导入；真机验收仍重点验证锁屏、倍速、循环和睡眠定时的稳定性。
 
 ## 9. 已知风险
 
@@ -234,8 +235,7 @@ data/lessons.generated.json
 
 仅在 MVP 日常使用稳定后考虑：
 
-- 导入全部 30 课；
-- 搜索课程；
+- 搜索和筛选课程；
 - A-B 循环；
 - 为台词生成时间轴，实现当前句高亮和单句循环；
 - “听一句—暂停—复述—重播”模式；
