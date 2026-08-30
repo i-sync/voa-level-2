@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#172033" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="description"
+      content="VOA Learning English Level 2 增强播放器：倍速、循环、睡眠定时和完整对话文本。"
+    />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>VOA Level 2 Player</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="返回课程首页">
+          <img src="assets/icon.svg" width="42" height="42" alt="" />
+          <span>
+            <strong>VOA Level 2</strong>
+            <small>Enhanced Player</small>
+          </span>
+        </a>
+        <span class="mvp-badge">MVP</span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <noscript>
+        <div class="notice notice-error">这个播放器需要启用 JavaScript。</div>
+      </noscript>
+
+      <div id="appError" class="notice notice-error" hidden></div>
+
+      <section class="card lesson-card" aria-labelledby="lessonTitle">
+        <nav class="lesson-nav" aria-label="课程导航">
+          <button id="previousLesson" class="secondary-button" type="button">← 上一课</button>
+          <label class="lesson-select-label" for="lessonSelect">
+            <span class="visually-hidden">选择课程</span>
+            <select id="lessonSelect" aria-label="选择课程"></select>
+          </label>
+          <button id="nextLesson" class="secondary-button" type="button">下一课 →</button>
+        </nav>
+
+        <div class="lesson-heading">
+          <div>
+            <p id="lessonEyebrow" class="eyebrow">Lesson</p>
+            <h1 id="lessonTitle">正在载入课程…</h1>
+          </div>
+          <label class="complete-control">
+            <input id="completedCheckbox" type="checkbox" />
+            <span>已学完</span>
+          </label>
+        </div>
+
+        <p class="source-line">
+          内容来源：VOA Learning English ·
+          <a id="sourceLink" href="https://learningenglish.voanews.com/p/6765.html" target="_blank" rel="noreferrer">
+            查看原课
+          </a>
+        </p>
+      </section>
+
+      <section class="card media-card" aria-labelledby="mediaHeading">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Player</p>
+            <h2 id="mediaHeading">播放课程</h2>
+          </div>
+          <div class="mode-tabs" role="tablist" aria-label="媒体类型">
+            <button id="audioTab" class="mode-tab" type="button" role="tab" aria-controls="audioPanel" data-mode="audio">
+              音频
+            </button>
+            <button id="videoTab" class="mode-tab" type="button" role="tab" aria-controls="videoPanel" data-mode="video">
+              视频
+            </button>
+          </div>
+        </div>
+
+        <div id="audioPanel" class="media-panel" role="tabpanel" aria-labelledby="audioTab">
+          <p class="media-tip">适合息屏、通勤和重复听。</p>
+          <audio id="audioPlayer" controls preload="metadata"></audio>
+        </div>
+
+        <div id="videoPanel" class="media-panel" role="tabpanel" aria-labelledby="videoTab" hidden>
+          <p class="media-tip">适合结合画面理解场景。</p>
+          <video id="videoPlayer" controls playsinline preload="metadata"></video>
+        </div>
+
+        <div id="mediaError" class="notice notice-error compact" hidden>
+          当前媒体加载失败。可以先打开本课的 VOA 原页面播放。
+        </div>
+
+        <div class="control-grid">
+          <section class="control-block" aria-labelledby="speedHeading">
+            <div class="control-title-row">
+              <h3 id="speedHeading">播放速度</h3>
+              <output id="speedValue" for="speedDown speedUp">1×</output>
+            </div>
+            <div id="speedPresets" class="chip-row" aria-label="快捷播放速度">
+              <button class="chip" type="button" data-speed="0.7">0.7×</button>
+              <button class="chip" type="button" data-speed="0.8">0.8×</button>
+              <button class="chip" type="button" data-speed="0.9">0.9×</button>
+              <button class="chip" type="button" data-speed="1">1.0×</button>
+            </div>
+            <div class="stepper-row">
+              <button id="speedDown" class="secondary-button square-button" type="button" aria-label="速度降低 0.05">−</button>
+              <span>每次调整 0.05</span>
+              <button id="speedUp" class="secondary-button square-button" type="button" aria-label="速度提高 0.05">＋</button>
+            </div>
+          </section>
+
+          <section class="control-block" aria-labelledby="playbackHeading">
+            <h3 id="playbackHeading">重复与跳转</h3>
+            <div class="action-row">
+              <button id="seekBackward" class="secondary-button" type="button">↶ 10 秒</button>
+              <button id="loopToggle" class="toggle-button" type="button" aria-pressed="false">循环本课：关</button>
+              <button id="seekForward" class="secondary-button" type="button">10 秒 ↷</button>
+            </div>
+          </section>
+        </div>
+
+        <section class="timer-block" aria-labelledby="timerHeading">
+          <div class="control-title-row">
+            <div>
+              <h3 id="timerHeading">睡眠定时</h3>
+              <p class="subtle">到点后暂停当前页面的音频和视频。</p>
+            </div>
+            <output id="timerStatus" aria-live="polite">未设置</output>
+          </div>
+
+          <div id="timerPresets" class="chip-row" aria-label="睡眠定时快捷选项">
+            <button class="chip timer-chip" type="button" data-minutes="15">15 分钟</button>
+            <button class="chip timer-chip" type="button" data-minutes="30">30 分钟</button>
+            <button class="chip timer-chip" type="button" data-minutes="45">45 分钟</button>
+            <button class="chip timer-chip" type="button" data-minutes="60">60 分钟</button>
+          </div>
+
+          <div class="custom-timer-row">
+            <label for="customMinutes">自定义</label>
+            <input id="customMinutes" type="number" min="1" max="240" inputmode="numeric" placeholder="分钟" />
+            <button id="setCustomTimer" class="secondary-button" type="button">设置</button>
+            <button id="cancelTimer" class="text-button" type="button" disabled>取消定时</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="card transcript-card" aria-labelledby="transcriptHeading">
+        <div class="section-heading-row transcript-heading-row">
+          <div>
+            <p class="eyebrow">Conversation</p>
+            <h2 id="transcriptHeading">对话文本</h2>
+          </div>
+          <div class="font-controls" aria-label="调整文本字号">
+            <button id="fontDown" class="secondary-button square-button" type="button" aria-label="减小文本字号">A−</button>
+            <button id="fontUp" class="secondary-button square-button" type="button" aria-label="增大文本字号">A＋</button>
+          </div>
+        </div>
+        <p class="transcript-note">当前版本是完整静态文本，暂不包含逐句时间轴。</p>
+        <div id="transcript" class="transcript" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Independent learning tool · Content source: VOA Learning English</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

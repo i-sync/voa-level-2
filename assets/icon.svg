@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="VOA Level 2 Player">
+  <rect width="512" height="512" rx="112" fill="#a52a2a"/>
+  <circle cx="256" cy="256" r="154" fill="#fffdf8" opacity=".12"/>
+  <path d="M204 163v186l161-93-161-93Z" fill="#fffdf8"/>
+  <path d="M117 126h94v42h-52v52h-42v-94Zm278 0v94h-42v-52h-52v-42h94ZM117 386v-94h42v52h52v42h-94Zm278 0h-94v-42h52v-52h42v94Z" fill="#fffdf8" opacity=".9"/>
+</svg>

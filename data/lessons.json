@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-30T00:00:00Z",
+  "course": {
+    "title": "Let's Learn English — Level 2",
+    "sourceUrl": "https://learningenglish.voanews.com/p/6765.html",
+    "publisher": "VOA Learning English",
+    "status": "mvp-seed"
+  },
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Budget Cuts",
+      "publishedAt": "2019-05-12",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson1/3960391.html",
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/08/31/3bf697ff-3ef5-4d59-8dcd-52613e2e7e9d_hq.mp3",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/7/7a/7a055fd0-0345-41e4-b24d-37df1736f3d1.mp4?cb=edc3e694c",
+      "audioDuration": "4:07",
+      "videoDuration": "5:00",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hum. Oh! “Important meeting. Everyone must come.” Well, back to work! And my boss has called a meeting. I wonder what it's about. Maybe we're all getting raises! Ooo, there's Jonathan! Maybe he knows."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Hi! I'm Professor Bot! This video is all about work. People talk about jobs and things that happen at work. Your assignment is to find as many work words as you can. Don't worry, I'll help."
+        },
+        {
+          "speaker": "Anna",
+          "text": "So, Jonathan, what do you think today's meeting is about? The email sounded important."
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "Well, I have heard people in the building talking about budget cuts."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh! Budget cuts? Wait, who has been talking about budget cuts?"
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "Mark in Accounting."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Mark in Accounting? That's one person. That's not “people.”"
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "I know, but Mark knows everything that goes on at The Studio."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That is true. But wait, look at us. We shouldn't gossip. That's how rumors start. We'll just go to the meeting and see what happens."
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "You're right. No more talk about budget cuts."
+        },
+        {
+          "speaker": "Amelia",
+          "text": "Budget cuts? Oh no!"
+        },
+        {
+          "speaker": "Amelia",
+          "text": "I just heard Anna and Jonathan talking about budget cuts."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "That must be what the meeting is about. When there are budget cuts, people lose their jobs."
+        },
+        {
+          "speaker": "Amelia",
+          "text": "Not you. You're a good reporter."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "And it's not you. You've done a great job as a videographer."
+        },
+        {
+          "speaker": "Amelia",
+          "text": "I can't go back to being a detective. Criminals scare me!"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "And I can't go back to being a teacher! High school kids scare me!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you hear any work words? They talked about a lot of jobs. You can make the name of a job by adding an ending to a verb! Kaveh reports, so, he's a reporter. Amelia used to detect, so she was a detective. If you teach, you're a teacher. And a videographer… uh, I think you understand. Back to the story."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Penelope, have you heard the news? Today's meeting is about budget cuts."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "That's awful! What should I do?"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Update your résumé. I’ve already updated mine. I’ll see you at the meeting."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Hello everyone! Quiet, please. Quiet, please!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "This meeting won’t take long. Then you can all leave."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "What is wrong with everyone? You look like I'm going to fire you. Ha-ha-ha-ha-ha! Seriously, what is wrong with everyone?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Excuse me, Ms. Weaver?"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Yes, Anna."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, everyone has been worrying about, you know … We’ve been worrying that you are going to fire us!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "I’m not going to fire any of you! No! The reason for this meeting is to tell you what a good job you’ve been doing and give out new assignments. Budget cuts have been happening. But only one person has lost their job — Mark in Accounting. Now, let’s talk about those new assignments."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Ms. Weaver's team is doing a good job! How did you do? Did you find all of the work words? Here's a list you can check."
+        },
+        {
+          "speaker": null,
+          "text": "Work words: boss, meeting, raises, email, budget cuts, Accounting, gossip, rumors, lose, reporter, résumé, videographer, detective, teacher, update, fire, assignment."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "The Interview",
+      "publishedAt": "2018-09-10",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-2/3960471.html",
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/09/05/676d9800-cee0-4a59-9e79-b9378e0061ad_hq.mp3",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/1/17/1706ec69-afcc-40bb-a79c-4a053b5c77ad.mp4?cb=edc3e78b9",
+      "audioDuration": "4:05",
+      "videoDuration": "5:00",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Ms. Weaver is giving new assignments out. I am ready to take on anything she gives me. Well, except reporting traffic from a helicopter. Wish me luck."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "I wonder what Anna’s new assignment will be? Professor Bot here! While you are watching, look for phrasal, or two-word verbs. Some stay together, like “go back,” and some can come apart, like “give assignments out.” Good luck, Anna!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "So, as I said at the meeting last week, I have new assignments for everyone at The Studio. Anna, you're good at asking questions. So, I want you to go back to hosting and reporting."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That sounds great."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "You're also a team player. So, I want you to team up with someone …"
+        },
+        {
+          "speaker": "Anna",
+          "text": "That sounds even better!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "… someone who is very “different” from you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That sounds … what do you mean “different”?"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Well, you are very cheerful, you're a people person. I want you to team up with someone who … isn't."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ms. Weaver, I will find that person."
+        },
+        {
+          "speaker": "Mimi",
+          "text": "Excuse me. Are you using this chair?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Yes."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, hi! Thanks for meeting me."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Sure. But I don’t have lots of time, Anna. I’m busy looking for work."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, you can tear these want ads up and throw them away! I have good news!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, I was working on that crossword puzzle."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh. Sorry. Sorry. Pete, forget about the crossword puzzle. I have a job offer for you!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I'm listening."
+        },
+        {
+          "speaker": "Anna",
+          "text": "My boss wants me to team up with someone to host a talk show. But the person must be different from me. So, I thought of you."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Different from you? What do you mean?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'm sorry, Pete, I don't have time right now. Here's my boss's address. Your interview is tomorrow morning at 10 a.m."
+        },
+        {
+          "speaker": "Pete",
+          "text": "But what do you mean “different”?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Just be yourself, Pete. Just be yourself."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you find any two-word verbs? Here’s one example. Pete can throw the want ads away! Throw away is a two-word verb."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Thanks for coming in, Pete."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Thanks for the opportunity, Ms. Weaver."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "I need to find out if you have the skills for this job. And I want you to be completely honest."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Okay."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "First, let's talk about your personal skills. Pete, are you a people person?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Well, okay, sometimes I think people talk too much."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Pete, what work of yours are you most proud of?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Last year, I locked myself in a cabin and wrote a book. I didn't speak to anybody the entire time! It was the best two months of my life."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Okay. I think I’ve heard enough."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hey! Hey, Pete, how was the interview with Ms. Weaver?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Well, she said I was grumpy and not good with people."
+        },
+        {
+          "speaker": "Anna",
+          "text": "And … ?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "And, I got the job!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I knew it! Congratulations! Let's go celebrate."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Okay!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you find more two-word verbs? Here is the list."
+        },
+        {
+          "speaker": null,
+          "text": "Two-word verbs: give out, find out, take on, tear up, go back, throw away, team up, come in."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "He Said - She Said",
+      "publishedAt": "2018-09-14",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-3/4027340.html",
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/09/15/078ffce1-f691-4e1e-811e-058154119d2d_hq.mp3",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/e/ee/ee3e6fb5-9ea6-4f8b-88b4-c24e14fb2780.mp4?cb=edc3e7884",
+      "audioDuration": "4:55",
+      "videoDuration": "5:00",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Today, Pete and I are meeting with a consultant who will help us with our new show. Yesterday, Pete had promised to meet me here at 8:00 a.m. but he did not come on time."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Uh-oh. It’s bad to be late for a business meeting. But while we wait for Pete, let’s talk about a new verb tense — past perfect! You know the past tense, right? Like, “Pete promised to meet me here at 8:00 a.m.” Past perfect is a little different. When we talk about two things in the past, we can use the past perfect for the first event. Put “had” before the past participle. “Pete had promised he would meet Anna.” Here's your assignment: find sentences with the past perfect tense. Remember, look for “had!”"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "You two are late — exactly 43 minutes late! What happened?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "He had to get his “special” coffee — SPECIAL coffee!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "She had to feed her birds — HER birds!"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Okay, I can see already that you need my help. You can’t both talk at the same time. You have to take turns. Alright, Anna, you go first."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sure. Kelly, see, Pete and I live in the same building. So, we decided to meet at 8:00 a.m. — 8:00 a.m. — to come to work together. I had waited 15 minutes when Pete arrived!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "After Pete had wasted time waiting for coffee, we were late. I left you a message."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Hum. I didn’t get that message."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh. Sorry."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Pete?"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Anna left a message. That’s the right thing to do. Did you find some examples of the past perfect sentences? I did. Anna said, “After Pete had wasted time waiting for coffee, we were late.” Look at that coffee! It looks more like dessert! Okay, keep watching for past perfect!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Yeah, that’s not why we’re late. This is why we’re late: I had arrived on time at 8:00 a.m. but didn’t see Anna. She was standing behind a tree. I think she was hugging it. I always walk to work. But she said that would take too long and that a scooter would be much faster. It was awful. I hated it. And it added too much time to our commute!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Then Anna stopped by a pond to feed the birds. She had named them after characters from books and yelled the names out loud … Romeo! Juliet! Sherlock!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "By the time she had fed all the birds, we were late."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "This is what I think. You two see the same event very differently. Does this happen often with you two?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Yes."
+        },
+        {
+          "speaker": "Anna",
+          "text": "No."
+        },
+        {
+          "speaker": "Pete",
+          "text": "No."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Okay. This is good. This is good! It’s good to see things differently. I have an idea: we will call the show “He Said, She Said.” For every story, you tell a different point of view."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That is a great idea, Kelly! Pete, we are different. That’s why I thought of you for this job!"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "I think you two understand perfectly."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Let’s get to work!"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "She named the birds? Really?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Yeah…"
+        },
+        {
+          "speaker": null,
+          "text": "Business people in the U.S. think you should come to a meeting at the exact time. If you are late to a business appointment, you should call and explain why."
+        }
+      ]
+    }
+  ]
+}

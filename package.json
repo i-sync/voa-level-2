@@ -1,0 +1,11 @@
+{
+  "name": "voa-level-2-player",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "python -m http.server 8000",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check js/app.js && node --check js/core.js && npm test"
+  }
+}

@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/lessons.generated.json
+.DS_Store
+.pytest_cache/
+node_modules/
+*.tmp
