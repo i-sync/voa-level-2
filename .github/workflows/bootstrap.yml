@@ -26,9 +26,10 @@ jobs:
           base64 --decode /tmp/voa-mvp.tar.gz.b64 > /tmp/voa-mvp.tar.gz
           echo "5671134395784cdda7ed8f3bcae8be95334f47f1c90b185e12aa121013f3165c  /tmp/voa-mvp.tar.gz" | sha256sum --check --strict
           tar --extract --gzip --file=/tmp/voa-mvp.tar.gz --directory=. --no-same-owner
-          rm -rf .bootstrap .github/workflows/bootstrap.yml
+          rm -rf .bootstrap
+          rm -f .github/workflows/ci.yml
 
-      - name: Commit the MVP
+      - name: Commit the MVP source
         shell: bash
         run: |
           set -euo pipefail
