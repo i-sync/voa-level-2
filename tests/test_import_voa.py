@@ -44,10 +44,11 @@ def test_dialogue_parts_splits_multiple_speakers_in_one_block() -> None:
     ]
 
 
-def test_parse_lesson_prefers_360p_and_128_kbps_and_extracts_conversation() -> None:
+def test_parse_lesson_prefers_1080p_and_128_kbps_and_extracts_conversation() -> None:
     html = """
     <html><body>
       <h1>Lesson 7: Tip Your Tour Guide</h1>
+      <a href="/video-1080.mp4?cb=fullhd&amp;download=1">1080p | 140MB</a>
       <a href="/video-720.mp4?download=1">720p | 70MB</a>
       <a href="/video-360.mp4?cb=xyz&amp;download=1">360p | 22MB</a>
       <h2>Conversation</h2>
@@ -72,7 +73,8 @@ def test_parse_lesson_prefers_360p_and_128_kbps_and_extracts_conversation() -> N
 
     assert lesson["id"] == 7
     assert lesson["title"] == "Tip Your Tour Guide"
-    assert lesson["videoUrl"] == "https://example.test/video-360.mp4?cb=xyz"
+    assert lesson["videoUrl"] == "https://example.test/video-1080.mp4?cb=fullhd"
+    assert lesson["videoQuality"] == 1080
     assert lesson["audioUrl"] == "https://example.test/audio-128.mp3"
     assert lesson["transcriptStatus"] == "complete"
     assert lesson["transcript"] == [
