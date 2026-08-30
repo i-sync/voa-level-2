@@ -141,7 +141,19 @@ def choose_video_url(
     return choose_video_source(soup, base_url, preferred_quality)[1]
 
 
-def choose_audio_url(soup: BeautifulSoup, base_url: str, preferred_bitrate: int = 128) -> str:
+def choose_audio_source(
+    soup: BeautifulSoup,
+    base_url: str,
+    preferred_bitrate: int = 128,
+) -> tuple[str, int, str]:
+    """Return an MP3 source, or the smallest MP4 when VOA has no lesson MP3.
+
+    A small number of VOA lesson pages expose video and transcript content but no
+    separate MP3 download. Browsers can play the AAC audio track of an MP4 in an
+    ``<audio>`` element, so the lowest-resolution MP4 is a bandwidth-conscious
+    fallback while keeping the player complete.
+    """
+
     candidates: list[tuple[int, str]] = []
 
     for anchor in soup.select("a[href]"):
@@ -154,10 +166,40 @@ def choose_audio_url(soup: BeautifulSoup, base_url: str, preferred_bitrate: int 
         bitrate = int(match.group(1)) if match else 0
         candidates.append((bitrate, normalise_media_url(href, base_url)))
 
-    if not candidates:
-        raise ImportFailure("No MP3 link was found on the lesson page.")
+    if candidates:
+        bitrate, url = min(
+            candidates,
+            key=lambda item: (abs(item[0] - preferred_bitrate), -item[0]),
+        )
+        return ("mp3", bitrate, url)
 
-    return min(candidates, key=lambda item: (abs(item[0] - preferred_bitrate), -item[0]))[1]
+    video_fallbacks: list[tuple[int, str]] = []
+    for anchor in soup.select("a[href]"):
+        href = str(anchor.get("href", ""))
+        if ".mp4" not in href.lower():
+            continue
+        text = clean_text(anchor.get_text(" ", strip=True))
+        match = VIDEO_QUALITY_RE.search(text)
+        if match:
+            video_fallbacks.append(
+                (int(match.group(1)), normalise_media_url(href, base_url))
+            )
+
+    if not video_fallbacks:
+        raise ImportFailure("No MP3 or MP4 audio fallback was found on the lesson page.")
+
+    quality, url = min(video_fallbacks, key=lambda item: item[0])
+    return ("mp4", quality, url)
+
+
+def choose_audio_url(
+    soup: BeautifulSoup,
+    base_url: str,
+    preferred_bitrate: int = 128,
+) -> str:
+    """Return only the selected audio-capable URL."""
+
+    return choose_audio_source(soup, base_url, preferred_bitrate)[2]
 
 
 def find_conversation_heading(soup: BeautifulSoup) -> Tag:
@@ -290,17 +332,24 @@ def parse_lesson(
         )
 
     video_quality, video_url = choose_video_source(soup, source_url)
+    audio_format, audio_quality, audio_url = choose_audio_source(soup, source_url)
 
-    return {
+    lesson: dict[str, object] = {
         "id": lesson_id,
         "title": title,
         "sourceUrl": source_url,
         "videoUrl": video_url,
         "videoQuality": video_quality,
-        "audioUrl": choose_audio_url(soup, source_url),
+        "audioUrl": audio_url,
+        "audioFormat": audio_format,
         "transcriptStatus": "complete",
         "transcript": extract_transcript(soup),
     }
+    if audio_format == "mp3":
+        lesson["audioBitrate"] = audio_quality
+    else:
+        lesson["audioFallbackVideoQuality"] = audio_quality
+    return lesson
 
 
 def fetch_html(session: requests.Session, url: str, timeout: float) -> str:
