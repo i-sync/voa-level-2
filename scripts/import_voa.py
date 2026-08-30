@@ -106,7 +106,13 @@ def parse_index(html: str, base_url: str = INDEX_URL) -> list[LessonLink]:
     return lessons
 
 
-def choose_video_url(soup: BeautifulSoup, base_url: str, preferred_quality: int = 360) -> str:
+def choose_video_source(
+    soup: BeautifulSoup,
+    base_url: str,
+    preferred_quality: int = 1080,
+) -> tuple[int, str]:
+    """Return the closest available MP4 quality and its normalized URL."""
+
     candidates: list[tuple[int, str]] = []
 
     for anchor in soup.select("a[href]"):
@@ -122,7 +128,17 @@ def choose_video_url(soup: BeautifulSoup, base_url: str, preferred_quality: int 
     if not candidates:
         raise ImportFailure("No MP4 link was found on the lesson page.")
 
-    return min(candidates, key=lambda item: (abs(item[0] - preferred_quality), item[0]))[1]
+    return min(candidates, key=lambda item: (abs(item[0] - preferred_quality), -item[0]))
+
+
+def choose_video_url(
+    soup: BeautifulSoup,
+    base_url: str,
+    preferred_quality: int = 1080,
+) -> str:
+    """Return only the selected MP4 URL for callers that do not need metadata."""
+
+    return choose_video_source(soup, base_url, preferred_quality)[1]
 
 
 def choose_audio_url(soup: BeautifulSoup, base_url: str, preferred_bitrate: int = 128) -> str:
@@ -273,11 +289,14 @@ def parse_lesson(
             f"Index expected Lesson {expected_id}, but page title says Lesson {lesson_id}."
         )
 
+    video_quality, video_url = choose_video_source(soup, source_url)
+
     return {
         "id": lesson_id,
         "title": title,
         "sourceUrl": source_url,
-        "videoUrl": choose_video_url(soup, source_url),
+        "videoUrl": video_url,
+        "videoQuality": video_quality,
         "audioUrl": choose_audio_url(soup, source_url),
         "transcriptStatus": "complete",
         "transcript": extract_transcript(soup),
