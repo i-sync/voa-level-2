@@ -6,9 +6,10 @@
 
 ## 当前状态
 
-MVP 已放入 Lesson 1–3，用于先验证 iPhone Safari 的媒体链路和锁屏行为：
+当前版本已包含 Lesson 1–30，并已切换为 VOA 提供的 1080p 视频资源：
 
-- 视频与 128 kbps 音频；
+- 30 课全部使用 1080p 视频；
+- 音频优先使用 128 kbps MP3；VOA 未提供独立 MP3 时，使用该课最小 MP4 的音轨；
 - 完整 Conversation 字幕/文本；
 - 首次打开默认 0.80，并提供 0.70 / 0.80 / 0.90 / 1.00 快捷速度；
 - 0.05 步进，范围 0.50–1.50；
@@ -18,7 +19,9 @@ MVP 已放入 Lesson 1–3，用于先验证 iPhone Safari 的媒体链路和锁
 - 上一课 / 下一课；
 - Media Session 渐进增强。
 
-前三课真机验收通过后，再导入剩余 27 课。完整范围和验收清单见 [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md)。
+目前 Lesson 8 的 VOA 页面没有独立 MP3，因此该课的音频播放器使用 240p MP4 的音轨；Lesson 8 的视频播放器仍然使用 1080p。
+
+完整范围、数据规则和真机验收清单见 [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md)。
 
 ## 本地运行
 
@@ -58,7 +61,7 @@ python -m json.tool data/lessons.json > /dev/null
 python -m pip install -r scripts/requirements.txt
 ```
 
-先用三课验证页面结构：
+只导入前三课用于调试页面结构：
 
 ```bash
 python scripts/import_voa.py --limit 3
@@ -80,20 +83,16 @@ python scripts/import_voa.py
 
 1. 从 VOA Level 2 索引发现编号课程；
 2. 忽略 Review 页面；
-3. 为每课优先选择 360p MP4 和 128 kbps MP3；
-4. 提取 Conversation 文本；
-5. 生成静态 JSON。
+3. 为每课选择 1080p MP4，并记录实际视频清晰度；
+4. 优先选择 128 kbps MP3；没有独立 MP3 时选择最小 MP4 作为音频来源；
+5. 提取 Conversation 文本；
+6. 生成静态 JSON。
 
-VOA 改版后脚本可能需要调整，所以生成结果必须人工检查，不能自动覆盖线上数据。
+VOA 改版后脚本可能需要调整。生成结果应先人工检查，再替换正式数据并运行全部测试，不能让网站在用户访问时实时抓取 VOA。
 
 ## 部署到 GitHub Pages
 
-仓库保持纯静态结构，可以直接使用 GitHub Pages：
-
-1. 打开仓库 **Settings → Pages**；
-2. Source 选择 **Deploy from a branch**；
-3. Branch 选择 `main`，目录选择 `/ (root)`；
-4. 保存并等待 Pages 发布。
+仓库通过 [`.github/workflows/static.yml`](.github/workflows/static.yml) 自动部署静态站点。`main` 分支有新提交时，GitHub Actions 会重新发布 GitHub Pages。Pages 的 Source 应选择 **GitHub Actions**。
 
 部署后应使用真实 iPhone 完成 [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) 中的锁屏、倍速、循环和定时测试。
 

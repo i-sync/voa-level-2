@@ -1,27 +1,25 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-30T00:00:00Z",
+  "generatedAt": "2026-08-31T00:42:03.370301+00:00",
   "course": {
     "title": "Let's Learn English — Level 2",
     "sourceUrl": "https://learningenglish.voanews.com/p/6765.html",
-    "publisher": "VOA Learning English",
-    "status": "mvp-seed"
+    "publisher": "VOA Learning English"
   },
   "lessons": [
     {
       "id": 1,
       "title": "Budget Cuts",
-      "publishedAt": "2019-05-12",
       "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson1/3960391.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/7/7a/7a055fd0-0345-41e4-b24d-37df1736f3d1_1080p.mp4?cb=edc3e694c",
+      "videoQuality": 1080,
       "audioUrl": "https://voa-audio.voanews.eu/vle/2017/08/31/3bf697ff-3ef5-4d59-8dcd-52613e2e7e9d_hq.mp3",
-      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/7/7a/7a055fd0-0345-41e4-b24d-37df1736f3d1.mp4?cb=edc3e694c",
-      "audioDuration": "4:07",
-      "videoDuration": "5:00",
+      "audioFormat": "mp3",
       "transcriptStatus": "complete",
       "transcript": [
         {
           "speaker": "Anna",
-          "text": "Hum. Oh! “Important meeting. Everyone must come.” Well, back to work! And my boss has called a meeting. I wonder what it's about. Maybe we're all getting raises! Ooo, there's Jonathan! Maybe he knows."
+          "text": "Hum. Oh! “Important meeting. Everyone must come.” Well, back to work! And my boss has called a meeting. I wonder what it's about. Maybe we're all getting raises ! Ooo, there's Jonathan! Maybe he knows."
         },
         {
           "speaker": "Professor Bot",
@@ -33,7 +31,7 @@
         },
         {
           "speaker": "Jonathan",
-          "text": "Well, I have heard people in the building talking about budget cuts."
+          "text": "Well, I have heard people in the building talking about budget cuts ."
         },
         {
           "speaker": "Anna",
@@ -41,7 +39,7 @@
         },
         {
           "speaker": "Jonathan",
-          "text": "Mark in Accounting."
+          "text": "Mark in Accounting ."
         },
         {
           "speaker": "Anna",
@@ -53,7 +51,7 @@
         },
         {
           "speaker": "Anna",
-          "text": "That is true. But wait, look at us. We shouldn't gossip. That's how rumors start. We'll just go to the meeting and see what happens."
+          "text": "That is true. But wait, look at us. We shouldn't gossip . That's how rumors start. We'll just go to the meeting and see what happens."
         },
         {
           "speaker": "Jonathan",
@@ -77,11 +75,11 @@
         },
         {
           "speaker": "Kaveh",
-          "text": "And it's not you. You've done a great job as a videographer."
+          "text": "And it's not you. You've done a great job as a videographer ."
         },
         {
           "speaker": "Amelia",
-          "text": "I can't go back to being a detective. Criminals scare me!"
+          "text": "I can't go back to being a detective . Criminals scare me!"
         },
         {
           "speaker": "Kaveh",
@@ -89,7 +87,7 @@
         },
         {
           "speaker": "Professor Bot",
-          "text": "Did you hear any work words? They talked about a lot of jobs. You can make the name of a job by adding an ending to a verb! Kaveh reports, so, he's a reporter. Amelia used to detect, so she was a detective. If you teach, you're a teacher. And a videographer… uh, I think you understand. Back to the story."
+          "text": "Did you hear any work words? They talked about a lot of jobs. You can make the name of a job by adding an ending to a verb! Kaveh reports, so, he's a reporter. Amelia used to detect, so she was a detective. If you teach, you're a teacher. And a videographer….uh, I think you understand. Back to the story."
         },
         {
           "speaker": "Kaveh",
@@ -129,36 +127,32 @@
         },
         {
           "speaker": "Ms. Weaver",
-          "text": "I’m not going to fire any of you! No! The reason for this meeting is to tell you what a good job you’ve been doing and give out new assignments. Budget cuts have been happening. But only one person has lost their job — Mark in Accounting. Now, let’s talk about those new assignments."
+          "text": "I’m not going to fire any of you! No! The reason for this meeting is to tell you what a good job you’ve been doing and give out new assignments . Budget cuts have been happening. But only one person has lost their job -- Mark in Accounting? Now, let’s talk about those new assignments."
         },
         {
           "speaker": "Professor Bot",
           "text": "Ms. Weaver's team is doing a good job! How did you do? Did you find all of the work words? Here's a list you can check."
-        },
-        {
-          "speaker": null,
-          "text": "Work words: boss, meeting, raises, email, budget cuts, Accounting, gossip, rumors, lose, reporter, résumé, videographer, detective, teacher, update, fire, assignment."
         }
-      ]
+      ],
+      "audioBitrate": 128
     },
     {
       "id": 2,
       "title": "The Interview",
-      "publishedAt": "2018-09-10",
       "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-2/3960471.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/1/17/1706ec69-afcc-40bb-a79c-4a053b5c77ad_1080p.mp4?cb=edc3e78b9",
+      "videoQuality": 1080,
       "audioUrl": "https://voa-audio.voanews.eu/vle/2017/09/05/676d9800-cee0-4a59-9e79-b9378e0061ad_hq.mp3",
-      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/1/17/1706ec69-afcc-40bb-a79c-4a053b5c77ad.mp4?cb=edc3e78b9",
-      "audioDuration": "4:05",
-      "videoDuration": "5:00",
+      "audioFormat": "mp3",
       "transcriptStatus": "complete",
       "transcript": [
         {
           "speaker": "Anna",
-          "text": "Ms. Weaver is giving new assignments out. I am ready to take on anything she gives me. Well, except reporting traffic from a helicopter. Wish me luck."
+          "text": "Ms. Weaver is giving new assignments out . I am ready to take on anything she gives me. Well, except reporting traffic from a helicopter . Wish me luck."
         },
         {
           "speaker": "Professor Bot",
-          "text": "I wonder what Anna’s new assignment will be? Professor Bot here! While you are watching, look for phrasal, or two-word verbs. Some stay together, like “go back,” and some can come apart, like “give assignments out.” Good luck, Anna!"
+          "text": "I wonder what Anna’s new assignment will be? Professor Bot here! While you are watching, look for phrasal, or two-word verbs. Some stay together, like “go back” and some can come apart, like “give [assignments] out.” Good luck, Anna!"
         },
         {
           "speaker": "Ms. Weaver",
@@ -170,7 +164,7 @@
         },
         {
           "speaker": "Ms. Weaver",
-          "text": "You're also a team player. So, I want you to team up with someone …"
+          "text": "You're also a team player . So, I want you team up with someone ..."
         },
         {
           "speaker": "Anna",
@@ -178,15 +172,15 @@
         },
         {
           "speaker": "Ms. Weaver",
-          "text": "… someone who is very “different” from you."
+          "text": "... someone who is very \"different\" from you."
         },
         {
           "speaker": "Anna",
-          "text": "That sounds … what do you mean “different”?"
+          "text": "That sounds ... what do you mean \"different\"?"
         },
         {
           "speaker": "Ms. Weaver",
-          "text": "Well, you are very cheerful, you're a people person. I want you to team up with someone who … isn't."
+          "text": "Well, you are very cheerful , you're a people person . I want you to team up with someone who ... isn't."
         },
         {
           "speaker": "Anna",
@@ -210,11 +204,11 @@
         },
         {
           "speaker": "Anna",
-          "text": "Pete, you can tear these want ads up and throw them away! I have good news!"
+          "text": "Pete, you can tear these want ads up and throw them away ! I have good news!"
         },
         {
           "speaker": "Pete",
-          "text": "Anna, I was working on that crossword puzzle."
+          "text": "Anna, I was working on that crossword puzzle ."
         },
         {
           "speaker": "Anna",
@@ -234,7 +228,7 @@
         },
         {
           "speaker": "Anna",
-          "text": "I'm sorry, Pete, I don't have time right now. Here's my boss's address. Your interview is tomorrow morning at 10 a.m."
+          "text": "I'm sorry, Pete, I don't have time right now. Here's my boss's address. Your interview is tomorrow morning at 10 am."
         },
         {
           "speaker": "Pete",
@@ -246,11 +240,11 @@
         },
         {
           "speaker": "Professor Bot",
-          "text": "Did you find any two-word verbs? Here’s one example. Pete can throw the want ads away! Throw away is a two-word verb."
+          "text": "Did you find any two-word verbs? Here’s one example. Pete can throw the want ads away ! Throw away is a two-word verb."
         },
         {
           "speaker": "Ms. Weaver",
-          "text": "Thanks for coming in, Pete."
+          "text": "Thanks for coming in , Pete."
         },
         {
           "speaker": "Pete",
@@ -266,7 +260,7 @@
         },
         {
           "speaker": "Ms. Weaver",
-          "text": "First, let's talk about your personal skills. Pete, are you a people person?"
+          "text": "First, let's talk about your personal skills . Pete, are you a people person ?"
         },
         {
           "speaker": "Pete",
@@ -310,44 +304,40 @@
         },
         {
           "speaker": "Professor Bot",
-          "text": "Did you find more two-word verbs? Here is the list."
-        },
-        {
-          "speaker": null,
-          "text": "Two-word verbs: give out, find out, take on, tear up, go back, throw away, team up, come in."
+          "text": "Did you find more two-word verbs? Here is the list. give out find out take on tear up go back throw away team up come in"
         }
-      ]
+      ],
+      "audioBitrate": 128
     },
     {
       "id": 3,
       "title": "He Said - She Said",
-      "publishedAt": "2018-09-14",
       "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-3/4027340.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/e/ee/ee3e6fb5-9ea6-4f8b-88b4-c24e14fb2780_1080p.mp4?cb=edc3e7884",
+      "videoQuality": 1080,
       "audioUrl": "https://voa-audio.voanews.eu/vle/2017/09/15/078ffce1-f691-4e1e-811e-058154119d2d_hq.mp3",
-      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/e/ee/ee3e6fb5-9ea6-4f8b-88b4-c24e14fb2780.mp4?cb=edc3e7884",
-      "audioDuration": "4:55",
-      "videoDuration": "5:00",
+      "audioFormat": "mp3",
       "transcriptStatus": "complete",
       "transcript": [
         {
           "speaker": "Anna",
-          "text": "Today, Pete and I are meeting with a consultant who will help us with our new show. Yesterday, Pete had promised to meet me here at 8:00 a.m. but he did not come on time."
+          "text": "Today, Pete and I are meeting with a consultant who will help us with our new show. Yesterday, Pete had promised to meet me here at 8:00 am. but he did not come on time."
         },
         {
-          "speaker": "Professor Bot",
-          "text": "Uh-oh. It’s bad to be late for a business meeting. But while we wait for Pete, let’s talk about a new verb tense — past perfect! You know the past tense, right? Like, “Pete promised to meet me here at 8:00 a.m.” Past perfect is a little different. When we talk about two things in the past, we can use the past perfect for the first event. Put “had” before the past participle. “Pete had promised he would meet Anna.” Here's your assignment: find sentences with the past perfect tense. Remember, look for “had!”"
+          "speaker": "Prof Bot",
+          "text": "Uh-oh. It’s bad to be late for a business meeting. But while we wait for Pete, let’s talk about a new verb tense -- past perfect! You know the past tense, right? Like, \"Pete promised to meet me here at 8:00 a.m.\" Past perfect is a little different. When we talk about two things in the past, we can use the past perfect for the first event. Put \"had\" before the past participle. \"Pete had promised he would meet Anna.\" Here's your assignment: find sentences with the past perfect tense. Remember, look for \"had!\""
         },
         {
           "speaker": "Kelly",
-          "text": "You two are late — exactly 43 minutes late! What happened?"
+          "text": "You two are late -- exactly 43 minutes late! What happened?"
         },
         {
           "speaker": "Anna",
-          "text": "He had to get his “special” coffee — SPECIAL coffee!"
+          "text": "He had to get his \"special\" coffee -- SPECIAL coffee!"
         },
         {
           "speaker": "Pete",
-          "text": "She had to feed her birds — HER birds!"
+          "text": "She had to feed her birds -- HER birds!"
         },
         {
           "speaker": "Kelly",
@@ -355,11 +345,11 @@
         },
         {
           "speaker": "Anna",
-          "text": "Sure. Kelly, see, Pete and I live in the same building. So, we decided to meet at 8:00 a.m. — 8:00 a.m. — to come to work together. I had waited 15 minutes when Pete arrived!"
+          "text": "Sure. Kelly, see, Pete and I live in the same building. So, we decided to meet at 8:00 a.m. - 8:00 a.m. to come to work together. I had waited 15 minutes when Pete arrived!"
         },
         {
           "speaker": "Anna",
-          "text": "After Pete had wasted time waiting for coffee, we were late. I left you a message."
+          "text": "After Pete had wasted time waiting for coffee, we were late. I left you a message.*"
         },
         {
           "speaker": "Kelly",
@@ -374,20 +364,16 @@
           "text": "Pete?"
         },
         {
-          "speaker": "Professor Bot",
-          "text": "Anna left a message. That’s the right thing to do. Did you find some examples of the past perfect sentences? I did. Anna said, “After Pete had wasted time waiting for coffee, we were late.” Look at that coffee! It looks more like dessert! Okay, keep watching for past perfect!"
+          "speaker": "Prof. Bot",
+          "text": "Anna left a message. That’s the right thing to do. Did you find some examples of the past perfect sentences? I did. Anna said,"
+        },
+        {
+          "speaker": "Anna",
+          "text": "\"After Pete had wasted time waiting for coffee, we were late. Look at that coffee! It looks more like dessert! Okay, keep watching for past perfect!"
         },
         {
           "speaker": "Pete",
-          "text": "Yeah, that’s not why we’re late. This is why we’re late: I had arrived on time at 8:00 a.m. but didn’t see Anna. She was standing behind a tree. I think she was hugging it. I always walk to work. But she said that would take too long and that a scooter would be much faster. It was awful. I hated it. And it added too much time to our commute!"
-        },
-        {
-          "speaker": "Pete",
-          "text": "Then Anna stopped by a pond to feed the birds. She had named them after characters from books and yelled the names out loud … Romeo! Juliet! Sherlock!"
-        },
-        {
-          "speaker": "Pete",
-          "text": "By the time she had fed all the birds, we were late."
+          "text": "Yeah, that’s not why we’re late. This is why we’re late: I had arrived on time at 8:00 a.m. but didn’t see Anna. She was standing behind a tree. I think she was hugging it. I always walk to work. But she said that would take too long and that a scooter would be much faster. It was awful. I hated it. And it added too much time to our commute ! Then Anna stopped by a pond to feed the birds. She had named them after characters from books and yelled the names out loud … Romeo! Juliet! Sherlock! By the time she had fed all the birds, we were late."
         },
         {
           "speaker": "Kelly",
@@ -411,7 +397,7 @@
         },
         {
           "speaker": "Kelly",
-          "text": "Okay. This is good. This is good! It’s good to see things differently. I have an idea: we will call the show “He Said, She Said.” For every story, you tell a different point of view."
+          "text": "Okay. This is good. This is good! It’s good to see things differently. I have an idea: we will call the show \"He Said, She Said.\" For every story, you tell a different point of view ."
         },
         {
           "speaker": "Anna",
@@ -437,7 +423,4667 @@
           "speaker": null,
           "text": "Business people in the U.S. think you should come to a meeting at the exact time. If you are late to a business appointment, you should call and explain why."
         }
-      ]
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 4,
+      "title": "Run Away With the Circus!",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-4-run-away-with-the-circus/4034187.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/8/8e/8e6a25fe-1336-4f85-901d-95d0dcabc112_1080p.mp4?cb=edc3e78ea",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/09/19/56dbc988-a70f-4417-8668-c3916f6b73e7_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hello, I’m Anna …"
+        },
+        {
+          "speaker": "Pete",
+          "text": "… and I’m Pete. Welcome to “He Said,"
+        },
+        {
+          "speaker": "Anna",
+          "text": "… She Said”!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Because there are always two sides …"
+        },
+        {
+          "speaker": "Anna",
+          "text": "to every story!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Today’s show is about Circus Arts!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Circus? That’s not an art form ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, it is."
+        },
+        {
+          "speaker": "Pete",
+          "text": "No, it isn't."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, it is."
+        },
+        {
+          "speaker": "Pete",
+          "text": "No, it isn't."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, it is!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "No, it isn't."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, it is!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "No, it isn't."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, it is!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Oh dear. Anna and Pete do not agree about Circus Arts. But that's okay. Today’s lesson is about agreeing and disagreeing. Let’s listen to how Anna and Pete disagree or agree. Let’s hope these two can agree on something."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Today, let’s run away with the circus! Recently, I went to a circus festival. There was a huge circus tent. And many different circus performers. It was a celebration of circus arts!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "That looks fun, Anna. But I don’t think circus performers are artists. I think they’re athletes with interesting skills … and costumes."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hmm, that is a very interesting point of view, Pete. And I completely disagree."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, Michelangelo was an artist. Rembrandt was an artist. People who swing from ropes are not artists. I know it’s not easy to swing from a bar and catch someone by the hands. You have to be very athletic to do that."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s a good point, Pete. They are athletic. But they are called trapeze artists. Trapeze … ARTISTS."
+        },
+        {
+          "speaker": "Pete",
+          "text": "I hear what you’re saying, Anna. I do. But where is the art? Look at these guys. They’re jugglers."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, they are skilled in the art of juggling."
+        },
+        {
+          "speaker": "Pete",
+          "text": "They have a special skill. But are they artists?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "No!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "They're just throwing things back and forth."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Kind of like you and me, Pete. We’re going back and forth on this issue."
+        },
+        {
+          "speaker": "Pete",
+          "text": "I don’t think we’ll ever agree on this one."
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, but we can agree that these young people are amazing."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Okay, yeah. We can agree on that. But, still, they are very athletic – flipping and throwing each other around."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, I agree with you on that point. Professor."
+        },
+        {
+          "speaker": "Bot",
+          "text": "They did it! They agreed!! Anna says she agrees that the performers are athletic. \"That’s a good point, Pete. They are athletic. I agree with you on that point. \" Now look for other ways they agree."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna? Anna!!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sorry! Sorry! But he’s an artist too. He is telling a story with his sticks and his costume."
+        },
+        {
+          "speaker": "Pete",
+          "text": "What story? What costume?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I see your point, Pete. I really do. But circus performers do more than physical tricks. Look! Look at these amazing performers!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I will admit -- I like their costumes."
+        },
+        {
+          "speaker": "Anna",
+          "text": "You know, Pete. Let’s let the performers speak for themselves."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Kate and Piper tell stories while hanging upside down on a ring !"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Was it hard to interview them upside down?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I interviewed them right side up , Pete. Kate says circus performing may be athletic but it’s not competitive . With most sports, you compete."
+        },
+        {
+          "speaker": "Kate",
+          "text": "It’s an art form because like, other sports are competing. This is simply performing and having fun."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Okay, Kate made a really good point. In athletics, there is a lot of competition. But still …"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Here’s Piper, Pete. Please pay attention, Pete."
+        },
+        {
+          "speaker": "Pete",
+          "text": "But, I -"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Shh."
+        },
+        {
+          "speaker": "Piper",
+          "text": "Well, when you’re up in the air doing circus you have to perform. And so, we learn to embody characters, and to move fluidly and gracefully … in artistic ways."
+        },
+        {
+          "speaker": "Anna",
+          "text": "And that …is why they are artists!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "You’re right, Anna. Oh, you’re right. It’s just so beautiful."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I know. I know, Pete."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Good job you two! I'm so glad that Anna and Pete finally agree! Pete said, \" You’re right, Anna.\" I agree, too. Circus arts are beautiful. Remember the website!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 5,
+      "title": "Greatest Vacation of All Time",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-5-greatest-vacation/4035571.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/3/3f/3f51d054-13af-46ae-a027-e469d65197b9_1080p.mp4?cb=edc3e7908",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/09/27/11289bfa-a821-47fb-905b-7b4174ae0c5e_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "“Do you need a vacation?” Wow. That was the best vacation I have ever had … in my head. A beach is much better than here. I need a vacation !"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "I hear you, Anna. I need a vacation too but not at the beach. Sand is not good for robots! When we compare things, we use special forms of adjectives. \"Better\" is a comparative adjective. That is used to compare two things. \"Best\" is a superlative adjective. It shows that one thing has more of ...something than ALL of the others. Try to find more of these adjectives. Look for ER or EST at the end."
+        },
+        {
+          "speaker": "Dan",
+          "text": "NO! You can’t get your money back. I don’t care that it was your worst vacation ever!"
+        },
+        {
+          "speaker": "Dan",
+          "text": "Hello! Have a seat! Welcome to the World’s Best Vacation Travel Agency !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thank you and congratulations !"
+        },
+        {
+          "speaker": "Dan",
+          "text": "For what?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "For being the world’s best travel agency."
+        },
+        {
+          "speaker": "Dan",
+          "text": "Right … thanks."
+        },
+        {
+          "speaker": "Dan",
+          "text": "Trudy, hold my calls. I am going to sell our most expensive vacation."
+        },
+        {
+          "speaker": "Trudy",
+          "text": "Sure thing, Boss."
+        },
+        {
+          "speaker": "Dan",
+          "text": "The Mountain Getaway is good for you. It’s a little pricey. But think of it -- you, on top of a mountain for seven days!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m afraid of high places."
+        },
+        {
+          "speaker": "Dan",
+          "text": "Of course you are. That’s why our Deep Sea Adventure is better for you! It is pricier than the Mountain Getaway. Just you and the animals of the sea!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Shark! Shark!"
+        },
+        {
+          "speaker": "Dan",
+          "text": "No, there are no sharks in your dream vacation! You need the Safari Camp Out! It is our priciest vacation. But I think it’s the best one for you. During the day, you’ll see elephants, giraffes and lions. At night, you’ll sleep out under the stars."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Look, I think this was a bad idea."
+        },
+        {
+          "speaker": "Dan",
+          "text": "Sure, you can leave. But then you won’t see the latest vacation technology ."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you find all of those adjectives? Dan started with good - The mountain getaway; then he moved to better - The Deep Sea Adventure. And finally, he said the Safari Campout was the best vacation for Anna!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Exactly what is the “latest vacation technology” … exactly?"
+        },
+        {
+          "speaker": "Dan",
+          "text": "I’m happy you asked. Meet the Travel Max 2000!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wow."
+        },
+        {
+          "speaker": "Dan",
+          "text": "So, tell me, how do you like to travel?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, I like travel that is cozy and romantic but still exciting."
+        },
+        {
+          "speaker": "Dan",
+          "text": "Great. Tell me more."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I like traveling in a plane but not in a helicopter! Planes are a little scary but helicopters are scarier! My favorite way of traveling is by train. Ships can be the scariest! Have you seen the movie “Titanic”? Oh, and no horses. But I will ride a camel. And no bike tours. Biking is THE slowest AND least romantic way to travel. Excuse me, but I think the Travel Max 2000 is on fire."
+        },
+        {
+          "speaker": "Dan",
+          "text": "Yes, we’re both on fire! We really want to sell you the most ex-, I mean, best vacation ever!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, I mean it’s really on fire!"
+        },
+        {
+          "speaker": "Dan",
+          "text": "You killed it. You killed the Travel Max 2000!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I am so sorry! Can I help you fix it?"
+        },
+        {
+          "speaker": "Dan",
+          "text": "No, no!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Don’t cry. I know what you need -- a vacation!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "The Safari Campout looks fun. It is the priciest. But I think you deserve it."
+        },
+        {
+          "speaker": "Dan",
+          "text": "No, no!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Oh Anna. This is the smokiest lesson yet! There were a lot of comparatives and superlatives but … I can’t breathe. Just go to the website to learn the best ways to use them!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 6,
+      "title": "Will It Float?",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lesson-6-will-it-float/4064553.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/7/77/776e11ee-dd39-46b3-a75c-6d56c0e4ccdd_1080p.mp4?cb=edc3e795c",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/10/10/4814fa95-feaa-447a-a081-499d11b1d5f3_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Penelope",
+          "text": "Anna, thanks for taking me on a tour of D.C. today."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sure thing, Penelope. You are new to town. And a tour is the best way to see more of the city!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "So, which tour are we taking – the one that goes through the city on a bus? Or the one that goes along the river in a boat?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Both!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "What? Anna, this isn’t going to be one of those trips, is it?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No. Follow me."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "In this lesson, you are going to hear lots of prepositions! What’s a preposition, you ask? It’s a word that shows relationships between things. Anna says they are going on a tour through the city and along the river. Through and along are both prepositions. Watch for more!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, Penelope, there’s our ride!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "What is it?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s the famous DC Ducks -- the boat with wheels ! We will ride on the road and then sail on the water!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Who thinks of these things?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I don't know. But I’m glad they do! Let’s get aboard , Sailor!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "( looking at a brochure about the boat) Hey, did you know that this bus … um, boat was created during World War II to carry people and supplies?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wow. You know, a tour is so much more interesting with Fun Facts, like that one."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "I agree. I love Fun Facts!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Did I hear you say you love Fun Facts? Anna &"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Yeah."
+        },
+        {
+          "speaker": "Boy",
+          "text": "Well, I have tons of Fun Facts for this tour! Anna &"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Great!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, where are his parents?"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Maybe - maybe he’s the Captain ’s son and he helps his dad on tours!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh yeah! It would be so awesome to ride around the city in a boat all day with your dad!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "This is amazing, Anna. There are so many beautiful buildings along this road!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hey, the Washington Monument is on the left!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "I have a Fun Fact too! Did you know that the Washington Monument was damaged in an earthquake? Whoa. Did you feel that?! I heard: \" around the city in a boat,\" \" along this road and \" on the left.\" All of these are prepositions showing place . Let's watch for more places and prepositions!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Look, Anna, we’re across from the White House!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, the only thing between us and the Presiden t is the street … and a park … and a security gate .... and police officers … with guns."
+        },
+        {
+          "speaker": "Boy",
+          "text": "Excuse me, do you want to know a Fun Fact about the White House? Anna &"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Yes!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Inside the White House there is a swimming pool , a movie theater and 32 bathrooms!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Thirty-two bathrooms! That’s a lot of bathrooms!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "I’d be happy with two. I live in a house with my mom, four sisters, two aunts and only one bathroom!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Oh my! You know, Anna, we should give him a tip !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Of course! It is polite to tip your tour guide! Luckily, I have lots of dollar bills!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "That was a great Fun Fact! Here you go!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Thank you! I can tell you Fun Facts all day!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you hear any more prepositions of place? I heard \" between us and the president\" “ inside the White House\" and \" in a house.\" And did you hear that the Duck Boat can go on the river? I don't believe it. Join us next time to find out which preposition we will use: The boat went ON the river or The boat went INTO the river?"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 7,
+      "title": "Tip Your Tour Guide",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lesson-7-tip-your-tour-guide/4064769.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/2/26/263b6553-9229-4c76-8c64-90ea037c2a8e_1080p.mp4?cb=edc3e7990",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/10/17/45e008c5-648b-4275-ad2d-d3b058d199a6_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Professor Bot",
+          "text": "Welcome back! Anna and Penelope are taking a tour with DC Ducks. In this lesson, we are looking for prepositions. Listen for in, on, at, under and over - some important prepositions of place."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, the Lincoln Memorial is coming up on your left!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "You’re going to love my Lincoln Memorial Fun Fact!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, please tell us!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "On a wall inside the memorial, the word “FUTURE” was carved wrong! They carved “EUTURE”!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, we all make mistakes."
+        },
+        {
+          "speaker": "Boy",
+          "text": "Yeah, but this mistake was carved in stone !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "You’re right. That is pretty bad. Here’s another dollar!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "More fun facts, please! (Crossing the river) I love riding over bridges! The water looks so pretty from here!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, this is amazing! A minute ago, we were riding along the river, and now we’re riding in the river! Awesome."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Hey, we’re passing by the Pentagon on our right!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, you love riding over the water on a bridge. But I love riding under a bridge in a boat!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Anna, look! An airplane is flying right over our heads!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wow! This is the closest I’ve ever been to an airplane in flight. Well, I’ve been inside a flying airplane. But not outside of an airplane as it flies over my head!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "And now we’re driving out of the water. I still can’t believe this thing drives and sails!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I know. It’s amazing."
+        },
+        {
+          "speaker": "Boy",
+          "text": "After we ride along these railroad tracks, you’ll see my favorite part of the tour! The U.S. Treasury where they make money!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "That young man is making a lot of money, too. Did you hear these prepositions? On your left, on our right, in the river, over bridges, over our heads, over my head, on a bridge. As you watch more, look for 'inside' and 'outside.'"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Look, the U.S. Capitol is coming up!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "I have a great Fun Fact about the U.S. Capitol."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "What is it?"
+        },
+        {
+          "speaker": "Boy",
+          "text": "There are tunnels under the Capitol. They connect the Capitol and office buildings of lawmakers."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I bet they built them years ago for secret reasons!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "No. The lawmakers did not want to walk around outside in bad weather."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "We’re back at Union Station!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Do you want to know a creepy Fun Fact about Union Station? (he points to Union Station)"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "The creepier the better!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Many years ago, inside Union Station, there was a funeral home !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "A funeral home?! You mean, for dead people?!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Do you know another kind of funeral home?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No!"
+        },
+        {
+          "speaker": "Boy",
+          "text": "Well, I’ve gotta run!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks for giving us the great tour!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Captain, that was awesome! And your son is a great tour guide!"
+        },
+        {
+          "speaker": "Captain",
+          "text": "What son?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Him."
+        },
+        {
+          "speaker": "Captain",
+          "text": "I’ve never seen that boy in my life! See ya, ladies!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "I learned many new Fun Facts in this lesson. Did you learn about prepositions? Here’s a list of all the prepositions used in this lesson. Wow! That’s a lot! I know, let’s not read them. Let’s sing them! Hit it, boys! Take it away singers! since at through aboard behind to about by near across for of ahead from on around in until over like with"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 8,
+      "title": "The Best Barbecue",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-8-best-barbecue/4073994.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/6/6a/6a264ff8-5d3a-4460-8d09-b56daf6ebe65_1080p.mp4?cb=edc3e79b1",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/6/6a/6a264ff8-5d3a-4460-8d09-b56daf6ebe65_240p.mp4?cb=edc3e79b1",
+      "audioFormat": "mp4",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Thanks for meeting me."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Sure."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’d like to get your advice on my latest project."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Of course. I heard you were sent to cover a big food festival that has all kinds of barbecue . So, how did it go?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, things started out great! But then, well, maybe you should watch it yourself."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Hi English learners! Your lesson today is about my favorite food -- barbecue! Your assignment is to find passive sentences. What are those, you might ask? In passive sentences the subject receives the action! For example, “Anna was sent to cover a food festival.” Passive sentences have a form of the BE verb + the past participle of the main verb. This lesson is LOADED with passive sentences. Hey! That’s a passive sentence, too! Okay, now, it’s Barbecue Time!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Today, a Barbecue Battle is being held in Washington, D.C. This festival, which is known as one of the biggest food festivals in the United States, brings together barbecue lovers from all over the country! Barbecue is meat that is cooked over an open fire or on a grill. Chicken, pork and beef are all common meats to grill on a barbecue! No matter which meat you like to barbecue, the sauce is very important. Sauces are taken very seriously by chefs. Most ingredients are kept secret! So, can you tell us what is in your barbecue sauce? Chef 1: No, I can’t tell you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "So, tell us, what is the secret ingredient in your barbecue sauce? Chef 2: (says nothing.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sauces are made by the barbecue chefs themselves. Most sauces are made with a tomato sauce, vinegar, and spices."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "How many passive sentences did you find? Here is one I found: Today, a Barbecue Battle is being held on the National Mall in Washington, D.C. Now you try. Turn this sentence from active to passive. Professor Bot loves Barbecue! Barbecue is loved by Prof. Bot. Good job! And yes, I do."
+        },
+        {
+          "speaker": "Anna",
+          "text": "There are some areas of the U.S. that are known for their tasty barbecue. The states of Texas, North and South Carolina and the cities of Memphis and Kansas City are known as the Barbecue Belt. People who are loyal to barbecue are really loyal to their favorite barbecue. That is why this festival is called a battle! Let’s ask a couple of people which barbecue is best. Person 1: Texas, of course! Person 2: Carolina barbecue is the very best. Person 3: Kansas City! Person 4: Memphis style! Person 3: Kansas City! Person 5: Texas! Person 3: Kansas! Person 5: Texas! Person 3: Kansas! Person 5: Texas! Person 3: I say Kansas. Person 5: Texas! Person 3: She keeps saying Texas, I say Kansas."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This is Anna Matteo reporting."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Kelly, people feel so strongly about barbecue. Unbelievable! So, what do you think of my project?"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "This is what I think. There is no way that Texas has the best barbecue. I am from Kansas City and we have THE best barbecue in the whole country. My mother and father owned a barbecue restaurant, which was really famous! So, I know barbecue! Anna, I know barbecue! I know barbecue! I know barbecue!"
+        },
+        {
+          "speaker": "Prof Bot",
+          "text": "Oh my. Kelly knows a lot about barbecue! And you know more about passive sentences! Be sure you go to the website to learn even more! Ah! Now, if you'll excuse me .. I'm hungry"
+        }
+      ],
+      "audioFallbackVideoQuality": 240
+    },
+    {
+      "id": 9,
+      "title": "Pets Are Family, Too!",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-9-pets-are-family-too/4074883.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/c/cd/cd492745-6461-4501-9f3e-5e59269f5655_1080p.mp4?cb=edc3e79dc",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/10/25/268efe48-7ad7-48da-8d13-89846a1f681a_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hi Ashley!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Hey, Anna! How was your weekend?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It was great! I went to the D.C. State Fair."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "I would have gone, but I was busy. How was it?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It was awesome! I won first place in a pet contest !"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "But, you don’t have a pet, do you?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes and no. What do you mean by “pet”?"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "A pet is an animal that lives with you. People love their pets. \"Ashley said, you don’t have a pet, do you? She used a tag question, a small question at the end of a sentence. Let's look for more of them!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Look, a pet! Who’s this cute little dog?"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Oh, right. You haven’t met my dog, have you? This is Dublin."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Dublin! Nice to meet you. He’s so cute!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Thanks! So, tell me about the state fair."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, there were the usual things -- fair food, cute babies, music. But there must have been a dozen different contests! And some were pretty strange."
+        },
+        {
+          "speaker": "Anna",
+          "text": "There was a contest to see who could spit a watermelon seed the farthest. You should have seen all the people who wanted to spit a watermelon seed! And, it was pretty fun to watch. But Ashley, the pet contests were the best. There was a pet parade . Lots of people walked with their dogs."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "That sounds so fun. But Anna, tell me, how did you win a pet contest without a pet?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Okay, the closest thing I have is my pet rock."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I know it’s silly, but I’ve had it since I was a little girl. So, for a joke, I brought it to the fair. But then I was invited to enter the “One-of-Kind Pet” contest. And I won! (holds up first place ribbon)"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Anna, only you could have won a pet contest with a pet rock. I should have brought Dublin. He would’ve won a contest!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s not very easy to win one of these. (shows her the blue ribbon) Does he have a costume?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "They had a costume contest. You should have seen this little girl. She and her dog wore matching princess costumes!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Dublin doesn’t wear costumes."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Does he know any tricks?"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Come this way. Now, watch this. (Dublin chases a toy)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "You caught it, Dublin! And you killed it! Good dog! Ashley, he could have won the Best Catch contest! Aw, good boy! Ashley, pets are fun, aren’t they?"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Yes. And they become part of your family. (she drinks from her Dublin mug)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ashley, I think I want a dog. No. I know I want a dog!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "It’s a big responsibility . You may want to spend time with a dog first."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That is a great idea. But where can I find a dog?"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "You know, Anna, I have some shopping to do. Do you want to watch Dublin for a couple of hours?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes! I would! I will take very good care of him!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "I know you will. Here’s his leash ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thank you."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "(to Dublin) Okay, I'll miss you!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Aw. I don’t want you to be lonely. Here, Rocky can stay with you. (puts pet rock on wall)"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Anna, I really don’t need … Okay. Thanks, Anna."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sure. Bye, Ashley. (to Dublin) Come on, Dublin! Bye, Rocky!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Bye!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Anna’s rock is cute, isn’t it? Oh, there is another tag question! You found some more, didn’t you? You haven’t met my dog, have you? Go to the VOA Learning English website to learn more."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 10,
+      "title": "Visit to Peru",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-10-visit-to-peru/4079037.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/7/78/785c4ee4-6b29-45d8-a060-65bcfbcc1f16_1080p.mp4?cb=edc3e7a33",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/10/27/863aecf4-1d6a-4fe1-9789-5251ac1e0be1_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Bruna",
+          "text": "Hi, Anna!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Bruna! What’s up?"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "I thought we could meet for lunch today."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I wish I could, but I can’t. I have to research Peru for a story."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "How’s it going?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Not so good. I’ve been reading about Peru and listening to Peruvian music. I really want to understand Peru. I hope it's enough."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "You should visit Peru."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I wish!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "You can!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Bruna, I don’t have the money or time to go to Peru. My deadline is tomorrow!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "No, I don’t mean to really go there. The museum where I work is having a Peruvian festival today! …. Anna? Anna? Anna, are you there?"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Hello again! Professor Bot here. Today we will hear about wishes and hopes. Bruna asked Anna to go to lunch, but she answered, I wish I could, but I can’t. Listen for more hope and wish sentences."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Hi, Anna!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Bruna! Thanks for telling me about this event."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Sure! It's much better than staring at your computer. I hope it helps with your story."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m sure it will. So, what should we see first?"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Dance and music are very important to Peruvian culture, so let’s watch the dancers."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Great! Let’s go!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "There's this very special Peruvian dance called Marinera Norteña."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I love the Marinera Nortina… !"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Marinera Norteña."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Marinera Norten… ?"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "No. Marinera Norteña."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I love the … marriage dance!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Bruna, I read about this dance. But it is much more romantic in person!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "The dancers are giving lessons after their performance. You should try it!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’d love to. But I’m not ready to get married. I mean, one day I hope to meet the right guy. We’ll buy matching motorcycles and ride into the sunset -- the wind blowing through our hair!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Anna, the dance just shows the courtship tradition. It doesn’t mean you will get married."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh. Well, I’ll try anyway."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Don’t forget. This festival also shows Peruvian art!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I hope I have time to see everything!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Anna, I wish I could join you. But I have some work to do."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Of course, of course. You go back to work. I’ll check out the art."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Okay, I’m hoping to finish in about an hour. Let’s meet then."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Great. See you then!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "See ya!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Did you notice any sentences with hope or wish? Anna says, “One day I hope to meet the right guy.” That’s an example of using “hope” with an infinitive to talk about doing something in the future. Keep watching!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, wow! I can make my own Peruvian art!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Anna, how’s it going?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Bruna!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "You know you're in the kid's section, right?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'm in the art making section."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "I see that. Your art is very nice. I wish I could do art like that."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, this one’s not mine. This is mine."
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Wow! Really? That's really nice!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks! And thanks for telling me about this festival. I learned so much about Peru. Ooh, we still have time!"
+        },
+        {
+          "speaker": "Bruna",
+          "text": "Time for what?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Time for Marinera Norteña!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Do you remember what Anna said? “I really want to understand Peru.” I hope you understand Peru a little better now, too. And I wish I could talk with you more about grammar, but that’s all the time we have today! Go to the website to learn more!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 11,
+      "title": "The Big Snow",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-11-the-big-snow/4102755.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/a/a4/a461d037-2f47-4d6e-b971-86c661a4cb8d_1080p.mp4?cb=edc3e7a51",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/11/21/0117495a-4165-48c3-8972-61491413ad7a_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Kelly",
+          "text": "Hi, Anna. Why do you have all this weather stuff?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I love weather."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Me too! Weather is so important."
+        },
+        {
+          "speaker": "Anna",
+          "text": "It is. It affects people’s lives!"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Have you ever reported on a big weather event ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I have. I’ve reported on a blizzard ."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Do mean the one last weekend?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes! I had been waiting for that blizzard for years. When it came, I was ready."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Welcome to our most perfect lesson! Why is it perfect? Today we are reviewing the present perfect and past perfect verb tenses. These show that an action is completed. Kelly uses the present perfect when she says,"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Have you ever reported on a big weather event? Anna uses the past perfect when she says,"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I had been waiting for that blizzard for years. Listen for \"have\" or \"had\" and the past participle to find more sentences with the perfect tense. I'll color those words to help you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I have wanted to report on a big weather event my whole life."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Who hasn’t? Did you report all weekend ... by yourself?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, no. I volunteered Pete to help me."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Why am I here on a Saturday? Why are you carrying things? Why? Why?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, these are my supplies – food, a blanket; warm clothing. Where are your supplies?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, Pete, Pete. This could be the “blizzard of the century.”"
+        },
+        {
+          "speaker": "Pete",
+          "text": "It’ll be fine."
+        },
+        {
+          "speaker": "Kelly",
+          "text": "How else had you prepared?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, I had just bought the latest weather forecasting software . So, I brought it!"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Do you mean The Weather Genie Pro?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "You know it. Pete thought it was pretty great too."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Do you have any games on that thing?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes! I have the best weather survival game. Boom!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Sounds fun."
+        },
+        {
+          "speaker": "Anna",
+          "text": "It is. But right now, Pete, this computer is a work tool. It will give us the temperature, wind speed, wind direction and amount of snowfall … in real time! Boom, boom!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I can’t wait."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, we need a name for this blizzard."
+        },
+        {
+          "speaker": "Pete",
+          "text": "No, we don’t."
+        },
+        {
+          "speaker": "Anna",
+          "text": "All the great storms have names."
+        },
+        {
+          "speaker": "Pete",
+          "text": "No, they don’t."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I know -- “The Big Snow!”"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I am not saying “The Big Snow.”"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Welcome to “The Big Snow.”"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "The Big Snow broke all kinds of records, didn’t it?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes it did. And every time a record was broken, we celebrated!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "So far, in Washington, D.C. 29 inches of snow has fallen. That, my dear listeners, is a record ! (Honks horn)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "We just broke the wind speed record! (Honks horn)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Snow has been falling for 30 hours straight ! That’s another record! (Honks horn. Pete comes into room and breaks the horn.)"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "By Saturday night, stores and restaurants had closed . Did you bring enough food?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I thought I had brought enough food. But I ran out."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hey, Pete, where is my bag of popcorn?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Maybe you ate it already."
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, I didn’t."
+        },
+        {
+          "speaker": "Pete",
+          "text": "I haven't seen it. (Pete has popcorn in his beard. Anna tries to hit him.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "We had reported together for 48 hours straight!"
+        },
+        {
+          "speaker": "Kelly",
+          "text": "Wow. That must have been a great team-building exercise for you and Pete."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yeah. You - you could say that."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "I hope you found all the sentences with perfect tenses. Learn more on our website!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 12,
+      "title": "Run! Bees!",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-12-run-bees/4139015.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/b/b4/b442094f-e869-4a7f-9c14-d335957eafbc_1080p.mp4?cb=edc3e7a9e",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/11/28/260c25bd-1773-42d0-8b8a-54924d27427c_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Wow. Did you know that bees are dying?"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "That is bad news. If all the bees died, there would be no food. Bees are very important. (buzz sound)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes, they are. Speaking of bees, one of our little friends is here now."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "You know, Anna, if you ignore it, it will fly away. But if you swat it, it might sting you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’ll ignore it. I can ignore it. See, I’m ignoring it. ( she is swatting at the bee)"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Anna, are you afraid of bees?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "What makes you say that?"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Anna, you should call my friend, Caroline. She is a beekeeper and a bee educator. If you talk to her, she’ll probably help you get over your fear of bees."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I am not afraid of bees."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Here’s her card."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ahhh!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "In this lesson, you can learn about conditionals. They have \"if\" and \"will\" or \"would.\" There are two kinds of conditional sentences in this lesson. Type 1 conditionals have a real event, and a result that probably will happen. Chances are good. Here is the pattern: If +present tense verb ... will + future tense verb. Kaveh uses this when he says: \"If you ignore it, it will fly away.\" Type 2 conditionals have a possible event and a result that may or may not happen. We don't know. Here is the pattern: If + past tense verb ...would + infinitive verb. Kaveh uses this pattern when he says, \"If all the bees died, there would be no food.\" Look for the \"if\" in a sentence to find more conditionals in today's lesson. I'll color them, too!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I think I'm at the wrong address. This does not look like a place where bees are kept. ​ (knocks on door)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, sorry to bother you. I’m looking for beekeeper Caroline. I’m here to take her “Learn to Love Bees!” class."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "You’re in the right place! I’m Caroline!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, nice to meet you! Um, Caroline, I thought this class used real bees and real hives ."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "It does! If you look in my backyard , you will see my bees! I’m a home beekeeper!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "What? You live with bees? That is really amazing! And at the same time really scary."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "It’s not scary. If you come, I’ll show you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Caroline, how many bees are in that hive?"
+        },
+        {
+          "speaker": "Caroline",
+          "text": "About thirty thousand (30,000) in each."
+        },
+        {
+          "speaker": "Anna",
+          "text": "What? That's amazing! But, aren’t you afraid that they are gonna come out and kill you?"
+        },
+        {
+          "speaker": "Caroline",
+          "text": "No, not at all, Anna. Even my children help me. Tell me, why are you afraid of bees?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I don't know. Well, when I was a little girl my mom ran out of honey . And I really wanted honey for my pancakes. So, I climbed high into a tree and hit a beehive with a stick … several times. Then I reached inside with my bare hands to pull the honey out. That’s when I got stung … a lot."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Caroline, if you hit a beehive with a stick and reach inside, you might get stung."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "No, Anna. If you do those things, you will get stung."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes. I did."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "And you know that it was your fault you got stung, don’t you?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes. I did."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Bees know your feelings. And if you stay calm , the bees will be calm. If you're nervous, the bees will be nervous. And if bees are nervous, they may sting. So, please be calm."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I will be calm. I am calm. Okay, I'm ready. I'm ready"
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Great. Let’s get our equipment on."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wait! Wait! I’m not ready! I'm nervous! Give me a minute to be calm."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Are you ready for one more conditional sentence? If you are not afraid, you will join us next time to learn more about bees!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 13,
+      "title": "Save the Bees!",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-13-save-the-bees/4145716.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/d/d7/d71f7385-7af3-4032-b1a8-3e543cf0cac0_1080p.mp4?cb=edc3e7ade",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/12/01/104a6627-290a-4472-911e-3bb9349f44f7_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Prof. Bot",
+          "text": "We are back with Anna and Caroline and the bees. Last time, Anna was afraid. ("
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'm not afraid of bees!) But Caroline is helping her to stay safe. Look at sentences that start with \"If\" to find more conditional sentences. Remember, Type 1 conditionals use the present tense and \"will,\" and Type 2 use the past tense and \"would.\" Now, let's find out what happens with Anna and the bees."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "I have a feeling that your fear of bees will be gone soon. There are things beekeepers do to protect ourselves. For example, we wear protective clothing. This is a beekeeper’s veil , suit and gloves. There are other things we can do, too. If I use a smoker , the bees will stay calm."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Let’s use smoke … lots of smoke."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Okay, Anna, that’s enough smoke. Another thing you can do is stay calm. Okay. When I lift the frame , you will see the bees."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m ready. Let's do this thing!"
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Okay, let's put on our protective clothing."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "I will carefully take out a frame. This is where the bees live. There are worker bees, drone bees and the queen bee. The bees have different jobs. The queen bee lays the eggs. The worker bees collect nectar and pollen ​from flowers and bring it back to the hive. Then they make honey! Now, you hold the frame. There are the bees."
+        },
+        {
+          "speaker": "Anna",
+          "text": "There are so many! And they are so busy! Now I know why we say, “busy as a bee!”"
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Good job, Anna."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Caroline, bees are beautiful and important. If I wanted to help the bees, what would I do?"
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Great question. You can plant native flowers that bees like. Here’s a book to help you know which ones to plant."
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s a beautiful book. And look, it tells you which bees like which types of flowers."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "It also tells you how the flowers affect the flavor of the honey."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Flowers make a big difference to bees. If they don’t eat, they won’t live."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Buying local honey also helps the bees. If you want to help bees, do those two things."
+        },
+        {
+          "speaker": "Prof Bot",
+          "text": "I learned a lot about bees. Hey, if I worked with bees, I would not need protective clothing! Guess what? That was a Type 2 conditional. And I heard a Type 1 conditional, too. ("
+        },
+        {
+          "speaker": "Anna",
+          "text": "If they don’t eat, they won’t live. )"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks for the book, Caroline, and the bee puppet and for teaching me about bees. Look … I’m not scared."
+        },
+        {
+          "speaker": "Caroline",
+          "text": "Good job, Anna. If you ever want to see the bees again, I’ll be here! You have my business card. I'll let you see yourself out."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks! Bye! I will plant tons of flowers!"
+        },
+        {
+          "speaker": "Bees",
+          "text": "Thanks, Anna. ( bees spell out the words )"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sure thing, bees! Oh, and I'm sorry about hitting that hive when I was a little girl."
+        },
+        {
+          "speaker": "Bees",
+          "text": "We love you, Anna. (bees make a heart sign.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Take care, bees! (to herself) W hich way is the Metro?"
+        },
+        {
+          "speaker": "Bees",
+          "text": "That way. (they draw an arrow)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "So, if I you want to learn more about bees, visit your local beekeeper like Anna did. Maybe you can try some local honey, too. Now it’s your turn. Practice making conditional sentences. If you practice, you will become better at them. That's type 1!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 14,
+      "title": "Made for Each Other",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-14-made-for-each-other/4159000.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/b/b0/b0230cad-9353-42b1-8d57-d64a8e5c7c5a_1080p.mp4?cb=edc3e7b14",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2017/12/12/e2fe076d-3fa7-495a-83ea-9d4d4cba9fad_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hello! What are you guys looking at?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I’m showing Ashley pictures of my girlfriend . We have so much in common -- even small things. She can’t whistle and I can’t either."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "(to Pete) And here’s a picture of my boyfriend . (sighs)"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "My family is big and so is his. I don’t like ball sports and he doesn’t either! (sighs) We are made for each other ..."
+        },
+        {
+          "speaker": "Pete",
+          "text": "… and so are we. (sighs)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Uh… you have found perfect partners … and so have I!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Pete and Ashley are talking about people they love. They are putting two ideas together with connectors. Let’s start with these two sentences: She can’t whistle. Pete can’t whistle. How do you put them together? Pete says, \"She can’t whistle and I can’t either.\" You can see we just add the conjunction “either” and take away the verb “whistle.” And Ashley says: \"I don’t like ball sports and he doesn’t either!\" Keep looking for connectors!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "You met someone, Anna? That’s great! What’s his name?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "His name? His name is uh… (stalling, looks around, sees a bus) Bus … ter. (stalling, looks around, sees a car) Car … ter."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "(says it like Anna did) Bus...ter Car...ter?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s just Buster Carter, Ashley. I like him and he likes me. We’re a great couple ."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Hey, let’s all get dinner tonight, together. You can bring Buster."
+        },
+        {
+          "speaker": "Pete",
+          "text": "( laughing ) Yeah, I can’t wait to meet him."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks, Ashley, but he’s really busy tonight with his uh, (looks around, sees squirrel) squirrel collection . Bye, guys! Gotta go!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Squirrel collection?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "You know, she made all that up ."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "That’s so sad. She needs to meet someone. Hey, do you know anyone who she might..."
+        },
+        {
+          "speaker": "Pete",
+          "text": "No."
+        },
+        {
+          "speaker": "Anna",
+          "text": "( to herself) Anna, Anna, you lied ! You lied! Now, they think you have a boyfriend - with a squirrel collection. Here, squirrel. (throws food) Well, you need to tell them the truth . You don’t have a boyfriend."
+        },
+        {
+          "speaker": "Man",
+          "text": "Excuse me, is this seat taken? (Anna shyly shakes head “no”)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ashley, Pete, I need to talk to you. This morning, I lied."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Let me guess. There’s no Buster Carter. What a surprise!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m sorry. But later I really did meet someone and we have a lot in common! He’s good at flying kites and so am I. He likes to read comics and so do I. I can play the ukulele and so can he."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "He sounds perfect for you, Anna. Can he come tonight?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s the sad part. You see, he just got a job as a spy, and tonight he leaves on assignment."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Of course he does."
+        },
+        {
+          "speaker": "Anna",
+          "text": "But that's okay, because now I know that there is someone out there made for me. (looks at the time) Oh, it’s late! I have to see him off at the train station. Bye, you guys!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Bye Anna! Oh dear, she’s worse than we thought."
+        },
+        {
+          "speaker": "Pete",
+          "text": "She’s lost her mind."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "What should we do?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "(happy, excited) Let’s tell her! (Pete goes to leave but Ashley pulls him back.)"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "No, Pete. Mr. Right may not be real but he makes her really happy."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you find any other connectors? Notice how the words are in a different order in the part after “so.” \"I am\" becomes \"am I\" and \"he can\" becomes \"can he.\" \"He’s good at flying kites and so am I. I can play the ukulele and so can he.\""
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 15,
+      "title": "Before and After",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-15-before-after/4159057.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/5/5c/5c124a10-74f5-4641-a72b-7f8efdbc8fa9_1080p.mp4?cb=edc3e7b43",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/01/04/99ceaa2e-fb25-43a8-8731-0a7f23901d65_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Penelope, even though we both love speed walking, could we slow down a bit?"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "No way! I think because I’m walking with you, I’m walking faster."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Come on, Penelope. Let's take a break. We've been speed walking since 8 a.m.! You're so competitive ! You even wore your medals!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "You brought your trophies! You’re out of shape. When we were little girls, we could speed walk all day! (pulls ahead)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "(chases her) Hey, w ait for me! Hey, you know the speed walking rules! If both feet leave the ground, it’s running! You ran!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Anna and Penelope are doing something they both love - speed walking! They are also using adverb clauses. Adverb clauses tell us when, why, how, where and under what conditions. For example, \"since 8 a.m.\" tells us when. Adverb clauses are dependent clauses and need an independent clause to make a complete sentence. Words like before, after, when, because, since, if and even though can signal an adverb clause. Keep watching for more adverb clauses!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Whew! That was great!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "(Anna catches up) Wow, Penelope, you’re still really fast! Since I’ve been working in an office, my speed walking has been much slower."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "You are slower, Anna. Maybe you should hire a personal trainer ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That will be great. As long as the trainer understands speed walking."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "(hands her a business card) Try this company. After you fill out an online application , they will match you to the perfect trainer."
+        },
+        {
+          "speaker": "Anna",
+          "text": "As soon as I get home tonight, I’ll do it! Thanks."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Are you my trainer?"
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "If you’re Anna, then I’m your trainer -- Alaskan Albert. Because I’m from Alaskan wilderness, I’m skilled in all outdoor activities of the wild ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s great but what about speed walking?"
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Speed walking? That's funny! Since I’ve been living in the city, I’ve combined wilderness training with a city workout. I call it “Call of the Wild Parkour !” (He howls like a wolf.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Okay … but seriously, when do we speed walk?"
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Your application did not say how funny you are!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No. But it did say that I'm a speed walker! Did you read it? Forget it. We'll have to cancel."
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Why?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "We can't train today because it's too cold and too windy."
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "No way! No pain, no gain ! When you exercise in really cold weather, you feel alive!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Really? Because right now I just feel cold."
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "You're so funny. But seriously, after our training, you will be ready for any extreme physical challenge . Let's get started! (He leads Anna through some parkour exercises.)"
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Anna, even though you’re trying really hard, you’re really bad at Call of the Wild Parkour. (he howls)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'm bad at Call of the Wild Parkour because I don’t want to do Call of the Wild Parkour! (she howls) I am a speed walker. It’s what I do. It’s part of who I am."
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Why didn’t you say something?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I did. Several times! You thought I was joking."
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Now I understand. Anna, I can help you., if you follow my advice , I'll put the speed back in your speed walk. (He shows her how to improve her speed walking)"
+        },
+        {
+          "speaker": "Alaskan Albert",
+          "text": "Go, Anna, go!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "For more about adverb clauses, visit our website!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 16,
+      "title": "Find Your Joy!",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-16/4198066.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/e/e2/e28c9b49-99f9-4443-87ab-12329eccbdf1_1080p.mp4?cb=edc3e7b80",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/01/10/95f0ce1f-6cfd-44e4-b83a-e225d7cb0224_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hi, Kaveh! Let’s go to lunch!"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Ooh, I know a great place. When I first started working here, I would go every day !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Great. Oh, no."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "What’s wrong?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I lost my key! I just had it this morning."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "You should check the Lost & Found office."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Great idea. Where is it?"
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "Oh, it used to be across from the cafeteria . But now it’s down in the basement next to the elevators . It’s really hard to find."
+        },
+        {
+          "speaker": "Anna",
+          "text": "The Lost & Found is hard to find. That’s funny."
+        },
+        {
+          "speaker": "Kaveh",
+          "text": "It is."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "I hope Anna can find the Lost & Found office! Used to and would describe something that happened repeatedly in the past. Kaveh uses would when he says, “When I first started working here, I would go every day! There are two differences between used to and would . Number 1: We use would only when we say the time period first. Number 2: For verbs like be , think , feel , see and understand , we can only use used to . Kaveh says, \"It used to be across from the cafeteria.\" Keep listening for more! (A worker moves the sign for the Lost & Found office. So, Anna walks into the wrong office without knowing it.)"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "Come in! I am Serenity ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Serenity. I’m Anna!"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "Please, sit down. How can I help you?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I lost something very important."
+        },
+        {
+          "speaker": "Serenity",
+          "text": "Shh. I already know. You need help."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes. I need help finding the key …"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "Shh. You need to find the key – the key that will give you happiness."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes. Finding this key will make me very happy."
+        },
+        {
+          "speaker": "Serenity",
+          "text": "First, Anna, let me tell you a little bit about myself."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Okay."
+        },
+        {
+          "speaker": "Serenity",
+          "text": "I used to be a very important person with a very important job . I made a lot of money -- I mean a lot."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wow. Good for you!"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "No! No, it was bad for me. I lost the most important thing – the key! You’ve lost it too, haven’t you, Anna? Haven’t you?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I guess. So, how does this work? Do I have to fill out a form or something?"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "No. No forms. Just answer this one question: As a child, what did you use to do to feel happy?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "When I was little, I used to sing all the time with my family . Those were good times."
+        },
+        {
+          "speaker": "Serenity",
+          "text": "Singing is so joyful ! I used to sing. But now that I’ve started my business, I’ve just been too busy. Too busy! Anna, why don’t you sing again?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I sing everywhere! I sing in the office. I sing on the metro. I sing in the elevators. I sing on the escalators . I sing in the bathroom. Serenity! Serenity! I really need to find my key. Yeah!"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "Yes, we need to find the key … the key to happiness."
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, no. I just need to find the key to my apartment."
+        },
+        {
+          "speaker": "Serenity",
+          "text": "I used to know. But now I don't! Do you, Anna?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I don’t know. I think I left it in the ladies’ room. You know, this isn’t the Lost & Found, is it? (Anna starts walking out of the room)"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "It could be the Lost & Found. I’m lost! And I used to find joy for people ! I used to find joy !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "You know, this is a bad time for you. I’ll find the Lost & Found myself. Bye, thanks."
+        },
+        {
+          "speaker": "Serenity",
+          "text": "I used to find joy. I used to find joy! I used to find joy!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ah, I found my key!"
+        },
+        {
+          "speaker": "Serenity",
+          "text": "I used to find joy!"
+        },
+        {
+          "speaker": "Pofessor Bot",
+          "text": "Oh no. Serenity lost her joy. But at least Anna found her key! Check out our website for more!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 17,
+      "title": "Flour Baby, Part 1",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-17/4220576.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/9/99/99b14704-c92c-4969-9b69-cba7e81ed310_1080p.mp4?cb=edc3e7baf",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/01/24/4f5af081-e654-4912-9f5d-24cd3fa5170a_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna, Pete, I have a new assignment for you -- a show on single parents! What is it like for a mother or a father to raise a child by herself or himself ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "We can interview single parents. They can share their experiences themselves ."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Yes, but you need to experience parenthood yourselves ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ourselves ?"
+        },
+        {
+          "speaker": "Peter",
+          "text": "Yeah, how do we do that? We’re not parents."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "I asked myself the same question. I said, \"Caty, how are they gonna do that?\" Then an idea came to me. I will give you the babies!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "You may be asking yourself the same thing that I’m asking myself : what is Ms. Weaver talking about!? I am sure we will find out shortly. This lesson teaches reflexive pronouns. Reflexive pronouns refer back to the subject of a sentence or clause. We use them when the subject and the object are the same person or thing. For example, Ms. Weaver says, “I asked myself the same question.” “I” is the subject and “myself” refers back to it. Here, she would not use the pronoun “me.” You need to use the reflexive pronoun “myself.” Reflexive pronouns are easy to find: they end in “self” or “selves.” I have a feeling we are going to see a lot of reflexive pronouns. Listen for them! (Pete and Anna continue their meeting with Ms. Weaver. She puts two bags of flour on the table. Pete and Anna still look confused.)"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Here are your babies!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Those are bags of flour."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "No, Pete, for the next six days, this is your baby. Here are your instructions . Do not leave your babies alone. A baby cannot take care of itself . And you two must do everything by yourselves . We will meet next Friday. Oh, and the person who does the best research will get an extra day of vacation. Help yourself to a baby."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, look, my baby is organic and whole grain. Your baby is ordinary . (Pete pushes her flour baby off desk.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "(to Pete) Monster ! (to Caty) This is a great idea, Ms. Weaver! (Pete and Anna are now outside.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "This is a terrible idea."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Speak for yourself , Pete! We need to throw ourselves into the research! I’m starting right now! (She leaves but forgets her Flour Baby.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Hey Anna, you forgot your baby! (She turns and looks at Pete.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Come to mama! (The bag of flour flies at her. She catches it.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Good girl! Good girl!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Singular reflexive pronouns end in “self.” Plural ones end in “selves.” Anna says, “We need to throw ourselves into the research!” The subject “we” is plural. So, we must use the plural reflexive pronoun “ourselves.” (The parenting research begins. Anna tries to open a baby stroller but can’t. A man walking by helps her. She pushes Flour Baby in the stroller but it falls out. On another day, she jogs with it. After several days, she is tired!)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "This is hard! I hope Pete is not doing well. I really need that vacation day!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "We will all see how Pete is doing in the next episode. We’ll also learn when not to use reflexive pronouns."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 18,
+      "title": "Flour Baby, Part 2",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-18/4231290.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/2/20/2098556b-efbc-46af-b466-ec35e553d691_1080p.mp4?cb=edc3e7c00",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/01/31/16d806b3-f878-4eff-bd6e-1857ec1241e0_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Professor Bot",
+          "text": "In Part 1 of this two-part lesson, Ms. Weaver gave Anna and Pete an assignment. Ms. Weaver instructed them to do everything by themselves. “Themselves” is a reflexive pronoun. In today’s lesson, Ms. Weaver will look at Pete’s and Anna’s research. First, let’s see Pete’s experiment. (Pete throws the bag of flour on his chair and throws many other things on his flour baby. Next, we see him outside enjoying ice-cream without his flour baby.)"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Okay, Pete, let me see your research first. (Pete hands her a big binder filled with research.)"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "That’s a heavy binder. And you and your Baby look great."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Thanks, Ms. Weaver. We feel great!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna. Anna, you’re next. Anna? Anna wake up! (She wakes up but is very confused.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'm here, Baby! I’m here! I’m here! Here's your bottle. (She accidentally squirts her bottle and milk goes everywhere.)"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna, you and your baby look awful. What happened?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, I took her everywhere. Everywhere. And I fed her every three hours. So, I haven’t slept since … what day is it?"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "It’s Friday. What happened there? (Ms. Weaver points to a large bandage on Anna’s flour baby.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, that. Oh, that. I was making myself a salad and had a little accident with a knife . I put my flour baby in front of me. And then I accidentally stabbed it. But I gave it First Aid !"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Is that a burn ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes. Yes it is. While I was making myself dinner, I put Baby next to me. I accidentally knocked her into the sink. So I put her in the microwave to dry . That’s when she caught fire. (Pete smiles, thinking he’s won.)"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Okay. So, we use a reflexive pronoun when it refers to the subject of a sentence or clause. But we DON’T use a reflexive pronoun with prepositions of place. Anna uses examples of both in one sentence: While I was making myself dinner, I put Baby next to me . We use a reflexive pronoun in the first part of the sentence. “Myself” refers to the subject “I.” But in the second part of the sentence, we don’t use a reflexive pronoun in the prepositional phrase. We use the pronoun “me.” Why? “next to” is a preposition of place. (Back in the meeting room, we’re about to learn who won the parenting experiment. Pete is smiling, thinking he won.)"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna, Anna, you should be very proud of yourself."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Proud? She stabbed and burned her baby!! And she only did one page of research…and it’s covered in milk. Ew."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Yes, Pete. But she followed instructions."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Hey, I did ..."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Please, Pete. Anna, I think your baby has lost some weight. Is there something else you want to share?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes. I’d like to share … these! I made them myself this morning."
+        },
+        {
+          "speaker": "Pete",
+          "text": "You baked your baby? You should be ashamed of yourself!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I baked them at the end of the experiment, Pete. At that point, this was just a bag of flour."
+        },
+        {
+          "speaker": "Pete",
+          "text": "It was always just a bag of flour!!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Pete, will you listen to yourself ?! You sound crazy."
+        },
+        {
+          "speaker": "Pete",
+          "text": "I sound crazy! This whole experiment was crazy!! She was the one who carried around and fed it and ... (Anna puts a cookie into his mouth. He chews it and begins to smile.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Mmm. That is good. (They all agree and eat the cookies.)"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "So, what have we learned? We’ve learned when to use reflexive pronouns and when not to. Go to our website for more information! You can practice using reflexive pronouns in our comments section."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 19,
+      "title": "Movie Night",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-19/4242927.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/7/72/72d73c46-9f5a-47ba-96dc-4a2e460ce714_1080p.mp4?cb=edc3e7c66",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/02/08/aa7b1559-adea-4534-8d4f-649785319a21_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hi, can you tell me how to get to your movie theater? (Movie theater worker on the phone gives directions.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, that’s easy. OK, thank you. Bye. (Anna meets Pete outside of the theater.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Pete! Thanks for the movie invitation ."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Yeah, sure Anna."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I love movies. I love the plot ! I love the set design ! I love the costumes! I love -"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna , I take movies very seriously . You're not one of those people who talks during a movie, are you?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Good."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Anna loves movies. And.. she loves talking about movies. And Pete doesn’t sound happy about that. But he’s trying to be polite. He can do that with Indirect Questions . We can ask a question directly : Where is your movie theater? or indirectly as Anna does:"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Can you tell me how to get to your movie theater? They have the same meaning. But indirect questions are more polite and a little more formal . Many indirect questions begin with: Can/Could you tell me… Would/Do you mind… Would it be possible… or Do you know… Hmm, do you know if Anna will stop talking? I sure don’t. Keep watching. And, this time look for indirect questions that begin with: Would you mind …"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I love the smell of popcorn. I love seats that rock . (Her chair makes noise as she rocks back and forth.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I love when people are quiet. (The lights go down and we see movie light on their faces.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ooh look, the previews are starting. I love to see what movies are coming out. Oh, this one looks good!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, the previews are part of the movie experience. So, would you mind not talking ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, sure, sure. (Anna eats her popcorn loudly. Then, she begins drinking her milkshake loudly.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, I was wondering: are you almost finished with that?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No. There's still a lot of milkshake at the bottom. (She drinks loudly again. And again.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, do you mind not drinking so loudly?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'll try. But it's really thick . (She moves the straw around and makes even more noise.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, what are you doing?! (A person in the audience shushes Pete.) Person in audience: Shh! (Pete tells the person what was happening.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "I’m not the one making all the noise. Person in audience: Shhh!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m done now. (Anna now holds many noisy boxes of candy. Finally, she chooses a candy bar .)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, would you mind opening that a little bit more quietly ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I'll try. (She tries to open it quietly but cannot.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, just give it to me! (He tears it open with his mouth. It makes a loud noise. Again, someone in the audience thinks he is making too much noise.) Person in audience: Shhh!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "(to the person) It's not mine. I'm opening it for her. Here. Person in audience: Shhhhhh!! (He gives the candy bar quickly back to her.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Here!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks, Pete."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Now, would you mind being more quiet? (The light of someone’s phone shines in Pete’s face. He asks the person a question.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Excuse me, would you mind turning down your phone light? (Then, Anna’s phone rings.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, sorry! I forgot to turn my phone off. (She tries to turn it off but drops it under the seat.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh no! I dropped it. Where is it? (She looks under the seat in front of her.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Anna, can you please turn off your phone? (She speaks to the person Pete just asked to turn their phone light down.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Excuse me, would you mind lending me your phone light for a minute?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "No! I’ll get it! Person in audience: Shhhhh! (People shush Pete again. He finally has had enough.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Look, people, I’m not the noisy one here! So, you all need to shush the right person. And I should know about shushing! I shush people all the time!! Security guard: Excuse me, sir. You can’t yell in a movie theater. Would you mind coming with me ?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "You're kicking me out ? Me? But I’m always the quiet one in the movie! (The security guard takes Pete out. Anna watches the movie and eats quietly from her bag of popcorn.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete should know better. You have to be quiet in a movie theater. Shh, the movie’s starting!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Well, that’s a surprise! I thought Anna would be the noisy one. Well, she was … with her food. But Pete did all of the talking. At least he tried to be polite by using indirect questions."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 20,
+      "title": "The Test Drive",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-20/4254704.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/a/ab/ab7dd50e-b4fa-412f-b50d-e7b0e81221ff_1080p.mp4?cb=edc3e8012",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/02/15/8b42c321-07ea-4eb1-a1f9-e7cc6019606e_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "(to Penelope) That’s a great idea. (to Rick) Rick, I think we should use this as the opening shot ."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Anna, did Ms. Weaver give us instructions for covering the car show?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "She did. She said that we need to show lots of cars. She said we need to interview people . And she also said that we should have fun."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Those were her exact words?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yeah. She said, “Have fun, Anna!” And she is the boss."
+        },
+        {
+          "speaker": "Anna",
+          "text": "(to Rick) Okay, Rick, are you - are you ready? OK. Hello, I'm Anna Matteo. Welcome to the Washington Car Show!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "People all over town are saying that if you like cars, this is the place to be ! So, let's see what people are talking about. (at Rick) How was that? Okay? Is that Good?"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Anna, Penelope and Rick are making a news story about the Washington Car Show. Ms. Weaver gave them instructions. We often need to tell others what someone else said. There are two ways to do this. One is to use the person’s exact words and use quotation marks. We call this \"direct speech.\" For example, Ms. Weaver had said, “You need to show lots of cars.” The other way is to talk about what someone said. We call this \"reported speech.\" Anna tells"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "She said that we need to show lots of cars. In this sentence, \"she,\" is the subject, “said” is the reporting verb, “that” is the conjunction and “we need to show lots of cars” is the reporting clause. Keep watching, and listen for sentences where Anna talks about what someone else said!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "This car show has many styles of vehicles . There are utility vehicles , classic cars , trucks, sports cars , and everyday vehicles."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Okay, I think we got good interviews."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Me too! People had very different opinions . But they all said they loved cars ."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Anna, look -- a robot!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "A robot!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "A robot!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Rick, we have to use the robot in the show! (They walk over to the robot. Anna begins to dance like a robot.)"
+        },
+        {
+          "speaker": "Robot",
+          "text": "What is your first name?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Anna! Anna!"
+        },
+        {
+          "speaker": "Robot",
+          "text": "Anna, you know, what an effort . What an effort to robot dance. How about a round of applause for Anna! I’ve never seen anyone try so hard."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, did you hear that? Hank the Robot said that he has never seen anyone dance like me."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Uh, I think many people here are saying that, Anna."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That was fun. You know what someone told me? You can test drive a Jaguar at this car show."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Now, that sounds fun."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Let’s go."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Okay."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This course is smooth . So you can drive faster."
+        },
+        {
+          "speaker": "Anna",
+          "text": "He said...that I can’t drive, unfortunately . (They begin the test drive. Kurt, the stunt driver , does the driving.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh my gosh… reverse."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That was great. This is awesome."
+        },
+        {
+          "speaker": "Kurt",
+          "text": "Are you ready to go on the rollercoaster ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m ready."
+        },
+        {
+          "speaker": "Kurt",
+          "text": "Here we go!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s awesome."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That was...That was awesome! I just want to go one more time. I promise. That’s it. Just one more time."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This course is bumpy and uneven . I was told that I could drive this course. So I am."
+        },
+        {
+          "speaker": "Anna",
+          "text": "(to Rick) Okay, Rick, are you rolling ? Awesome. Okay, this course is uneven. But I think the ride will be smooth."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ooh. This hill is really steep ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh my gosh. I can’t tell you how much fun this is."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, that was so much fun! I think I need to go again."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Uh, Anna, I think we have enough test drive video."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ms. Weaver said to get a lot. So, I think I should go again. (to Rick) Rick, I’m going to go again. Until next time!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "But I want to get lunch, Anna!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Penelope said she wants to go to lunch . But I don’t think that’s going to happen soon. Visit our website for more!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 21,
+      "title": "Trash to Treasure, Part 1",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-21/4273059.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/3/33/33288430-6fd2-49ab-aa0d-e7bcca6f13d8_1080p.mp4?cb=edc3e8066",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/03/06/fabffd67-3af1-480c-925c-0b87e11fe82b_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "(on phone, to Pete) Got it. Pete, I promise. I won’t tell anyone. (to herself) Bye. He is so strange ."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Hey, Anna!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Ashley!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Are you talking to yourself again?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, not this time. I was talking to Pete."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "How’s he doing?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Good. He has a birthday coming up! But he told me not to tell anyone."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Why?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, from the way he was speaking , I don’t think he likes cake or presents or fun."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "That sounds like Pete."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, I don’t care. I’m getting him a present. Do you know where I can buy something unique ?"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "I do -- Tanglewood Works. You will definitely find something unique there."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Great. I’ll go this weekend. Now, speaking of Pete’s birthday, what else should I do? I know. I’ll rent him a clown!"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Yeah, he’ll never speak to you again."
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Did you hear Ashley and Anna using the words talk and speak ? Talk and speak both mean “to say words.” And, many times, you can use either word without losing any meaning. But there are some differences in when we use these words. The word talk is usually used: for conversations between two or more people and informal situations, such as between friends or family For example, Ashley asks"
+        },
+        {
+          "speaker": "Anna",
+          "text": "“Are you talking to yourself again?” Speak is usually used: for one-way communication, such as presentations formal situations , such as a boss speaking with her workers to talk about language ability and in polite requests Keep watching, and listen for the words talk and speak . (Anna goes to Tanglewood Works.)"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Hey there. Welcome to Tanglewood Works! I’m Sue. How can I help you today?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi Sue, I’m Anna. A friend told me about your store. She said, “Anna, this place is really unique!”"
+        },
+        {
+          "speaker": "Sue",
+          "text": "We are! Here at Tanglewood Works, we focus on things that are handmade , reclaimed and recycled ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wow! That is really good for the environment."
+        },
+        {
+          "speaker": "Sue",
+          "text": "It’s good for you too. Local artists made all of these one-of-a-kind pieces. And I paint most of the furniture ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Can I look around?"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Oh, please do. (Anna walks around the store.)"
+        },
+        {
+          "speaker": "Sue",
+          "text": "So, Anna, do you like to make things?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Me? Oh, no. Every time I try to make something, something goes wrong. (She knocks down many things.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, sorry. Sorry."
+        },
+        {
+          "speaker": "Sue",
+          "text": "It’s okay. Anna, everybody can make something."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sue, this piece is very interesting!"
+        },
+        {
+          "speaker": "Sue",
+          "text": "You know, when I found these pieces, they were broken and in a dumpster . But they spoke to me. And they said, “Save me, Sue! Save me!”"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sue, what do you mean they “spoke” to you?"
+        },
+        {
+          "speaker": "Sue",
+          "text": "When I see something special that someone has thrown away, I can almost hear it talk ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s not saying anything!"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, it’s not easy to see the treasure in trash ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Or hear it talk."
+        },
+        {
+          "speaker": "Sue",
+          "text": "But you can learn. In fact, I teach private classes. And one is called Turning Trash to Treasure."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Next week, bring in some trash and we’ll turn it into treasure. Just remember – pick some trash that “ speaks ” to you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Got it! I’ll see you next week!"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Will Anna find trash that “ speaks ” to her? What will it say? We’ll find out next week!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 22,
+      "title": "Trash to Treasure, Part 2",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-22/4283017.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/d/d1/d122dfe7-5f99-4ef9-980f-1ac4aa6a4865_1080p.mp4?cb=edc3e82fc",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/03/06/0fd0e840-fff7-4d90-aaeb-eba188526184_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Sue",
+          "text": "Welcome to class, Anna. I can’t wait to see your trash!"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Oh, okay. Alright, it’s a -- it’s a net with a … oh, it’s got a hole in it. Tell me about that."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This net said to me, “Anna, I used to catch stuff. I don’t anymore. So, use me, Anna.” That’s what it said . It said , “Use me, Anna.”"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Okay. So...it’s a plastic helmet."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This plastic helmet said , “Anna. Hey, Anna, find me a head.”"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Okay, um...and a broken toy."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This broken toy … this broken toy said to me – it said, “Anna, help me find fun.” “Help me, Anna” is what it said."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, this stuff is not saying anything to you or me or anyone. It’s what we like to call in the business … garbage ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "But you said to bring in trash."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Sometimes trash is treasure. Sometimes it's just trash."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, don’t worry. Next week, I could teach you decoupage ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Decoupage. Decoupage. That’s fun to say."
+        },
+        {
+          "speaker": "Sue",
+          "text": "All you need to bring is a clean shoe box. A box that held shoes."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I got it. I got it! See you next week!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Ut oh. It looks like Anna doesn’t know the difference between treasure and trash. She thinks those things are telling her something!"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "The words tell and say have similar meanings. But we use them in different ways."
+        },
+        {
+          "speaker": "Prof Bot",
+          "text": "Tell means “to inform or instruct someone with words” and is almost always followed by an indirect object. For example, Sue says, “Tell me about that.”"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "The word me is the indirect object and tells us who is being told."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Say means “to express something with words” and focuses more on the words used. For example, Anna says, “That’s what it said. It said, ‘Use me, Anna.’”"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Listen for when Anna and Sue use tell and say ."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, welcome to Decoupage class. Decoupage is just gluing pretty pictures onto stuff . (Sue gets a phone call.)"
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, I’ve got to talk to this person. I’ll be right back. Don’t start without me."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Got it. (Sue leaves to take her phone call. Anna gets glue everywhere. She becomes covered with glue and paper .)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Okay. I can fix this."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, what happened? I told you to wait for me!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Actually , you told me not to start without you, which I didn’t. Your glue is really sticky."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Next week, let’s try lamp making. There’s – there’s no glue. Here's a flier ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks. See you next week."
+        },
+        {
+          "speaker": "Sue",
+          "text": "Anna, you did really well this week. I think lamp making might be your thing !"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Thanks, Sue. I did everything you told me to do."
+        },
+        {
+          "speaker": "Remember",
+          "text": "I said to read the instructions really carefully. Where are those instructions?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Let’s just plug it in! (Anna plugs in the lamp and, suddenly, the city loses electricity .)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "So, what class will you be teaching next week?"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "Too bad Anna didn’t follow instructions! Visit our website for more on tell and say !"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 23,
+      "title": "Rock Star",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-23/4287922.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/0/0e/0e75964c-a547-4867-81bc-23c1a81ac2e2_1080p.mp4?cb=edc48ea85",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/03/15/b53a7e2c-2dd1-4623-b4d0-92efba982191_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "Hello?"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna, this is Ms. Weaver."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Ms. Weaver!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Tomorrow, you ’ll be interviewing musician Emma G. (Anna is very excited. She loves Emma G’s music.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Emma G?! I will be talking to Emma G?!"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna? Anna, are you there?"
+        },
+        {
+          "speaker": "Professor Bot",
+          "text": "Anna and Ms. Weaver used the future continuous verb tense to talk about the interview."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "We use future continuous to talk about actions that will be in progress at or around a time in the future."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "For example, Ms. Weaver says, “Tomorrow, you ’ll be interviewing musician Emma G.”"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "There are two options for future continuous. The first is: will be + the - ing form of the verb"
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "And the second is: be + going to be + the - ing form of the verb. Keep watching for more!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hello and welcome to The Music! Today, musician Emma G will be joining us here!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "She is a wonderful songwriter and an amazing singer. And I love her! Let’s give a warm welcome to Emma G!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi. Thank you for coming on the show, Emma G."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Of course. It’s great to be here."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, we can’t wait to hear you sing. I listen to your music a lot. So, I feel like I know you. Is that strange?"
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Anna, listening to music can be a very personal experience. So, no, that’s not strange."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Good because I made something for you -- a video scrapbook of our friendship."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I took photos of you and added myself. I worked on it all weekend."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Well, that -- that’s strange. Is that even -- is that even legal ?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Now, Emma, let’s talk about your schedule . Tell me ... I mean, tell us exactly where you will be and when. Exactly."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Sure. Well, in early June, I ’ll be performing at several venues across Austin, Texas."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s my vacation week. I can meet you there! We can tour the city. We can have lunch."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Um, yeah maybe. Then in mid-July, I’ m going to be teaching at a music camp in Chicago."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’ ll be visiting my sister then. She only lives about six hours from Chicago! I could drive over. We could hang out."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Yeah, uh maybe. You know, maybe now is a good time for some music."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s a great idea. Now, let's hear a song from Emma G.!"
+        },
+        {
+          "speaker": "Emma G",
+          "text": "I wrote this song a couple of years ago. It’s called “ Wary .”"
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Do you believe in happy endings?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Endings..."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Do you really believe that we could be…"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Be..."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "I think something is wrong. I hear a voice in the background ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sorry. Sorry, Emma. That was me. I’m just so excited."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "No problem. I'm glad you like the song."
+        },
+        {
+          "speaker": "Anna",
+          "text": "You go ahead. You go ahead."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Okay. Do you believe in happy endings? (She hears a tambourine playing and looks at Anna.)"
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Anna, there’s no tambourine in this."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m so sorry. I’m so sorry, Emma. See, I’ve always wanted to sing with you."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Well, come on over then and we can sing a song together first."
+        },
+        {
+          "speaker": "Anna",
+          "text": "No, I couldn't."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Come on. It’ll be fun."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Okay! Here. I brought my favorite song."
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Oh, uh okay. Actually, I like this song. Um, are you ready?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Yes! Yes!"
+        },
+        {
+          "speaker": "Emma G",
+          "text": "Okay. Emma G / Anna together: Every breath you take* Every move you make Every bond you break Every step you take I' ll be watching you … I’ ll be watching you ... I’ ll be watching you ..."
+        },
+        {
+          "speaker": null,
+          "text": "From \"Every Breath You Take\" by The Police"
+        },
+        {
+          "speaker": null,
+          "text": "And now, here's a song by Emma G called \"Just Drive.\" Click here to read the words. This song is not part of the lesson but just a little something for you to enjoy!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 24,
+      "title": "I Feel Super!",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-24/4307612.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/5/52/5234adeb-50d6-4f72-8a68-42beb3b26a82_1080p.mp4?cb=edc48eb81",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/03/23/f1f4841a-c2cb-4ee3-9cbe-2a132ffb5c8e_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "ANNA",
+          "text": "Hi! I see you like superhero culture. Me too."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "In fact, tonight I’m going to the big superhero convention. Are you going?"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Um, I don’t know."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Well, you'd better decide soon. Last year, it sold out."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "So, since we’re talking about superheroes: would you rather become a superhero by accident, like Spiderman, or be born a superhero, like Wonder Woman?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Take your time. It’s a big question. I thought about it for days –"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Okay. If I had to choose, I’ d rather be born a superhero."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I’d rather become a superhero by an unexpected accident!"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Aren’t all accidents unexpected?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Well, yeah."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "What was that!? Are you okay?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I'm better than okay. I feel super ! PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Oh No! Anna was just hit by lightning. She had better get help. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "We use had better to give advice. It is very informal and stronger than should and ought to . For example, Anna says: “ You'd better decide soon. Last year, it sold out.” PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "When we use had better , we usually shorten the word had for personal pronouns. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "We use would rather to say what we or someone else prefers to do or have. For example, the boy says: “Okay. If I had to choose, I’d rather be born a superhero. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "With would rather , we also shorten the word would when used with personal pronouns. Keep watching and listen for had better and would rather."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "You’d better see a doctor."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I’ve never felt better!"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "You were just struck by lightning !! And what happened to your hair and your clothes?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I don't know. Wait, I do know. This is my super suit ! And this is my origin story ."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "What are you talking about?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "An origin story tells the beginning of a superhero. You should know that."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "You're not making any sense , lady ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I would rather be called Lightning Bolt Lady! It’ll sound great in a theme song: Lightning Bolt Lady!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Now, I need to find my superpowers --"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Um, I really think --"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Wait. Don’t tell me. I’ll read your mind. You are thinking you’d like to be my super helper."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "I was not thinking that."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "... that you’d like to live in a treehouse."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "No."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "… that you should eat more vegetables."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Please, stop talking. You really should get some help."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Mind reading is not my superpower. Maybe I can become invisible. I … am … invisible!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "You can’t see me. Who am I? I’m not here. You can’t see me."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "I can see you and so can everybody else."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No power of invisibility. Maybe I can create a force field . I feel it working. Nothing can hurt – (Someone throws a piece of paper and it hits her head.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Ow, that wasn’t very nice. I see I have a lot of work to do. Well, goodbye, non-super person!"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Wait. I’d better go with you. You might get worse…if that’s even possible."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "That's very nice of you, ordinary human . But I’ d rather go by myself. This is a quest."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Every time you speak, I get more confused."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "A quest is a part of all superhero stories. You really need to work on your superhero studies. Now, stand back. I’ve never flown before."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "And you’re not flying now."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Flying is also not my superpower. That’s too bad. It's going to be expensive to Uber everywhere. You know, I' d rather walk. It’s a nice day. Goodbye, non-super person."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "I am not talking to strangers again."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "Will Lightning Bolt Lady find her superpowers … ever? Ouch! Did that brick wall hurt? Will the young man ever talk to a stranger again?"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "Find out on the next episode of Let’s Learn English! ​"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 25,
+      "title": "Only Human",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-25/4322773.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/4/4d/4d8e7b5e-ee13-4a0e-a743-5db22ceb979c_1080p.mp4?cb=edc48ec98",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/03/30/a591e14e-e65c-4370-91fb-06e8f9cad590_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "ANNOUNCER",
+          "text": "When last we saw Anna, she had made a new friend. And they had been talking about superheroes for a while when suddenly Anna became Lightning Bolt Lady!"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "She tried to find her superpowers. But it did not go well."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "She can’t fly, become invisible or create a force field. And she really cannot walk through walls. Ouch, Lightning Bolt Lady."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "She had been walking into that wall for about 15 minutes when she had a great idea."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "I just had a great idea!"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "I can’t wait to hear this one! But first, let’s talk about grammar."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "Professor Bot is on vacation this week. I’m the announcer. So, I’m going to tell you about the past perfect continuous."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "We use this verb tense to show that an action started in the past and continued to another time or action in the past."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "For example, I said, “She had been walking into that wall for about 15 minutes when she had a great idea.”"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "Had been walking is the past perfect continuous of the verb walk . It’s had been plus the -ing form of the verb."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "You’ll hear me use this verb tense a few more times today."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "Now, what am I forgetting? Oh right! Lightning Bolt Lady’s great idea."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "If I want to know my superpowers, I’ll need to learn about lightning!"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "So, she read many books about lightning."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Wow. A lightning strike usually lasts less than a second . (She tells this to a person and he slowly moves away.)"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Lightning is really fast and I like speed walking. So, maybe one of my superpowers is super-speed walking! (to stranger) Bye! (She begins to super-speed walk.)"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Check! Super-speed walking is definitely one of my superpowers."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Lightning has millions of volts of electricity . Amazing! (She puts her hand up and lightning bolts shoot from her fingers.)"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Wow! I can charge a lot of batteries with this superpower!"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "She had been looking for hours for someone to help when she found her chance."
+        },
+        {
+          "speaker": "WOMAN",
+          "text": "Hello? Hello? I’m sorry. I’m going to have to call you back. My phone is dying."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Excuse me, I can charge your phone."
+        },
+        {
+          "speaker": "WOMAN",
+          "text": "Really? Thanks!"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "I’m Lightning Bolt Lady! (She takes the woman's phone and shoots it with a lightning bolt. But it turns into ashes . Then, she gives the woman lots of money and smiles and says goodbye.)"
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "She had been practicing her superpowers all day. Suddenly, she heard a terrible sound – a child’s disappointment ."
+        },
+        {
+          "speaker": "ANNOUNCER",
+          "text": "These children tried to light a fire for over an hour. But then, they gave up ."
+        },
+        {
+          "speaker": "PARENT",
+          "text": "Hey kids, that wood will never burn. It’is too wet."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Small humans, what is wrong?"
+        },
+        {
+          "speaker": "CHILD",
+          "text": "Stranger danger!"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "I’m Lightning Bolt Lady!"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Oh no. It’s you."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "(to"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": ") We meet again. And guess what: I found my superpowers."
+        },
+        {
+          "speaker": "CHILD",
+          "text": "Well, we need a fire to toast the marshmallows to make S’mores ."
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "I can help."
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "We don’t need a super-speed walker but thanks!"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Super-speed walking is just one of my superpowers. I can also do this! (She tries to use her lightning bolts but it doesn't go well.)"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Sorry! Let me do it again. (She lights the fire with her lightning bolts.)"
+        },
+        {
+          "speaker": "CHILDREN",
+          "text": "Thanks, Lightning Bolt Lady!"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "Lightning Bolt Lady"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "You’re welcome. But you don’t have enough firewood . Using my super-speed walking, I will get more. (She super-speed walks around to get firewood.)"
+        },
+        {
+          "speaker": "PARENT",
+          "text": "Lightning Bolt Lady, come back! A lightning storm is coming!"
+        },
+        {
+          "speaker": "LIGHTNING BOLT LADY",
+          "text": "Not a chance ! There’s not a cloud in the …"
+        },
+        {
+          "speaker": "CHILD",
+          "text": "Lightning Bolt Lady, are you okay?"
+        },
+        {
+          "speaker": "CHILD",
+          "text": "Where's your super-suit?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Oh no! I've lost my superpowers!"
+        },
+        {
+          "speaker": "YOUNG MAN",
+          "text": "It's starting to rain. Do you want to go inside and eat some S’mores?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "You read my mind."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "You know, I thought mind reading would be one of my superpowers. But it wasn’t."
+        },
+        {
+          "speaker": "CHILD",
+          "text": "That’d be a cool superpower."
+        },
+        {
+          "speaker": "CHILD",
+          "text": "But I’d rather be able to talk to animals."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 26,
+      "title": "Look-alikes",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-26/4350607.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/d/de/de2c2542-eef8-44b2-b2c0-baf24135549a_1080p.mp4?cb=ede5e8c19",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/04/25/3b556bb7-8c37-4c22-a390-d79b9f34fd24_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Anna",
+          "text": "This article is so interesting. Pete, listen to this: “Somewhere in the world there is someone who looks just like you.”"
+        },
+        {
+          "speaker": "Pete",
+          "text": "No one is this handsome."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh Pete, there’s something between your teeth. (Pete tries to clean his teeth.)"
+        },
+        {
+          "speaker": "Pete",
+          "text": "It is gone?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No. No. It’s still there. There. You got it. But think of it: There could be two of us in the world!"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Two Annas?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Actually, Anna, maybe your silly article is right. Yesterday at work, I met a woman who looks just like you."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Really? Wait, are you making fun of me?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Not this time."
+        },
+        {
+          "speaker": "Pete",
+          "text": "She’s tall and has curly hair. But even her face looks like yours. I think she’s a career consultant."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I bet she has a lot of great advice. I can’t wait to meet her."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Yes, you can. I met her and she is very difficult."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, she’s just new. We have to give her a chance. What’s her name?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Evelyna or something like that. You can’t miss her. She always wears a hat."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "So, Anna, have you met the new consultant yet?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "No. But I’ve already heard. We look alike, don’t we?"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Yeah, but you don’t act alike. You’re much nicer than she is."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Maybe she gets nervous at new jobs. Or maybe she’s shy. Let’s not judge, Penelope."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "She’s not nervous or shy. She’s mean."
+        },
+        {
+          "speaker": "Anna",
+          "text": "You know, we should get to know her better. Let’s invite her to lunch!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Sorry but I’m busy that day. (Penelope walks away. Anna yells after her.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Oh, that’s too bad. Hey, I haven’t picked a day yet! (Anna and Pete are playing a game.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "This is going to be so much fun. Boy, I can’t wait to play this game."
+        },
+        {
+          "speaker": "Evilana",
+          "text": "How much longer are you going to be?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "We’ll be just a minute … (Anna turns around and sees her look-alike.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "You must be Evelana. I’m Anna. We are look-alikes!"
+        },
+        {
+          "speaker": "Evilana",
+          "text": "No, we’re not. And my name is pronounced “Evil-ana.”"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Oh. This is going to be fun."
+        },
+        {
+          "speaker": "Evilana",
+          "text": "You had better hurry up. I need this room for a lecture. It’s called: “If You Want to Win, Others Must Lose.” What is all this stuff, anyway?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s a game. We’re going to play at lunch."
+        },
+        {
+          "speaker": "Evilana",
+          "text": "It’s a stupid child’s game!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "It’s a fun game. But yes, it is for children."
+        },
+        {
+          "speaker": "Evilana",
+          "text": "Well, you may be childish but I’m not. And you look stupid with that thing on your head."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, you look serious with that look on your face. Come on, Pete. Let’s play somewhere else."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Actually, I’m going to stay for Evilana’s lecture."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Fine. You can learn new ways to beat people."
+        },
+        {
+          "speaker": "Evilana",
+          "text": "He will. He will. (Days later, Anna and Penelope are playing the game. Pete comes in. He has a problem with his eye.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Okay. Am I a food?"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Nope."
+        },
+        {
+          "speaker": "Pete",
+          "text": "Hey, do you guys have room for one more?"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Sure, Pete! Come on over. What happened to your eye?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Evilana “accidentally” hit me. And she didn’t even say sorry. She’s so mean!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "I told you so."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Here, Pete. Put on this headband. You’ll feel better. Penelope, you’re right. Evilana is an awful person!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "And violent. And now we have to work with her!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Haven’t you heard? She’s gone! She was given another assignment."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "What assignment?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I’m not sure. I think it has something to do with outdoors. Anyway, let’s play! Pete it’s your turn."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 27,
+      "title": "Fish out of Water",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-27/4374632.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/1/1f/1f94874c-4395-4a61-b536-714406498f46_1080p.mp4?cb=ede5e8c91",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/05/03/198277fc-1de6-487a-8196-dc808623e1b6_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "ANNA",
+          "text": "Hello, Ms. Weaver! MS."
+        },
+        {
+          "speaker": "WEAVER",
+          "text": "Oh, Anna. I’ve invited some people to dinner Saturday. We’re going to that new seafood restaurant -- Fish on a Dish. MS."
+        },
+        {
+          "speaker": "WEAVER",
+          "text": "Why don’t you join us? My treat ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Thanks, Ms. Weaver. But I already have plans. My friend has invited me to her houseboat . MS."
+        },
+        {
+          "speaker": "WEAVER",
+          "text": "Houseboat, really? That’s unique."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Yes, it is. In fact , I’m thinking of living on a houseboat. MS."
+        },
+        {
+          "speaker": "WEAVER",
+          "text": "Aren’t you too tall and klutzy to live on a houseboat?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I am not too tall! (She knocks over a display board .) PROF."
+        },
+        {
+          "speaker": "BOT VO",
+          "text": "Is Anna really ready for a houseboat? PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Ms. Weaver invited Anna to dinner. When we make friendly, informal invitations, we use phrases like “Why don’t…?” PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "For example, Ms. Weaver said, “Why don’t you join us? My treat!”"
+        },
+        {
+          "speaker": "That’s",
+          "text": "Why don’t plus the subject plus the simple form of the verb. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Anna responded to the invitation by saying, “Thanks, but I already have plans.” Keep watching for more examples of informal invitations!"
+        },
+        {
+          "speaker": "FANNY",
+          "text": "Anna, I’m so glad you could come!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Hi, Fanny!"
+        },
+        {
+          "speaker": "FANNY",
+          "text": "Hi, this is my son, Phoenix."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Hi, Phoenix."
+        },
+        {
+          "speaker": "FANNY",
+          "text": "How about you give Anna a tour and I will make some lunch?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "Aye, aye, captain !"
+        },
+        {
+          "speaker": "FANNY",
+          "text": "Great!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Do you really call her “captain”?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "I kind of have to."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "So, Phoenix, I think I’d like to live on a houseboat. Do you like living here?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "I love it! It’s much different than living in a house."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Oh, I bet. I bet you had to get rid of a lot of stuff, didn’t you?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "No way! We moved from a 3- story house to a boat! So, we really had to downsize!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I’d have to get rid of a lot of stuff. I have a rock collection and I have some really big rocks."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Can you stop this boat from rocking for a minute?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "No. We’re floating on water. I can’t do that."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Well, since you live on the water, aren’t you afraid of great white sharks ?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "No, not really. They don’t live in these waters."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "… that you know of. What about killer whales ?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "No."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Electric eels ?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "No."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Barracudas?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "No."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Piranhas?"
+        },
+        {
+          "speaker": "PHOENIX",
+          "text": "Uh-uh."
+        },
+        {
+          "speaker": "FANNY",
+          "text": "You know, Anna, if you’re afraid of sea life, maybe you shouldn’t live on a houseboat. Do you have any boating experience?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Oh, oh yeah, Fanny. I have battled the great waters before -- once on a swan boat and once in a duck boat ... bus. It was a boat that turned into a bus."
+        },
+        {
+          "speaker": "FANNY",
+          "text": "Yeah, I don’t think that counts ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Fanny, does this rocking ever bother you?"
+        },
+        {
+          "speaker": "FANNY",
+          "text": "No, I love it. It goes up and down and side to side and up and down. Anna, I love it! (Because of the rocking, Anna begins to feel seasick .)"
+        },
+        {
+          "speaker": "FANNY",
+          "text": "Anna, are you feeling okay?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Yeah, yeah. You know, I just need some fresh air."
+        },
+        {
+          "speaker": "FANNY",
+          "text": "Let me open a window for you."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No, I need some fresh land air. I mean, I need to breathe air on land. Oh, is that the time? I should really be going."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Thanks for lunch, Fanny, and a tour of your houseboat. It’s given me a great idea!"
+        },
+        {
+          "speaker": "FANNY",
+          "text": "You’re going to live on a houseboat?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Sort of . Thanks again!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Hi! How would you like to hang out on my boat ? Great! See you then! (Ms. Weaver and Anna sit in a boat on land.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "…and this is my shark net. MS."
+        },
+        {
+          "speaker": "WEAVER",
+          "text": "Thank you for the invitation, Anna."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Of course, would you like more orange juice ? MS."
+        },
+        {
+          "speaker": "WEAVER",
+          "text": "Uh.."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "(to young man) Ahoy!"
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 28,
+      "title": "For the Birds",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-28/4396849.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/b/bb/bb0da721-de99-49ad-be0b-2441ad716410_1080p.mp4?cb=ede5e8cd0",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/05/17/48003699-cb0b-4cb7-8002-27bb38944ebf_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "KELLY",
+          "text": "Oh, Anna, there you are! I am so glad we joined the Great City Bird Count! Aren't you?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No. Today has been a bust … a flop … a bummer!"
+        },
+        {
+          "speaker": "KELLY",
+          "text": "I’m sensing a little disappointment ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "A little?"
+        },
+        {
+          "speaker": "KELLY",
+          "text": "My official bird-watching form is almost full!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I've only seen pigeons ... lots and lots of pigeons! But I did write down some other valuable information."
+        },
+        {
+          "speaker": "KELLY",
+          "text": "Did you find a bird's nest ?!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No. (She shows Kelly a map of ice cream trucks.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I found 10 ice cream trucks in this five- block area.​ Their music seems to follow me everywhere."
+        },
+        {
+          "speaker": "KELLY",
+          "text": "We' re supposed to be counting birds, not ice cream trucks. This is important scientific work!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Well, when you want ice cream, my data will be pretty important."
+        },
+        {
+          "speaker": "KELLY",
+          "text": "Anna, birds are everywhere! I’m sure you’ll find something. Use your imagination ! But, make sure that you put it on the official form. (Anna walks away with her ice cream truck map.) PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Anna was supposed to find birds, but she didn’t. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Kelly says, “We' re supposed to be counting birds, not ice cream trucks.” To be supposed to means you are expected to do something. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "It’s different from have to and ought to . Have to means you must do something. And ought to means you should do it but you don’t have to. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Keep watching for have to and ought to ! (Anna looks through binoculars but doesn't see birds. She talks to herself.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No birds. Oh wait, there’s another ice cream truck! Anna, focus on birds. Aw, but that truck has my favorite flavor ... banana!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "That man is in the way . I can’t see the price . I wonder what flavor he's getting."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Strawberry? He doesn't seem like a strawberry kind of guy ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "In fact, he doesn't seem like an ice cream truck kind of guy. That suit looks expensive."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Maybe he's a spy! You know what that means: The ice cream truck driver is a spy, too!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Genius ! It’s a perfect disguise ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "What?! The man in the suit left his briefcase at the ice cream truck!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I was right! He is a spy! And, he just dropped off top-secret information! I ought to do something. Something needs to be done! I need to do something. (Anna runs to the ice cream truck and takes the briefcase.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I did it! I took the spy’s briefcase!"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "What’s that?! The ice cream truck -- it’s following me! It wants the case back! I have to hide . (She runs and hides behind a tree.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "This is my life now -- running, scared, alone. (She runs to another tree.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "That awful music -- it’s following me everywhere! (The man sees her at the tree.)"
+        },
+        {
+          "speaker": "MAN",
+          "text": "Hey! You found my briefcase."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "You caught me! I mean, I caught you!"
+        },
+        {
+          "speaker": "MAN",
+          "text": "Well, I just want my briefcase. All my poems are in there."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Poems? You’re a poet?"
+        },
+        {
+          "speaker": "MAN",
+          "text": "Well, I'm a lawyer . But I write poems, too. (Anna gives the man his briefcase.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "So, you’re not a spy?"
+        },
+        {
+          "speaker": "MAN",
+          "text": "You look disappointed."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No, that’s okay. It’s not your fault . Poems are nice, too. I guess."
+        },
+        {
+          "speaker": "MAN",
+          "text": "Well, would you like me to read my latest one?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Why not ?"
+        },
+        {
+          "speaker": "MAN",
+          "text": "On sunny day walks, my hand reaches for ice cream from fragaria ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I love your poem!"
+        },
+        {
+          "speaker": "MAN",
+          "text": "I love ice cream."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Me too."
+        },
+        {
+          "speaker": "MAN",
+          "text": "What's your favorite flavor?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Banana."
+        },
+        {
+          "speaker": "MAN",
+          "text": "Well, my favorite flavor is ..."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Strawberry !"
+        },
+        {
+          "speaker": "MAN",
+          "text": "How did you know that?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "A little bird told me ."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 29,
+      "title": "Where There's Smoke...",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-29/4423736.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2018/06/1/15/15611607-f9f6-4091-ab7b-7252258452fa_fullhd.mp4?cb=ed2bc555c",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/06/08/c954b93d-aacb-40b2-8c20-423d8c100045_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "PENELOPE",
+          "text": "Hey, Anna. What are you reading?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I’m reading about fire safety . Ms. Weaver named me fire safety monitor ."
+        },
+        {
+          "speaker": "PENELOPE",
+          "text": "But the only time we have a fire emergency is when someone burns a piece of toast ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "That is true. But fire safety is very serious – very serious. If there is a fire emergency , I have to help everyone out of the building ."
+        },
+        {
+          "speaker": "PENELOPE",
+          "text": "Well then, if I were you, I’d learn as much as possible ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "You’re right. And I know just who to call! PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Hmm, I wonder where Anna’s going. Today we are reviewing conditionals and learning helpful language for emergencies. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "If Anna studies hard, she’ll be a great fire safety monitor! That’s a conditional. It uses “if” to show that something is true only when something else is true. PROF."
+        },
+        {
+          "speaker": "BOT",
+          "text": "Let’s find out where Anna is going. And if you want to learn fire emergency language, keep watching! (Two firefighters welcome Anna to their firehouse .)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Hi, Firefighter Jones."
+        },
+        {
+          "speaker": "FIREFIGHTER JONES",
+          "text": "Hey, how are you, Anna?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I’m well, thanks. How are you? Hi, Firefighter Hatcher."
+        },
+        {
+          "speaker": "FIREFIGHTER HATCHER",
+          "text": "Hi, Anna. How are you?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I’m well, thanks."
+        },
+        {
+          "speaker": "FF H",
+          "text": "Welcome to our firehouse."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Thank you."
+        },
+        {
+          "speaker": "FF H",
+          "text": "Come on in."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Thanks."
+        },
+        {
+          "speaker": "FF H",
+          "text": "This is where the firefighters eat. This is where we rest. This is where we exercise. This is where the firetrucks are parked and maintained ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "This place is beautiful."
+        },
+        {
+          "speaker": "FF H",
+          "text": "You know, the firehouse is a firefighter’s second home."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Firefighter Jones,"
+        },
+        {
+          "speaker": "Firefighter Hatcher",
+          "text": "Can you tell me some ways to prepare for a fire emergency?"
+        },
+        {
+          "speaker": "FF H",
+          "text": "Sure, Anna. There’s one really important thing you can do: Install a fire alarm. Test it monthly and make sure the batteries are fully charged."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Let’s talk about those emergency exits ."
+        },
+        {
+          "speaker": "FF J",
+          "text": "In your home, office and schools, know where your emergency exits are located ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "What about fire extinguishers ?"
+        },
+        {
+          "speaker": "FF J",
+          "text": "Everyone should know how to use a fire extinguisher. Have one handy and practice using it."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "What if we need to get out?"
+        },
+        {
+          "speaker": "FF J",
+          "text": "You should have an evacuation plan. And practice getting out safely with fire drills ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "If I am in a building and it’s on fire, should I use the elevator ?"
+        },
+        {
+          "speaker": "FF H",
+          "text": "No. Always use the stairs ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "What other safety tips should I know?"
+        },
+        {
+          "speaker": "FF J",
+          "text": "Stay low . Smoke rises . The air is clearer close to the ground."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Stay low. Anything else?"
+        },
+        {
+          "speaker": "FF H",
+          "text": "If you touch a door and it’s hot, don’t open it . There might be a fire on the other side."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "What do I do if my clothes catch on fire ?"
+        },
+        {
+          "speaker": "FF H",
+          "text": "Do not run. If you run, the fire will burn faster . You must stop, drop and roll."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "Thanks so much! I’ve learned a lot. And I can’t wait to share this information with others."
+        },
+        {
+          "speaker": "FF H",
+          "text": "Thanks for coming, Anna."
+        },
+        {
+          "speaker": "FF J",
+          "text": "It’s been a pleasure meeting you. (Anna is back at the office talking to Penelope.)"
+        },
+        {
+          "speaker": "PENELOPE",
+          "text": "So, Anna, how was the visit to the fire station ?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "I learned a lot! And firefighters have a very difficult job."
+        },
+        {
+          "speaker": "PENELOPE",
+          "text": "Do you smell smoke?"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No. So, like I was saying, I learned how to …"
+        },
+        {
+          "speaker": "PENELOPE",
+          "text": "Anna, I smell smoke ."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "If you smell smoke, call the fire department! (Anna begins to evacuate her coworkers.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "If you smell smoke, get out of the building . Come on people, we have a fire emergency! Leave your things and evacuate calmly and quickly. Very good. Very good."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "We have a fire emergency. No, take the stairs Let’s get out. Let’s get out safely. (Anna and coworkers stand outside of the building.)"
+        },
+        {
+          "speaker": "ANNA",
+          "text": "We got out in less than 6 minutes! Good job, people! Wait. Where’s Pete?"
+        },
+        {
+          "speaker": "PENELOPE",
+          "text": "I know where he is. I’ll go get him."
+        },
+        {
+          "speaker": "ANNA",
+          "text": "No! Never go back into a burning building! The fire department is coming. Stay calm, Pete. Help is on the way! Help is on the way! Today, you learned important language to use for fire emergencies. Study and remember them. How many can you remember? Helpful Language Helpful Phrases emergency exit/s evacuation plan firefighter fire extinguisher fire truck firehouse fire station fire department fire drill/s catch fire / catch on fire Install fire alarms. I smell smoke. Do you smell smoke? There’s a fire! Call the fire department! The building is on fire! Stop, drop and roll."
+        }
+      ],
+      "audioBitrate": 128
+    },
+    {
+      "id": 30,
+      "title": "Dream a Little Dream",
+      "sourceUrl": "https://learningenglish.voanews.com/a/lets-learn-english-level-2-lesson-30/4465315.html",
+      "videoUrl": "https://voa-video-ns.akamaized.net/pangeavideo/2021/02/2/24/243c881f-4bee-45a7-b181-d3c8b4156c30_1080p.mp4?cb=ede5e8d21",
+      "videoQuality": 1080,
+      "audioUrl": "https://voa-audio.voanews.eu/vle/2018/07/06/931150ac-ddf3-42db-9247-b3ac4aec6180_hq.mp3",
+      "audioFormat": "mp3",
+      "transcriptStatus": "complete",
+      "transcript": [
+        {
+          "speaker": "Ashley",
+          "text": "Anna, where are you going in such a hurry?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Hi, Ashley. The nurse ’s office. Today I get the results from my blood test."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "I’m sure you’re fine. Don’t worry."
+        },
+        {
+          "speaker": "Anna",
+          "text": "You know, I used to dream of being a nurse. It is such an honorable career. Is there something you’ve dreamed of doing?"
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Sure! I would love to be a dog trainer . Actually, I’ve taught my dog, Dublin, lots of tricks!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, I’m off to the nurse. Bye, Ashley."
+        },
+        {
+          "speaker": "Ashley",
+          "text": "Bye, Anna."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Bye, Dublin. (Anna stands near the nurse’s office and listens to her phone call.)"
+        },
+        {
+          "speaker": "Nurse",
+          "text": "I’m looking at her test results and they’re not good. In fact, I’m afraid she’s not going to make it."
+        },
+        {
+          "speaker": "Anna",
+          "text": "What?! I'm not going to make it? I'm dying??"
+        },
+        {
+          "speaker": "Nurse",
+          "text": "Anna, come in. How are you?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I guess..not so good. I’m dying!?"
+        },
+        {
+          "speaker": "Nurse",
+          "text": "What are you talking about?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I just heard you on the phone. Just tell me: How much longer do I have?"
+        },
+        {
+          "speaker": "Nurse",
+          "text": "I wasn't talking about you. A student of mine didn’t do well on her science test. So, she won’t be able to make it ... to graduation."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Whew. Thank goodness ! For a minute, my whole life passed before my eyes . There are so many things I haven't done yet. Nurse Well, life is short. It’s important to do something you love every day."
+        },
+        {
+          "speaker": "Anna",
+          "text": "I couldn’t agree more."
+        },
+        {
+          "speaker": "Nurse",
+          "text": "Now, let’s talk about your blood test. Your cholesterol is really low."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Awesome! (Next, Anna is sitting in a sound studio with Jonathan.)"
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "Okay, Anna, say something and I’ll check your sound level ."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Testing 1, 2, 3. Testing. Jonathan, I’ve been wondering something: What’s at the top of your bucket list ?"
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "That’s easy. I’d love to win the World Karaoke Contest."
+        },
+        {
+          "speaker": "Anna",
+          "text": "This is so strange. I just saw on Twitter that they are having auditions in D.C. this weekend!"
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "Are you serious? Can you read the story by yourself?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Sure, absolutely ."
+        },
+        {
+          "speaker": "Jonathan",
+          "text": "Thanks!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "You go. (Anna goes outside and talks to Penelope.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Penelope, I was wondering if you still dream of being a dancer."
+        },
+        {
+          "speaker": "Penelope",
+          "text": "Only every day!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, guess what: A famous dancer is having a flash mob around the corner! Hundreds of people are dancing together!"
+        },
+        {
+          "speaker": "Penelope",
+          "text": "No way!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Way! If you leave right now, you can join them! Bye! (Anna then sits with Pete in the office kitchen.)"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete, what’s one of your dreams?"
+        },
+        {
+          "speaker": "Pete",
+          "text": "Well, last night I dreamt I was in a spaceship . I was flying through outer space with these two beautiful..."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Pete -- not that kind of dream. I mean your hopes for the future. Pete Oh. I plan on selling my book to Hollywood and becoming rich and famous."
+        },
+        {
+          "speaker": "Anna",
+          "text": "That’s going to be difficult."
+        },
+        {
+          "speaker": "Pete",
+          "text": "It’s my agent! Hello? Uh-huh. Sure! I can be in Los Angeles tomorrow!"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Well, good job, Anna! My work here is done … almost. (Music plays as Anna talks to many more coworkers)"
+        },
+        {
+          "speaker": "MUSIC",
+          "text": "You can search but you won't find the answer without a dream. You can reach for the stars but you won't get there without a dream...without a dream. (Then, Anna is sitting at her work desk.)"
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "Anna, what’s going on? Where is everybody?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "I don’t know. Maybe something is, uh, going around the office."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "You mean germs ? Anna, you’d better use some of this hand cleaner. You don’t want to get sick, too."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Right. Okay, thanks. Not germs – dreams, Ms. Weaver. Dreams."
+        },
+        {
+          "speaker": "Ms. Weaver",
+          "text": "What did you say, Anna?"
+        },
+        {
+          "speaker": "Anna",
+          "text": "Nothing. Nothing."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "We hope you have enjoyed Level 2 of Let’s Learn English. Everyone is following their dreams, big and small."
+        },
+        {
+          "speaker": "Prof. Bot",
+          "text": "What are your dreams? Our dream is for you to keep learning English! Thanks for watching."
+        }
+      ],
+      "audioBitrate": 128
     }
   ]
 }

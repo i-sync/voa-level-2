@@ -1,8 +1,8 @@
 # VOA Level 2 Player — 产品需求（MVP）
 
-版本：0.1
-日期：2026-08-30
-状态：开发中
+版本：0.3  
+日期：2026-08-31  
+状态：可用，Lesson 1–30 已补齐并使用 1080p 视频
 
 ## 1. 背景
 
@@ -46,9 +46,9 @@ MVP 明确不做：
 
 ## 4. 用户与设备
 
-主要用户：项目创建者本人。
-主要设备：iPhone Safari。
-次要设备：桌面 Chrome / Edge。
+主要用户：项目创建者本人。  
+主要设备：iPhone Safari。  
+次要设备：桌面 Chrome / Edge。  
 主要场景：睡前息屏听、通勤泛听、看文本精听。
 
 ## 5. MVP 功能需求
@@ -59,12 +59,12 @@ MVP 明确不做：
 - 可以从下拉框选择课程。
 - 支持上一课和下一课。
 - URL 应包含 `?lesson=N`，便于收藏和返回。
-- MVP 首批数据为 Lesson 1–3；验证完成后导入全部 30 课。
+- 课程目录包含连续的 Lesson 1–30，不包含 Review 页面。
 
 ### FR-02 视频播放
 
 - 使用浏览器原生 `<video controls playsinline>`。
-- 首选 VOA 360p MP4，降低移动流量。
+- Lesson 1–30 均使用 VOA 提供的 1080p MP4；数据中记录 `videoQuality: 1080`。
 - 能拖动进度、暂停和继续。
 - 播放视频时自动暂停音频。
 - 记录每课视频播放位置。
@@ -72,7 +72,9 @@ MVP 明确不做：
 ### FR-03 音频播放
 
 - 使用浏览器原生 `<audio controls>`。
-- 首选 VOA 128 kbps MP3。
+- 优先使用 VOA 128 kbps MP3，并记录 `audioFormat: "mp3"` 与 `audioBitrate: 128`。
+- 若课程页没有独立 MP3，则使用该课最小清晰度 MP4 的音轨，并记录 `audioFormat: "mp4"` 与 `audioFallbackVideoQuality`。
+- 当前 Lesson 8 使用 240p MP4 音轨作为音频来源；它的视频仍为 1080p。
 - 支持 iPhone 锁屏后继续播放；是否稳定以真机测试结果为准。
 - 播放音频时自动暂停视频。
 - 记录每课音频播放位置。
@@ -140,20 +142,33 @@ MVP 明确不做：
 
 ## 6. 数据需求
 
-运行时只读取本仓库的静态文件 `data/lessons.json`。单课数据结构：
+运行时只读取本仓库的静态文件 `data/lessons.json`。MP3 课程示例：
 
 ```json
 {
   "id": 1,
   "title": "Budget Cuts",
   "sourceUrl": "https://learningenglish.voanews.com/...",
-  "videoUrl": "https://...mp4?cb=...",
-  "audioUrl": "https://...mp3",
+  "videoUrl": "https://..._1080p.mp4?cb=...",
+  "videoQuality": 1080,
+  "audioUrl": "https://..._hq.mp3",
+  "audioFormat": "mp3",
+  "audioBitrate": 128,
   "transcriptStatus": "complete",
   "transcript": [
     { "speaker": "Anna", "text": "..." },
     { "speaker": null, "text": "..." }
   ]
+}
+```
+
+没有独立 MP3 的课程使用：
+
+```json
+{
+  "audioUrl": "https://..._240p.mp4?cb=...",
+  "audioFormat": "mp4",
+  "audioFallbackVideoQuality": 240
 }
 ```
 
@@ -166,7 +181,9 @@ scripts/import_voa.py
           ↓
 data/lessons.generated.json
           ↓
-人工检查差异后替换 data/lessons.json
+人工检查差异并运行测试
+          ↓
+data/lessons.json
 ```
 
 网站不能在用户访问时实时抓取 VOA。
@@ -184,10 +201,14 @@ data/lessons.generated.json
 
 ## 8. MVP 验收标准
 
-### 桌面浏览器
+### 自动与桌面验证
 
+- [x] Lesson 1–30 连续存在，不包含 Review 页面；
+- [x] 30 个视频地址均记录 `videoQuality: 1080`；
+- [x] 每课都有可用的音频来源和非空 Conversation 文本；
+- [x] JavaScript 与 Python 自动测试通过；
 - [ ] 页面通过静态 HTTP 服务器正常打开；
-- [ ] Lesson 1–3 均可选择；
+- [ ] Lesson 1–30 均可选择，上一课/下一课连续；
 - [ ] 视频和音频不会同时播放；
 - [ ] 0.70、0.80、0.90、1.00 快捷速度生效；
 - [ ] 加减按钮以 0.05 调整；
@@ -200,6 +221,7 @@ data/lessons.generated.json
 ### iPhone Safari 真机
 
 - [ ] 音频可以正常播放和拖动；
+- [ ] Lesson 8 的 MP4 音轨能在音频播放器中正常播放和息屏；
 - [ ] 0.80 倍速声音正常；
 - [ ] 锁屏后音频继续播放；
 - [ ] 锁屏后仍保持 0.80 倍速；
@@ -208,7 +230,7 @@ data/lessons.generated.json
 - [ ] 1 分钟、15 分钟和 30 分钟定时分别测试；
 - [ ] 记录“完全准时 / 有延迟 / 仅解锁后停止”的真实结果。
 
-只有前三课通过上述真机验证，才批量导入剩余 27 课。
+Lesson 1–30 已完成导入；真机验收仍重点验证锁屏、倍速、循环和睡眠定时的稳定性。
 
 ## 9. 已知风险
 
@@ -230,12 +252,15 @@ data/lessons.generated.json
 
 导入器依赖 VOA 页面结构。脚本失败时应明确报错，不应静默生成空数据；生成结果必须人工检查。
 
+### R-04 MP4 音轨兼容性
+
+Lesson 8 当前没有独立 MP3，音频播放器使用 240p MP4。桌面与 iPhone Safari 都应单独验证其播放、倍速、循环和锁屏行为。若兼容性不稳定，再考虑只为这一课托管抽取后的音频，而不是扩大整个系统架构。
+
 ## 10. 后续候选功能
 
 仅在 MVP 日常使用稳定后考虑：
 
-- 导入全部 30 课；
-- 搜索课程；
+- 搜索和筛选课程；
 - A-B 循环；
 - 为台词生成时间轴，实现当前句高亮和单句循环；
 - “听一句—暂停—复述—重播”模式；

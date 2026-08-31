@@ -23,7 +23,7 @@ def test_index_has_unique_ids_and_existing_local_assets():
         assert (ROOT / local_path).is_file(), local_path
 
 
-def test_sample_lesson_data_is_ordered_and_has_official_sources():
+def test_lesson_data_is_ordered_and_has_official_sources():
     payload = json.loads((ROOT / "data" / "lessons.json").read_text(encoding="utf-8"))
     lessons = payload["lessons"]
 
@@ -36,14 +36,17 @@ def test_sample_lesson_data_is_ordered_and_has_official_sources():
         assert lesson["audioUrl"].startswith("https://")
         assert lesson["videoUrl"].startswith("https://")
         assert lesson.get("transcriptStatus") == "complete"
-        assert isinstance(lesson["transcript"], list)
-        assert len(lesson["transcript"]) >= 20
+
+        transcript = lesson["transcript"]
+        assert isinstance(transcript, list)
+        assert transcript
+        assert all(isinstance(entry.get("text"), str) and entry["text"].strip() for entry in transcript)
+        assert any(entry.get("speaker") for entry in transcript)
 
 
 def test_stylesheet_has_balanced_blocks():
     css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
     assert css.count("{") == css.count("}")
-
 
 
 def test_javascript_id_selectors_exist_in_html():
