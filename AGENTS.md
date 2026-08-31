@@ -17,12 +17,12 @@ Build a small, reliable, mobile-first player for VOA Let's Learn English Level 2
 - Treat iPhone Safari behavior as a first-class acceptance requirement. Do not claim background timers are reliable without real-device evidence.
 - Prefer a small targeted change over architecture work or speculative abstractions.
 
-## Current MVP boundary
+## Current course scope
 
-The MVP includes:
+The current release includes:
 
-- lessons 1–3 as seed data;
-- video and audio playback;
+- all 30 lessons with VOA 1080p video;
+- 128 kbps MP3 audio where VOA provides it, with the smallest MP4 audio track as a fallback;
 - 0.50–1.50 speed with 0.05 steps;
 - whole-lesson loop;
 - 15/30/45/60/custom sleep timer;
@@ -31,7 +31,7 @@ The MVP includes:
 - previous/next lesson navigation;
 - progressive Media Session support.
 
-Do not add synchronized subtitles, sentence looping, accounts, cloud sync, analytics, monetization, or an app wrapper during MVP stabilization.
+Do not add synchronized subtitles, sentence looping, accounts, cloud sync, analytics, monetization, or an app wrapper without explicit user approval.
 
 ## Validation before completion
 

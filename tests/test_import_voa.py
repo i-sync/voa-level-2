@@ -76,6 +76,8 @@ def test_parse_lesson_prefers_1080p_and_128_kbps_and_extracts_conversation() -> 
     assert lesson["videoUrl"] == "https://example.test/video-1080.mp4?cb=fullhd"
     assert lesson["videoQuality"] == 1080
     assert lesson["audioUrl"] == "https://example.test/audio-128.mp3"
+    assert lesson["audioFormat"] == "mp3"
+    assert lesson["audioBitrate"] == 128
     assert lesson["transcriptStatus"] == "complete"
     assert lesson["transcript"] == [
         {"speaker": "Anna", "text": "First line."},
@@ -86,6 +88,34 @@ def test_parse_lesson_prefers_1080p_and_128_kbps_and_extracts_conversation() -> 
         },
         {"speaker": None, "text": "A useful cultural note."},
     ]
+
+
+def test_parse_lesson_uses_smallest_mp4_audio_track_when_mp3_is_missing() -> None:
+    html = """
+    <html><body>
+      <h1>Lesson 8: The Best Barbecue</h1>
+      <a href="/video-1080.mp4?download=1">1080p | 140MB</a>
+      <a href="/video-360.mp4?download=1">360p | 22MB</a>
+      <a href="/video-240.mp4?cb=small&amp;download=1">240p | 12MB</a>
+      <h2>Conversation</h2>
+      <p>Anna: Thanks for meeting me.</p>
+      <p>Kelly: Sure.</p>
+      <h2>Listening Quiz</h2>
+    </body></html>
+    """
+
+    lesson = parse_lesson(
+        html,
+        "https://example.test/a/lesson-8.html",
+        expected_id=8,
+        fallback_title="Fallback",
+    )
+
+    assert lesson["videoQuality"] == 1080
+    assert lesson["audioUrl"] == "https://example.test/video-240.mp4?cb=small"
+    assert lesson["audioFormat"] == "mp4"
+    assert lesson["audioFallbackVideoQuality"] == 240
+    assert "audioBitrate" not in lesson
 
 
 def test_validate_lessons_accepts_well_formed_sorted_data() -> None:
