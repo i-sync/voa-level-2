@@ -34,6 +34,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          from textwrap import dedent, indent
 
 
           def replace_once(path: str, old: str, new: str) -> None:
@@ -42,18 +43,21 @@ jobs:
               count = text.count(old)
               if count != 1:
                   raise SystemExit(
-                      f"Expected exactly one match in {path}, found {count}: {old[:120]!r}"
+                      f"Expected exactly one match in {path}, found {count}: {old[:140]!r}"
                   )
               file.write_text(text.replace(old, new, 1), encoding="utf-8")
 
 
-          replace_once(
-              "index.html",
-              '''        <div id="audioPanel" class="media-panel" role="tabpanel" aria-labelledby="audioTab">
-                    <p class="media-tip">适合息屏、通勤和重复听。</p>
-                    <audio id="audioPlayer" controls preload="metadata"></audio>
-                  </div>''',
-              '''        <div id="audioPanel" class="media-panel" role="tabpanel" aria-labelledby="audioTab">
+          html_old = (
+              '        <div id="audioPanel" class="media-panel" role="tabpanel" aria-labelledby="audioTab">\n'
+              '          <p class="media-tip">适合息屏、通勤和重复听。</p>\n'
+              '          <audio id="audioPlayer" controls preload="metadata"></audio>\n'
+              '        </div>'
+          )
+          html_new = indent(
+              dedent(
+                  '''\
+                  <div id="audioPanel" class="media-panel" role="tabpanel" aria-labelledby="audioTab">
                     <p class="media-tip">适合息屏、通勤和重复听。</p>
                     <div id="audioDockSlot" class="audio-dock-slot">
                       <div id="audioDock" class="audio-dock">
@@ -67,8 +71,11 @@ jobs:
                         <audio id="audioPlayer" controls preload="metadata"></audio>
                       </div>
                     </div>
-                  </div>''',
+                  </div>'''
+              ),
+              "        ",
           )
+          replace_once("index.html", html_old, html_new)
 
           replace_once(
               "js/app.js",
@@ -78,239 +85,239 @@ jobs:
 
           replace_once(
               "js/app.js",
-              '''  audioPanel: $("#audioPanel"),
-                  videoPanel: $("#videoPanel"),
-                  audio: $("#audioPlayer"),''',
-              '''  audioPanel: $("#audioPanel"),
-                  videoPanel: $("#videoPanel"),
-                  audioDockSlot: $("#audioDockSlot"),
-                  audioDock: $("#audioDock"),
-                  audioDockTitle: $("#audioDockTitle"),
-                  dockSeekBackward: $("#dockSeekBackward"),
-                  dockSeekForward: $("#dockSeekForward"),
-                  audio: $("#audioPlayer"),''',
+              '  audioPanel: $("#audioPanel"),\n'
+              '  videoPanel: $("#videoPanel"),\n'
+              '  audio: $("#audioPlayer"),',
+              '  audioPanel: $("#audioPanel"),\n'
+              '  videoPanel: $("#videoPanel"),\n'
+              '  audioDockSlot: $("#audioDockSlot"),\n'
+              '  audioDock: $("#audioDock"),\n'
+              '  audioDockTitle: $("#audioDockTitle"),\n'
+              '  dockSeekBackward: $("#dockSeekBackward"),\n'
+              '  dockSeekForward: $("#dockSeekForward"),\n'
+              '  audio: $("#audioPlayer"),',
           )
 
           replace_once(
               "js/app.js",
-              '''const lastPositionWrite = { audio: 0, video: 0 };
-                let lastSessionPositionUpdate = 0;''',
-              '''const lastPositionWrite = { audio: 0, video: 0 };
-                const audioDockMedia = window.matchMedia(AUDIO_DOCK_QUERY);
-                let lastSessionPositionUpdate = 0;
-                let audioDockActivated = false;
-                let audioDockSlotAboveViewport = false;
-                let audioDockSuspended = false;
-                let audioDockObserver = null;''',
+              'const lastPositionWrite = { audio: 0, video: 0 };\n'
+              'let lastSessionPositionUpdate = 0;',
+              'const lastPositionWrite = { audio: 0, video: 0 };\n'
+              'const audioDockMedia = window.matchMedia(AUDIO_DOCK_QUERY);\n'
+              'let lastSessionPositionUpdate = 0;\n'
+              'let audioDockActivated = false;\n'
+              'let audioDockSlotAboveViewport = false;\n'
+              'let audioDockSuspended = false;\n'
+              'let audioDockObserver = null;',
           )
 
-          replace_once(
-              "js/app.js",
-              '''function pauseAll() {
-                  dom.audio.pause();
-                  dom.video.pause();
-                  updatePlaybackState();
+          dock_functions = dedent(
+              '''\
+              function updateAudioDockMetrics() {
+                if (!dom.audioDock.classList.contains("is-docked")) return;
+                const height = Math.ceil(dom.audioDock.getBoundingClientRect().height);
+                if (height > 0) {
+                  document.documentElement.style.setProperty("--audio-dock-height", `${height}px`);
                 }
+              }
 
-                function setMode''',
-              '''function pauseAll() {
-                  dom.audio.pause();
-                  dom.video.pause();
-                  updatePlaybackState();
-                }
+              function setAudioDocked(value) {
+                const docked = Boolean(value);
+                if (dom.audioDock.classList.contains("is-docked") === docked) return;
 
-                function updateAudioDockMetrics() {
-                  if (!dom.audioDock.classList.contains("is-docked")) return;
-                  const height = Math.ceil(dom.audioDock.getBoundingClientRect().height);
-                  if (height > 0) {
-                    document.documentElement.style.setProperty("--audio-dock-height", `${height}px`);
+                if (docked) {
+                  const placeholderHeight = Math.ceil(dom.audioDock.getBoundingClientRect().height);
+                  if (placeholderHeight > 0) {
+                    dom.audioDockSlot.style.height = `${placeholderHeight}px`;
                   }
+                  dom.audioDock.classList.add("is-docked");
+                  dom.audioDock.setAttribute("aria-label", "浮动音频播放器");
+                  document.body.classList.add("has-audio-dock");
+                  requestAnimationFrame(updateAudioDockMetrics);
+                  return;
                 }
 
-                function setAudioDocked(value) {
-                  const docked = Boolean(value);
-                  if (dom.audioDock.classList.contains("is-docked") === docked) return;
+                dom.audioDock.classList.remove("is-docked");
+                dom.audioDock.removeAttribute("aria-label");
+                dom.audioDockSlot.style.removeProperty("height");
+                document.body.classList.remove("has-audio-dock");
+                document.documentElement.style.removeProperty("--audio-dock-height");
+              }
 
-                  if (docked) {
-                    const placeholderHeight = Math.ceil(dom.audioDock.getBoundingClientRect().height);
-                    if (placeholderHeight > 0) {
-                      dom.audioDockSlot.style.height = `${placeholderHeight}px`;
-                    }
-                    dom.audioDock.classList.add("is-docked");
-                    dom.audioDock.setAttribute("aria-label", "浮动音频播放器");
-                    document.body.classList.add("has-audio-dock");
-                    requestAnimationFrame(updateAudioDockMetrics);
-                    return;
-                  }
+              function updateAudioDock() {
+                const shouldDock =
+                  audioDockMedia.matches &&
+                  audioDockActivated &&
+                  !audioDockSuspended &&
+                  activeMode === "audio" &&
+                  audioDockSlotAboveViewport;
+                setAudioDocked(shouldDock);
+              }
 
-                  dom.audioDock.classList.remove("is-docked");
-                  dom.audioDock.removeAttribute("aria-label");
-                  dom.audioDockSlot.style.removeProperty("height");
-                  document.body.classList.remove("has-audio-dock");
-                  document.documentElement.style.removeProperty("--audio-dock-height");
-                }
+              function updateAudioDockTitle() {
+                const title = currentLesson
+                  ? `Lesson ${currentLesson.id} · ${currentLesson.title}`
+                  : "VOA Level 2";
+                dom.audioDockTitle.textContent = title;
+                dom.audioDockTitle.title = title;
+              }
 
-                function updateAudioDock() {
-                  const shouldDock =
-                    audioDockMedia.matches &&
-                    audioDockActivated &&
-                    !audioDockSuspended &&
-                    activeMode === "audio" &&
-                    audioDockSlotAboveViewport;
-                  setAudioDocked(shouldDock);
-                }
+              function resetAudioDock() {
+                audioDockActivated = false;
+                setAudioDocked(false);
+                audioDockSlotAboveViewport = dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
+              }
 
-                function updateAudioDockTitle() {
-                  const title = currentLesson
-                    ? `Lesson ${currentLesson.id} · ${currentLesson.title}`
-                    : "VOA Level 2";
-                  dom.audioDockTitle.textContent = title;
-                  dom.audioDockTitle.title = title;
-                }
+              function setAudioDockSuspended(value) {
+                audioDockSuspended = Boolean(value);
+                updateAudioDock();
+              }
 
-                function resetAudioDock() {
-                  audioDockActivated = false;
-                  setAudioDocked(false);
-                  audioDockSlotAboveViewport = dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
-                }
-
-                function setAudioDockSuspended(value) {
-                  audioDockSuspended = Boolean(value);
+              function setupAudioDock() {
+                const updateSlotState = () => {
+                  const rect = dom.audioDockSlot.getBoundingClientRect();
+                  audioDockSlotAboveViewport = rect.bottom <= 0;
                   updateAudioDock();
-                }
+                  updateAudioDockMetrics();
+                };
 
-                function setupAudioDock() {
-                  const updateSlotState = () => {
-                    const rect = dom.audioDockSlot.getBoundingClientRect();
-                    audioDockSlotAboveViewport = rect.bottom <= 0;
+                if ("IntersectionObserver" in window) {
+                  audioDockObserver = new IntersectionObserver(([entry]) => {
+                    audioDockSlotAboveViewport =
+                      !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
                     updateAudioDock();
-                    updateAudioDockMetrics();
-                  };
+                  });
+                  audioDockObserver.observe(dom.audioDockSlot);
+                } else {
+                  window.addEventListener("scroll", updateSlotState, { passive: true });
+                }
 
-                  if ("IntersectionObserver" in window) {
-                    audioDockObserver = new IntersectionObserver(([entry]) => {
-                      audioDockSlotAboveViewport =
-                        !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
-                      updateAudioDock();
-                    });
-                    audioDockObserver.observe(dom.audioDockSlot);
-                  } else {
-                    window.addEventListener("scroll", updateSlotState, { passive: true });
-                  }
-
-                  const handleViewportChange = () => {
-                    updateSlotState();
-                    updateAudioDockMetrics();
-                  };
-
-                  if (typeof audioDockMedia.addEventListener === "function") {
-                    audioDockMedia.addEventListener("change", handleViewportChange);
-                  } else {
-                    audioDockMedia.addListener(handleViewportChange);
-                  }
-                  window.addEventListener("resize", handleViewportChange);
-                  window.visualViewport?.addEventListener("resize", handleViewportChange);
+                const handleViewportChange = () => {
                   updateSlotState();
+                  updateAudioDockMetrics();
+                };
+
+                if (typeof audioDockMedia.addEventListener === "function") {
+                  audioDockMedia.addEventListener("change", handleViewportChange);
+                } else {
+                  audioDockMedia.addListener(handleViewportChange);
                 }
+                window.addEventListener("resize", handleViewportChange);
+                window.visualViewport?.addEventListener("resize", handleViewportChange);
+                updateSlotState();
+              }
+              '''
+          ).rstrip()
 
-                function setMode''',
+          pause_all = (
+              'function pauseAll() {\n'
+              '  dom.audio.pause();\n'
+              '  dom.video.pause();\n'
+              '  updatePlaybackState();\n'
+              '}'
+          )
+          replace_once(
+              "js/app.js",
+              pause_all + '\n\nfunction setMode',
+              pause_all + '\n\n' + dock_functions + '\n\nfunction setMode',
           )
 
           replace_once(
               "js/app.js",
-              '''  updateMediaMetadata();
-                  updatePlaybackState();
-                }
-
-                function setSpeed''',
-              '''  updateMediaMetadata();
-                  updatePlaybackState();
-                  updateAudioDock();
-                }
-
-                function setSpeed''',
+              '  updateMediaMetadata();\n'
+              '  updatePlaybackState();\n'
+              '}\n\n'
+              'function setSpeed',
+              '  updateMediaMetadata();\n'
+              '  updatePlaybackState();\n'
+              '  updateAudioDock();\n'
+              '}\n\n'
+              'function setSpeed',
           )
 
           replace_once(
               "js/app.js",
-              '''  const lesson = lessons.find((candidate) => candidate.id === id);
-                  if (!lesson) return;
-
-                  savePosition''',
-              '''  const lesson = lessons.find((candidate) => candidate.id === id);
-                  if (!lesson) return;
-
-                  resetAudioDock();
-                  savePosition''',
+              '  const lesson = lessons.find((candidate) => candidate.id === id);\n'
+              '  if (!lesson) return;\n\n'
+              '  savePosition',
+              '  const lesson = lessons.find((candidate) => candidate.id === id);\n'
+              '  if (!lesson) return;\n\n'
+              '  resetAudioDock();\n'
+              '  savePosition',
           )
 
           replace_once(
               "js/app.js",
-              '''  currentLesson = lesson;
-                  preferences.currentLesson = lesson.id;''',
-              '''  currentLesson = lesson;
-                  updateAudioDockTitle();
-                  preferences.currentLesson = lesson.id;''',
+              '  currentLesson = lesson;\n'
+              '  preferences.currentLesson = lesson.id;',
+              '  currentLesson = lesson;\n'
+              '  updateAudioDockTitle();\n'
+              '  preferences.currentLesson = lesson.id;',
           )
 
           replace_once(
               "js/app.js",
-              '''  item.addEventListener("play", () => {
-                    setMode(mode, { pausePrevious: false });
-                    media[mode === "audio" ? "video" : "audio"].pause();''',
-              '''  item.addEventListener("play", () => {
-                    setMode(mode, { pausePrevious: false });
-                    if (mode === "audio") {
-                      audioDockActivated = true;
-                      audioDockSlotAboveViewport =
-                        dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
-                      updateAudioDock();
-                    }
-                    media[mode === "audio" ? "video" : "audio"].pause();''',
+              '  item.addEventListener("play", () => {\n'
+              '    setMode(mode, { pausePrevious: false });\n'
+              '    media[mode === "audio" ? "video" : "audio"].pause();',
+              '  item.addEventListener("play", () => {\n'
+              '    setMode(mode, { pausePrevious: false });\n'
+              '    if (mode === "audio") {\n'
+              '      audioDockActivated = true;\n'
+              '      audioDockSlotAboveViewport =\n'
+              '        dom.audioDockSlot.getBoundingClientRect().bottom <= 0;\n'
+              '      updateAudioDock();\n'
+              '    }\n'
+              '    media[mode === "audio" ? "video" : "audio"].pause();',
           )
 
           replace_once(
               "js/app.js",
-              '''  dom.seekBackward.addEventListener("click", () => seek(-10));
-                  dom.seekForward.addEventListener("click", () => seek(10));
-                  dom.loopToggle''',
-              '''  dom.seekBackward.addEventListener("click", () => seek(-10));
-                  dom.seekForward.addEventListener("click", () => seek(10));
-                  dom.dockSeekBackward.addEventListener("click", () => seek(-10));
-                  dom.dockSeekForward.addEventListener("click", () => seek(10));
-                  dom.loopToggle''',
+              '  dom.seekBackward.addEventListener("click", () => seek(-10));\n'
+              '  dom.seekForward.addEventListener("click", () => seek(10));\n'
+              '  dom.loopToggle',
+              '  dom.seekBackward.addEventListener("click", () => seek(-10));\n'
+              '  dom.seekForward.addEventListener("click", () => seek(10));\n'
+              '  dom.dockSeekBackward.addEventListener("click", () => seek(-10));\n'
+              '  dom.dockSeekForward.addEventListener("click", () => seek(10));\n'
+              '  dom.loopToggle',
           )
 
-          replace_once(
-              "js/app.js",
-              '''  window.addEventListener("pageshow", checkTimer);
-                  window.addEventListener("focus", checkTimer);
-                  document.addEventListener("visibilitychange", checkTimer);''',
-              '''  document.addEventListener("focusin", (event) => {
-                    if (event.target.matches?.("input, textarea")) setAudioDockSuspended(true);
+          focus_handlers = dedent(
+              '''\
+                document.addEventListener("focusin", (event) => {
+                  if (event.target.matches?.("input, textarea")) setAudioDockSuspended(true);
+                });
+                document.addEventListener("focusout", (event) => {
+                  if (!event.target.matches?.("input, textarea")) return;
+                  requestAnimationFrame(() => {
+                    const keyboardInputFocused =
+                      document.activeElement?.matches?.("input, textarea") ?? false;
+                    setAudioDockSuspended(keyboardInputFocused);
                   });
-                  document.addEventListener("focusout", (event) => {
-                    if (!event.target.matches?.("input, textarea")) return;
-                    requestAnimationFrame(() => {
-                      const keyboardInputFocused =
-                        document.activeElement?.matches?.("input, textarea") ?? false;
-                      setAudioDockSuspended(keyboardInputFocused);
-                    });
-                  });
-                  window.addEventListener("pageshow", checkTimer);
-                  window.addEventListener("focus", checkTimer);
-                  document.addEventListener("visibilitychange", checkTimer);''',
+                });
+              '''
+          )
+          replace_once(
+              "js/app.js",
+              '  window.addEventListener("pageshow", checkTimer);\n'
+              '  window.addEventListener("focus", checkTimer);\n'
+              '  document.addEventListener("visibilitychange", checkTimer);',
+              focus_handlers
+              + '  window.addEventListener("pageshow", checkTimer);\n'
+              + '  window.addEventListener("focus", checkTimer);\n'
+              + '  document.addEventListener("visibilitychange", checkTimer);',
           )
 
           replace_once(
               "js/app.js",
-              '''  bindMedia(dom.video, "video");
-                  bindEvents();
-                  registerMediaSession();''',
-              '''  bindMedia(dom.video, "video");
-                  bindEvents();
-                  setupAudioDock();
-                  registerMediaSession();''',
+              '  bindMedia(dom.video, "video");\n'
+              '  bindEvents();\n'
+              '  registerMediaSession();',
+              '  bindMedia(dom.video, "video");\n'
+              '  bindEvents();\n'
+              '  setupAudioDock();\n'
+              '  registerMediaSession();',
           )
 
           replace_once(
@@ -319,94 +326,95 @@ jobs:
               '  --transcript-scale: 1;\n  --audio-dock-height: 122px;\n',
           )
 
-          dock_css = r'''
+          dock_css = dedent(
+              '''\
 
-          .audio-dock-slot {
-            min-height: 54px;
-          }
+              .audio-dock-slot {
+                min-height: 54px;
+              }
 
-          .audio-dock {
-            width: 100%;
-          }
+              .audio-dock {
+                width: 100%;
+              }
 
-          .audio-dock-toolbar {
-            display: none;
-          }
+              .audio-dock-toolbar {
+                display: none;
+              }
 
-          .audio-dock-title {
-            min-width: 0;
-            margin: 0;
-            overflow: hidden;
-            color: #f8fafc;
-            font-size: 0.84rem;
-            font-weight: 800;
-            line-height: 1.2;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
+              .audio-dock-title {
+                min-width: 0;
+                margin: 0;
+                overflow: hidden;
+                color: #f8fafc;
+                font-size: 0.84rem;
+                font-weight: 800;
+                line-height: 1.2;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
 
-          .audio-dock-actions {
-            display: flex;
-            flex: 0 0 auto;
-            gap: 7px;
-          }
+              .audio-dock-actions {
+                display: flex;
+                flex: 0 0 auto;
+                gap: 7px;
+              }
 
-          .audio-dock-skip {
-            min-width: 50px;
-            min-height: 36px;
-            padding: 0 9px;
-            border-color: rgba(255, 255, 255, 0.22);
-            border-radius: 9px;
-            color: #f8fafc;
-            background: rgba(255, 255, 255, 0.1);
-            font-size: 0.82rem;
-            font-weight: 800;
-          }
+              .audio-dock-skip {
+                min-width: 50px;
+                min-height: 36px;
+                padding: 0 9px;
+                border-color: rgba(255, 255, 255, 0.22);
+                border-radius: 9px;
+                color: #f8fafc;
+                background: rgba(255, 255, 255, 0.1);
+                font-size: 0.82rem;
+                font-weight: 800;
+              }
 
-          .audio-dock-skip:hover {
-            border-color: rgba(255, 255, 255, 0.42);
-          }
+              .audio-dock-skip:hover {
+                border-color: rgba(255, 255, 255, 0.42);
+              }
 
-          @media (max-width: 620px) {
-            .audio-dock.is-docked {
-              position: fixed;
-              z-index: 45;
-              right: 0;
-              bottom: 0;
-              left: 0;
-              padding:
-                9px max(12px, env(safe-area-inset-right))
-                calc(10px + env(safe-area-inset-bottom))
-                max(12px, env(safe-area-inset-left));
-              border-top: 1px solid rgba(255, 255, 255, 0.16);
-              background: rgba(17, 24, 39, 0.97);
-              box-shadow: 0 -14px 34px rgba(17, 24, 39, 0.28);
-              -webkit-backdrop-filter: blur(18px);
-              backdrop-filter: blur(18px);
-            }
+              @media (max-width: 620px) {
+                .audio-dock.is-docked {
+                  position: fixed;
+                  z-index: 45;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  padding:
+                    9px max(12px, env(safe-area-inset-right))
+                    calc(10px + env(safe-area-inset-bottom))
+                    max(12px, env(safe-area-inset-left));
+                  border-top: 1px solid rgba(255, 255, 255, 0.16);
+                  background: rgba(17, 24, 39, 0.97);
+                  box-shadow: 0 -14px 34px rgba(17, 24, 39, 0.28);
+                  -webkit-backdrop-filter: blur(18px);
+                  backdrop-filter: blur(18px);
+                }
 
-            .audio-dock.is-docked .audio-dock-toolbar {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              gap: 12px;
-              margin-bottom: 7px;
-            }
+                .audio-dock.is-docked .audio-dock-toolbar {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 12px;
+                  margin-bottom: 7px;
+                }
 
-            .audio-dock.is-docked audio {
-              min-height: 48px;
-            }
+                .audio-dock.is-docked audio {
+                  min-height: 48px;
+                }
 
-            body.has-audio-dock .page-shell {
-              padding-bottom: calc(var(--audio-dock-height) + 42px);
-            }
+                body.has-audio-dock .page-shell {
+                  padding-bottom: calc(var(--audio-dock-height) + 42px);
+                }
 
-            body.has-audio-dock .toast {
-              bottom: calc(var(--audio-dock-height) + 14px);
-            }
-          }
-          '''
-
+                body.has-audio-dock .toast {
+                  bottom: calc(var(--audio-dock-height) + 14px);
+                }
+              }
+              '''
+          )
           replace_once(
               "css/styles.css",
               '\n@media (prefers-reduced-motion: reduce) {',
@@ -415,93 +423,83 @@ jobs:
 
           replace_once(
               "README.md",
-              '''- 上一课 / 下一课；
-                - Media Session 渐进增强。''',
-              '''- 上一课 / 下一课；
-                - 手机阅读字幕时，已启动的同一个音频播放器会固定在底部，并提供前后 10 秒跳转；
-                - Media Session 渐进增强。''',
+              '- 上一课 / 下一课；\n- Media Session 渐进增强。',
+              '- 上一课 / 下一课；\n'
+              '- 手机阅读字幕时，已启动的同一个音频播放器会固定在底部，并提供前后 10 秒跳转；\n'
+              '- Media Session 渐进增强。',
           )
 
           replace_once(
               "AGENTS.md",
-              '''- previous/next lesson navigation;
-                - progressive Media Session support.''',
-              '''- previous/next lesson navigation;
-                - a mobile bottom audio dock that reuses the single native `<audio>` while reading transcripts;
-                - progressive Media Session support.''',
+              '- previous/next lesson navigation;\n- progressive Media Session support.',
+              '- previous/next lesson navigation;\n'
+              '- a mobile bottom audio dock that reuses the single native `<audio>` while reading transcripts;\n'
+              '- progressive Media Session support.',
           )
 
+          replace_once("docs/REQUIREMENTS.md", '版本：0.3  \n', '版本：0.4  \n')
           replace_once(
               "docs/REQUIREMENTS.md",
-              '版本：0.3  \n',
-              '版本：0.4  \n',
+              '- 官方 RSS 在实际客户端中内容不完整，不能作为课程目录来源。',
+              '- 官方 RSS 在实际客户端中内容不完整，不能作为课程目录来源；\n'
+              '- 手机向下阅读字幕时，原播放器离开视口，暂停、继续和后退操作不够方便。',
           )
-
           replace_once(
               "docs/REQUIREMENTS.md",
-              '''- 官方 RSS 在实际客户端中内容不完整，不能作为课程目录来源。''',
-              '''- 官方 RSS 在实际客户端中内容不完整，不能作为课程目录来源；
-                - 手机向下阅读字幕时，原播放器离开视口，暂停、继续和后退操作不够方便。''',
+              '6. 向下阅读完整对话；\n7. 下次回来继续上一次课程和进度。',
+              '6. 向下阅读完整对话，并继续在屏幕底部控制同一个音频；\n'
+              '7. 下次回来继续上一次课程和进度。',
           )
-
           replace_once(
               "docs/REQUIREMENTS.md",
-              '''6. 向下阅读完整对话；
-                7. 下次回来继续上一次课程和进度。''',
-              '''6. 向下阅读完整对话，并继续在屏幕底部控制同一个音频；
-                7. 下次回来继续上一次课程和进度。''',
+              '- 播放音频时自动暂停视频。\n- 记录每课音频播放位置。',
+              '- 播放音频时自动暂停视频。\n'
+              '- 记录每课音频播放位置。\n'
+              '- 在手机宽度下，用户启动过本课音频并向下滚动到原播放器完全离开视口后，将同一个 `<audio>` 固定在屏幕底部。\n'
+              '- 浮动状态显示 `Lesson N · Title`、原生音频控件、后退 10 秒和前进 10 秒。\n'
+              '- 在浮动播放器中暂停后仍保持显示，方便继续播放；滚回原位置、切换视频、切换课程或离开手机宽度时自动收起。\n'
+              '- 页面始终只有一个音频元素，不复制媒体实例，不重新加载或同步第二个播放器。\n'
+              '- 浮动播放器避让 iPhone 底部安全区域，并为字幕末尾和 Toast 留出空间。',
           )
-
           replace_once(
               "docs/REQUIREMENTS.md",
-              '''- 播放音频时自动暂停视频。
-                - 记录每课音频播放位置。''',
-              '''- 播放音频时自动暂停视频。
-                - 记录每课音频播放位置。
-                - 在手机宽度下，用户启动过本课音频并向下滚动到原播放器完全离开视口后，将同一个 `<audio>` 固定在屏幕底部。
-                - 浮动状态显示 `Lesson N · Title`、原生音频控件、后退 10 秒和前进 10 秒。
-                - 在浮动播放器中暂停后仍保持显示，方便继续播放；滚回原位置、切换视频、切换课程或离开手机宽度时自动收起。
-                - 页面始终只有一个音频元素，不复制媒体实例，不重新加载或同步第二个播放器。
-                - 浮动播放器避让 iPhone 底部安全区域，并为字幕末尾和 Toast 留出空间。''',
-          )
-
-          replace_once(
-              "docs/REQUIREMENTS.md",
-              '''- [ ] 音频可以正常播放和拖动；
-                - [ ] Lesson 8 的 MP4 音轨能在音频播放器中正常播放和息屏；''',
-              '''- [ ] 音频可以正常播放和拖动；
-                - [ ] 音频启动后向下阅读字幕，原播放器离开视口时同一个播放器固定在底部；
-                - [ ] 浮动播放器显示课程名，并可暂停、继续、后退 10 秒和前进 10 秒；
-                - [ ] 在浮动播放器中暂停后控制条不会消失，继续播放时位置与倍速保持不变；
-                - [ ] 滚回原播放器、切换视频或切换课程时浮动状态正确收起；
-                - [ ] 最后一段字幕和提示 Toast 不会被浮动播放器遮挡；
-                - [ ] Lesson 8 的 MP4 音轨能在音频播放器中正常播放和息屏；''',
+              '- [ ] 音频可以正常播放和拖动；\n'
+              '- [ ] Lesson 8 的 MP4 音轨能在音频播放器中正常播放和息屏；',
+              '- [ ] 音频可以正常播放和拖动；\n'
+              '- [ ] 音频启动后向下阅读字幕，原播放器离开视口时同一个播放器固定在底部；\n'
+              '- [ ] 浮动播放器显示课程名，并可暂停、继续、后退 10 秒和前进 10 秒；\n'
+              '- [ ] 在浮动播放器中暂停后控制条不会消失，继续播放时位置与倍速保持不变；\n'
+              '- [ ] 滚回原播放器、切换视频或切换课程时浮动状态正确收起；\n'
+              '- [ ] 最后一段字幕和提示 Toast 不会被浮动播放器遮挡；\n'
+              '- [ ] Lesson 8 的 MP4 音轨能在音频播放器中正常播放和息屏；',
           )
 
           static_test = Path("tests/test_static_site.py")
           text = static_test.read_text(encoding="utf-8")
-          addition = r'''
-
-
-          def test_mobile_audio_dock_reuses_the_single_native_audio_player():
-              html = (ROOT / "index.html").read_text(encoding="utf-8")
-              css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
-              script = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
-              soup = BeautifulSoup(html, "html.parser")
-
-              assert len(soup.find_all("audio")) == 1
-              assert soup.select_one("#audioDockSlot #audioDock #audioPlayer") is not None
-              assert soup.find(id="audioDockTitle") is not None
-              assert soup.find(id="dockSeekBackward") is not None
-              assert soup.find(id="dockSeekForward") is not None
-              assert ".audio-dock.is-docked" in css
-              assert "position: fixed;" in css
-              assert "env(safe-area-inset-bottom)" in css
-              assert "IntersectionObserver" in script
-              assert "audioDockActivated" in script
-          '''
           if "test_mobile_audio_dock_reuses_the_single_native_audio_player" in text:
               raise SystemExit("Audio dock test already exists")
+          addition = dedent(
+              '''\
+
+
+              def test_mobile_audio_dock_reuses_the_single_native_audio_player():
+                  html = (ROOT / "index.html").read_text(encoding="utf-8")
+                  css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
+                  script = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
+                  soup = BeautifulSoup(html, "html.parser")
+
+                  assert len(soup.find_all("audio")) == 1
+                  assert soup.select_one("#audioDockSlot #audioDock #audioPlayer") is not None
+                  assert soup.find(id="audioDockTitle") is not None
+                  assert soup.find(id="dockSeekBackward") is not None
+                  assert soup.find(id="dockSeekForward") is not None
+                  assert ".audio-dock.is-docked" in css
+                  assert "position: fixed;" in css
+                  assert "env(safe-area-inset-bottom)" in css
+                  assert "IntersectionObserver" in script
+                  assert "audioDockActivated" in script
+              '''
+          )
           static_test.write_text(text.rstrip() + addition + "\n", encoding="utf-8")
           PY
 
