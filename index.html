@@ -82,7 +82,18 @@
 
         <div id="audioPanel" class="media-panel" role="tabpanel" aria-labelledby="audioTab">
           <p class="media-tip">适合息屏、通勤和重复听。</p>
-          <audio id="audioPlayer" controls preload="metadata"></audio>
+          <div id="audioDockSlot" class="audio-dock-slot">
+            <div id="audioDock" class="audio-dock">
+              <div class="audio-dock-toolbar">
+                <p id="audioDockTitle" class="audio-dock-title">VOA Level 2</p>
+                <div class="audio-dock-actions" aria-label="浮动播放跳转">
+                  <button id="dockSeekBackward" class="audio-dock-skip" type="button" aria-label="后退 10 秒">↶10</button>
+                  <button id="dockSeekForward" class="audio-dock-skip" type="button" aria-label="前进 10 秒">10↷</button>
+                </div>
+              </div>
+              <audio id="audioPlayer" controls preload="metadata"></audio>
+            </div>
+          </div>
         </div>
 
         <div id="videoPanel" class="media-panel" role="tabpanel" aria-labelledby="videoTab" hidden>
