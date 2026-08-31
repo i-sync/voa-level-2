@@ -1,0 +1,82 @@
+name: Retry mobile audio dock
+
+on:
+  push:
+    branches:
+      - feature/mobile-audio-dock
+    paths:
+      - .github/workflows/mobile-audio-dock-retry.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Apply corrected mobile audio dock patch
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from textwrap import dedent
+
+          workflow = Path(".github/workflows/mobile-audio-dock.yml").read_text(encoding="utf-8")
+          start_marker = "          python - <<'PY'\n"
+          end_marker = "\n          PY\n\n      - name: Install importer dependencies"
+          if start_marker not in workflow or end_marker not in workflow:
+              raise SystemExit("Could not locate the embedded implementation script")
+
+          script = workflow.split(start_marker, 1)[1].split(end_marker, 1)[0]
+          script = dedent(script)
+
+          old_version = r'''replace_once("docs/REQUIREMENTS.md", '版本：0.3  \n', '版本：0.4  \n')'''
+          new_version = r'''replace_once("docs/REQUIREMENTS.md", '版本：0.3  \n', '版本：0.4\n')'''
+          old_write = r'''static_test.write_text(text.rstrip() + addition + "\n", encoding="utf-8")'''
+          new_write = r'''static_test.write_text(text.rstrip() + addition.rstrip() + "\n", encoding="utf-8")'''
+
+          if script.count(old_version) != 1:
+              raise SystemExit("Could not patch the requirements version formatting")
+          if script.count(old_write) != 1:
+              raise SystemExit("Could not patch the static test EOF formatting")
+
+          script = script.replace(old_version, new_version, 1)
+          script = script.replace(old_write, new_write, 1)
+          exec(compile(script, "mobile-audio-dock-implementation", "exec"), {})
+          PY
+
+      - name: Install importer dependencies
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Validate the implementation
+        run: |
+          node --check js/app.js
+          node --check js/core.js
+          npm test
+          python -m pytest -q
+          python -m json.tool data/lessons.json > /dev/null
+          git diff --check
+
+      - name: Commit the implementation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/mobile-audio-dock.yml .github/workflows/mobile-audio-dock-retry.yml
+          git add index.html css/styles.css js/app.js tests/test_static_site.py README.md AGENTS.md docs/REQUIREMENTS.md
+          git commit -m "feat: add mobile transcript audio dock"
+          git push origin HEAD:feature/mobile-audio-dock
