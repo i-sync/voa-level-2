@@ -1,0 +1,152 @@
+name: Validate mobile audio dock
+
+on:
+  push:
+    branches:
+      - feature/mobile-audio-dock
+    paths:
+      - .github/workflows/validate-mobile-audio-dock.yml
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature implementation
+        uses: actions/checkout@v4
+        with:
+          ref: 87bdf88b27e6da2b8928b617ddbcb95cb150b33d
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Chromium test runtime
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start the static site
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 >/tmp/voa-server.log 2>&1 &
+          echo $! >/tmp/voa-server.pid
+          curl --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:8000/ >/dev/null
+
+      - name: Exercise mobile and desktop behavior
+        run: |
+          node <<'JS'
+          const assert = require("node:assert/strict");
+          const { chromium } = require("playwright");
+
+          const browser = await chromium.launch({ headless: true });
+
+          async function openPage(viewport) {
+            const page = await browser.newPage({ viewport });
+            await page.route(/\.(?:mp3|mp4)(?:\?|$)/i, (route) => route.abort());
+            await page.goto("http://127.0.0.1:8000/?lesson=3", {
+              waitUntil: "domcontentloaded",
+            });
+            await page.waitForFunction(
+              () => document.querySelectorAll("#lessonSelect option").length === 30,
+            );
+            return page;
+          }
+
+          async function activateAudio(page, currentTime = 100) {
+            await page.evaluate((time) => {
+              const audio = document.querySelector("#audioPlayer");
+              let internalTime = time;
+              Object.defineProperty(audio, "duration", {
+                configurable: true,
+                value: 300,
+              });
+              Object.defineProperty(audio, "currentTime", {
+                configurable: true,
+                get: () => internalTime,
+                set: (value) => {
+                  internalTime = value;
+                },
+              });
+              audio.dispatchEvent(new Event("play"));
+            }, currentTime);
+          }
+
+          async function scrollPastPlayer(page) {
+            await page.locator(".transcript-entry").nth(10).scrollIntoViewIfNeeded();
+            await page.waitForFunction(
+              () => document.querySelector("#audioDock").classList.contains("is-docked"),
+            );
+          }
+
+          const mobile = await openPage({ width: 390, height: 844 });
+          assert.equal(await mobile.locator("audio").count(), 1);
+          await activateAudio(mobile);
+          await scrollPastPlayer(mobile);
+
+          assert.equal(
+            await mobile.locator("#audioDock").evaluate((element) => getComputedStyle(element).position),
+            "fixed",
+          );
+          assert.equal(
+            await mobile.locator("#audioDockTitle").textContent(),
+            "Lesson 3 · He Said - She Said",
+          );
+          assert.equal(await mobile.locator("body").evaluate((body) => body.classList.contains("has-audio-dock")), true);
+
+          await mobile.locator("#dockSeekBackward").click();
+          assert.equal(await mobile.locator("#audioPlayer").evaluate((audio) => audio.currentTime), 90);
+          await mobile.locator("#dockSeekForward").click();
+          assert.equal(await mobile.locator("#audioPlayer").evaluate((audio) => audio.currentTime), 100);
+
+          await mobile.locator("#audioPlayer").evaluate((audio) => audio.dispatchEvent(new Event("pause")));
+          assert.equal(await mobile.locator("#audioDock").evaluate((element) => element.classList.contains("is-docked")), true);
+
+          await mobile.locator("#audioDockSlot").scrollIntoViewIfNeeded();
+          await mobile.waitForFunction(
+            () => !document.querySelector("#audioDock").classList.contains("is-docked"),
+          );
+
+          await activateAudio(mobile, 120);
+          await scrollPastPlayer(mobile);
+          await mobile.locator("#videoTab").evaluate((button) => button.click());
+          await mobile.waitForFunction(
+            () => !document.querySelector("#audioDock").classList.contains("is-docked"),
+          );
+
+          await mobile.locator("#audioTab").evaluate((button) => button.click());
+          await mobile.waitForFunction(
+            () => document.querySelector("#audioDock").classList.contains("is-docked"),
+          );
+          await mobile.locator("#lessonSelect").selectOption("4");
+          await mobile.waitForFunction(
+            () => !document.querySelector("#audioDock").classList.contains("is-docked"),
+          );
+          assert.equal(await mobile.locator("#lessonTitle").textContent(), "Run Away With the Circus!");
+          await mobile.close();
+
+          const desktop = await openPage({ width: 1024, height: 800 });
+          await activateAudio(desktop);
+          await desktop.locator(".transcript-entry").nth(10).scrollIntoViewIfNeeded();
+          await desktop.waitForTimeout(200);
+          assert.notEqual(
+            await desktop.locator("#audioDock").evaluate((element) => getComputedStyle(element).position),
+            "fixed",
+          );
+          assert.equal(await desktop.locator("audio").count(), 1);
+          await desktop.close();
+
+          await browser.close();
+          console.log("Mobile and desktop audio dock smoke tests passed.");
+          JS
+
+      - name: Show server log on failure
+        if: failure()
+        run: cat /tmp/voa-server.log || true
