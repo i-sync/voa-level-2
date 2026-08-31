@@ -18,6 +18,7 @@
   --radius-small: 11px;
   --content-width: 900px;
   --transcript-scale: 1;
+  --audio-dock-height: 122px;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -690,6 +691,91 @@ a {
   .mode-tabs {
     width: 100%;
     margin-top: 12px;
+  }
+}
+
+.audio-dock-slot {
+  min-height: 54px;
+}
+
+.audio-dock {
+  width: 100%;
+}
+
+.audio-dock-toolbar {
+  display: none;
+}
+
+.audio-dock-title {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audio-dock-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 7px;
+}
+
+.audio-dock-skip {
+  min-width: 50px;
+  min-height: 36px;
+  padding: 0 9px;
+  border-color: rgba(255, 255, 255, 0.22);
+  border-radius: 9px;
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.audio-dock-skip:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+@media (max-width: 620px) {
+  .audio-dock.is-docked {
+    position: fixed;
+    z-index: 45;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding:
+      9px max(12px, env(safe-area-inset-right))
+      calc(10px + env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(17, 24, 39, 0.97);
+    box-shadow: 0 -14px 34px rgba(17, 24, 39, 0.28);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .audio-dock.is-docked .audio-dock-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 7px;
+  }
+
+  .audio-dock.is-docked audio {
+    min-height: 48px;
+  }
+
+  body.has-audio-dock .page-shell {
+    padding-bottom: calc(var(--audio-dock-height) + 42px);
+  }
+
+  body.has-audio-dock .toast {
+    bottom: calc(var(--audio-dock-height) + 14px);
   }
 }
 

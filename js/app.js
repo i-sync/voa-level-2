@@ -12,6 +12,7 @@ import {
 } from "./core.js";
 
 const RESUME_END_GUARD_SECONDS = 8;
+const AUDIO_DOCK_QUERY = "(max-width: 620px)";
 
 const KEYS = {
   preferences: "voa-level2.preferences.v1",
@@ -42,6 +43,11 @@ const dom = {
   videoTab: $("#videoTab"),
   audioPanel: $("#audioPanel"),
   videoPanel: $("#videoPanel"),
+  audioDockSlot: $("#audioDockSlot"),
+  audioDock: $("#audioDock"),
+  audioDockTitle: $("#audioDockTitle"),
+  dockSeekBackward: $("#dockSeekBackward"),
+  dockSeekForward: $("#dockSeekForward"),
   audio: $("#audioPlayer"),
   video: $("#videoPlayer"),
   mediaError: $("#mediaError"),
@@ -89,7 +95,12 @@ let timerInterval = null;
 let timerTimeout = null;
 let toastTimeout = null;
 const lastPositionWrite = { audio: 0, video: 0 };
+const audioDockMedia = window.matchMedia(AUDIO_DOCK_QUERY);
 let lastSessionPositionUpdate = 0;
+let audioDockActivated = false;
+let audioDockSlotAboveViewport = false;
+let audioDockSuspended = false;
+let audioDockObserver = null;
 
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -143,6 +154,100 @@ function pauseAll() {
   updatePlaybackState();
 }
 
+function updateAudioDockMetrics() {
+  if (!dom.audioDock.classList.contains("is-docked")) return;
+  const height = Math.ceil(dom.audioDock.getBoundingClientRect().height);
+  if (height > 0) {
+    document.documentElement.style.setProperty("--audio-dock-height", `${height}px`);
+  }
+}
+
+function setAudioDocked(value) {
+  const docked = Boolean(value);
+  if (dom.audioDock.classList.contains("is-docked") === docked) return;
+
+  if (docked) {
+    const placeholderHeight = Math.ceil(dom.audioDock.getBoundingClientRect().height);
+    if (placeholderHeight > 0) {
+      dom.audioDockSlot.style.height = `${placeholderHeight}px`;
+    }
+    dom.audioDock.classList.add("is-docked");
+    dom.audioDock.setAttribute("aria-label", "浮动音频播放器");
+    document.body.classList.add("has-audio-dock");
+    requestAnimationFrame(updateAudioDockMetrics);
+    return;
+  }
+
+  dom.audioDock.classList.remove("is-docked");
+  dom.audioDock.removeAttribute("aria-label");
+  dom.audioDockSlot.style.removeProperty("height");
+  document.body.classList.remove("has-audio-dock");
+  document.documentElement.style.removeProperty("--audio-dock-height");
+}
+
+function updateAudioDock() {
+  const shouldDock =
+    audioDockMedia.matches &&
+    audioDockActivated &&
+    !audioDockSuspended &&
+    activeMode === "audio" &&
+    audioDockSlotAboveViewport;
+  setAudioDocked(shouldDock);
+}
+
+function updateAudioDockTitle() {
+  const title = currentLesson
+    ? `Lesson ${currentLesson.id} · ${currentLesson.title}`
+    : "VOA Level 2";
+  dom.audioDockTitle.textContent = title;
+  dom.audioDockTitle.title = title;
+}
+
+function resetAudioDock() {
+  audioDockActivated = false;
+  setAudioDocked(false);
+  audioDockSlotAboveViewport = dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
+}
+
+function setAudioDockSuspended(value) {
+  audioDockSuspended = Boolean(value);
+  updateAudioDock();
+}
+
+function setupAudioDock() {
+  const updateSlotState = () => {
+    const rect = dom.audioDockSlot.getBoundingClientRect();
+    audioDockSlotAboveViewport = rect.bottom <= 0;
+    updateAudioDock();
+    updateAudioDockMetrics();
+  };
+
+  if ("IntersectionObserver" in window) {
+    audioDockObserver = new IntersectionObserver(([entry]) => {
+      audioDockSlotAboveViewport =
+        !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
+      updateAudioDock();
+    });
+    audioDockObserver.observe(dom.audioDockSlot);
+  } else {
+    window.addEventListener("scroll", updateSlotState, { passive: true });
+  }
+
+  const handleViewportChange = () => {
+    updateSlotState();
+    updateAudioDockMetrics();
+  };
+
+  if (typeof audioDockMedia.addEventListener === "function") {
+    audioDockMedia.addEventListener("change", handleViewportChange);
+  } else {
+    audioDockMedia.addListener(handleViewportChange);
+  }
+  window.addEventListener("resize", handleViewportChange);
+  window.visualViewport?.addEventListener("resize", handleViewportChange);
+  updateSlotState();
+}
+
 function setMode(mode, { persist = true, pausePrevious = true } = {}) {
   if (!(mode in media)) return;
   if (pausePrevious && activeMode !== mode) media[activeMode].pause();
@@ -163,6 +268,7 @@ function setMode(mode, { persist = true, pausePrevious = true } = {}) {
   }
   updateMediaMetadata();
   updatePlaybackState();
+  updateAudioDock();
 }
 
 function setSpeed(value, { persist = true } = {}) {
@@ -302,12 +408,14 @@ function loadLesson(id, { historyMode = "push", autoplay = false } = {}) {
   const lesson = lessons.find((candidate) => candidate.id === id);
   if (!lesson) return;
 
+  resetAudioDock();
   savePosition(dom.audio, "audio", true);
   savePosition(dom.video, "video", true);
   pauseAll();
   dom.mediaError.hidden = true;
 
   currentLesson = lesson;
+  updateAudioDockTitle();
   preferences.currentLesson = lesson.id;
   savePreferences();
 
@@ -486,6 +594,12 @@ function bindMedia(item, mode) {
   });
   item.addEventListener("play", () => {
     setMode(mode, { pausePrevious: false });
+    if (mode === "audio") {
+      audioDockActivated = true;
+      audioDockSlotAboveViewport =
+        dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
+      updateAudioDock();
+    }
     media[mode === "audio" ? "video" : "audio"].pause();
     dom.mediaError.hidden = true;
     checkTimer();
@@ -537,6 +651,8 @@ function bindEvents() {
   dom.speedUp.addEventListener("click", () => setSpeed(preferences.speed + SPEED_STEP));
   dom.seekBackward.addEventListener("click", () => seek(-10));
   dom.seekForward.addEventListener("click", () => seek(10));
+  dom.dockSeekBackward.addEventListener("click", () => seek(-10));
+  dom.dockSeekForward.addEventListener("click", () => seek(10));
   dom.loopToggle.addEventListener("click", () => setLoop(!preferences.loop));
   dom.timerPresets.addEventListener("click", (event) => {
     const button = event.target.closest("[data-minutes]");
@@ -569,6 +685,17 @@ function bindEvents() {
     savePosition(dom.audio, "audio", true);
     savePosition(dom.video, "video", true);
   });
+document.addEventListener("focusin", (event) => {
+  if (event.target.matches?.("input, textarea")) setAudioDockSuspended(true);
+});
+document.addEventListener("focusout", (event) => {
+  if (!event.target.matches?.("input, textarea")) return;
+  requestAnimationFrame(() => {
+    const keyboardInputFocused =
+      document.activeElement?.matches?.("input, textarea") ?? false;
+    setAudioDockSuspended(keyboardInputFocused);
+  });
+});
   window.addEventListener("pageshow", checkTimer);
   window.addEventListener("focus", checkTimer);
   document.addEventListener("visibilitychange", checkTimer);
@@ -578,6 +705,7 @@ async function init() {
   bindMedia(dom.audio, "audio");
   bindMedia(dom.video, "video");
   bindEvents();
+  setupAudioDock();
   registerMediaSession();
 
   try {

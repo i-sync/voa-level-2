@@ -60,3 +60,20 @@ def test_javascript_id_selectors_exist_in_html():
 
     assert selected_ids
     assert selected_ids <= html_ids, sorted(selected_ids - html_ids)
+
+def test_mobile_audio_dock_reuses_the_single_native_audio_player():
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
+    script = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+
+    assert len(soup.find_all("audio")) == 1
+    assert soup.select_one("#audioDockSlot #audioDock #audioPlayer") is not None
+    assert soup.find(id="audioDockTitle") is not None
+    assert soup.find(id="dockSeekBackward") is not None
+    assert soup.find(id="dockSeekForward") is not None
+    assert ".audio-dock.is-docked" in css
+    assert "position: fixed;" in css
+    assert "env(safe-area-inset-bottom)" in css
+    assert "IntersectionObserver" in script
+    assert "audioDockActivated" in script
