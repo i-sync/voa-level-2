@@ -71,7 +71,7 @@ jobs:
           python -m http.server 8000 > /tmp/voa-server.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
-          cat > /tmp/playlist-smoke.cjs <<'JS'
+          cat > tests/playlist-smoke.cjs <<'JS'
           const assert = require("node:assert/strict");
           const { chromium } = require("playwright");
 
@@ -108,7 +108,8 @@ jobs:
             process.exit(1);
           });
           JS
-          node /tmp/playlist-smoke.cjs
+          node tests/playlist-smoke.cjs
+          rm tests/playlist-smoke.cjs
 
       - name: Commit implementation
         run: |
