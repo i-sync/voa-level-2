@@ -1,0 +1,1288 @@
+name: Build audio playlist and desktop dock
+
+on:
+  push:
+    branches:
+      - feature/audio-playlist-desktop-dock
+    paths:
+      - .github/workflows/build-audio-playlist.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Apply playlist and responsive dock changes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import textwrap
+
+
+          def replace_once(path: str, old: str, new: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one match in {path}, found {count}: {old[:120]!r}")
+              file.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+
+          def replace_regex(path: str, pattern: str, replacement: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              updated, count = re.subn(pattern, replacement, text, count=1, flags=re.S)
+              if count != 1:
+                  raise SystemExit(f"Expected one regex match in {path}, found {count}: {pattern}")
+              file.write_text(updated, encoding="utf-8")
+
+
+          core = r'''export const SPEED_MIN = 0.5;
+          export const SPEED_MAX = 1.5;
+          export const SPEED_STEP = 0.05;
+          export const REPEAT_MODES = ["off", "one", "queue"];
+
+          export function clamp(value, min, max) {
+            return Math.min(max, Math.max(min, value));
+          }
+
+          export function normalizeSpeed(value) {
+            const numeric = Number(value);
+            if (!Number.isFinite(numeric)) return 1;
+            const stepped = Math.round(clamp(numeric, SPEED_MIN, SPEED_MAX) / SPEED_STEP) * SPEED_STEP;
+            return Number(stepped.toFixed(2));
+          }
+
+          export function formatSpeed(value) {
+            const speed = normalizeSpeed(value);
+            return `${speed.toFixed(2).replace(/0$/, "")}×`;
+          }
+
+          export function formatMediaTime(seconds) {
+            const total = Math.max(0, Math.floor(Number(seconds) || 0));
+            const hours = Math.floor(total / 3600);
+            const minutes = Math.floor((total % 3600) / 60);
+            const remainder = total % 60;
+            if (hours > 0) {
+              return `${hours}:${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+            }
+            return `${minutes}:${String(remainder).padStart(2, "0")}`;
+          }
+
+          export function formatRemaining(milliseconds) {
+            const total = Math.max(0, Math.ceil((Number(milliseconds) || 0) / 1000));
+            const hours = Math.floor(total / 3600);
+            const minutes = Math.floor((total % 3600) / 60);
+            const seconds = total % 60;
+            if (hours > 0) {
+              return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+            }
+            return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+          }
+
+          export function parseLessonId(value, lessons, fallbackId = 1) {
+            const requested = Number.parseInt(String(value), 10);
+            if (lessons.some((lesson) => lesson.id === requested)) return requested;
+
+            const fallback = Number.parseInt(String(fallbackId), 10);
+            if (lessons.some((lesson) => lesson.id === fallback)) return fallback;
+
+            return lessons[0]?.id ?? 1;
+          }
+
+          export function getAdjacentLessonId(lessons, currentId, direction) {
+            const index = lessons.findIndex((lesson) => lesson.id === currentId);
+            if (index < 0) return null;
+            return lessons[index + direction]?.id ?? null;
+          }
+
+          export function normalizeCustomTimerMinutes(value) {
+            const minutes = Number.parseInt(String(value), 10);
+            if (!Number.isFinite(minutes)) return null;
+            return clamp(minutes, 1, 240);
+          }
+
+          export function normalizeRepeatMode(value, legacyLoop = false) {
+            if (REPEAT_MODES.includes(value)) return value;
+            return legacyLoop ? "one" : "off";
+          }
+
+          export function normalizeLessonQueue(values, lessons) {
+            const validIds = new Set(
+              lessons
+                .map((lesson) => Number(typeof lesson === "number" ? lesson : lesson?.id))
+                .filter((id) => Number.isInteger(id) && id > 0),
+            );
+            return [...new Set((Array.isArray(values) ? values : []).map(Number))]
+              .filter((id) => validIds.has(id))
+              .sort((a, b) => a - b);
+          }
+
+          export function getQueueLessonId(queue, currentId, direction = 1) {
+            if (!Array.isArray(queue) || queue.length === 0) return null;
+            const index = queue.indexOf(Number(currentId));
+            if (index < 0) return direction < 0 ? queue.at(-1) : queue[0];
+            const offset = ((index + direction) % queue.length + queue.length) % queue.length;
+            return queue[offset];
+          }
+
+          export function formatLessonQueue(queue) {
+            if (!Array.isArray(queue) || queue.length === 0) return "未设置播放列表";
+            const ids = [...queue].map(Number).filter(Number.isFinite).sort((a, b) => a - b);
+            const contiguous = ids.every((id, index) => index === 0 || id === ids[index - 1] + 1);
+            if (contiguous && ids.length > 1) {
+              return `Lesson ${ids[0]}–${ids.at(-1)} · ${ids.length} 课`;
+            }
+            const displayed = ids.length <= 6 ? ids.join("、") : `${ids.slice(0, 5).join("、")}…`;
+            return `Lesson ${displayed} · ${ids.length} 课`;
+          }
+          '''
+          Path("js/core.js").write_text(textwrap.dedent(core), encoding="utf-8")
+
+          core_tests = r'''import test from "node:test";
+          import assert from "node:assert/strict";
+
+          import {
+            formatLessonQueue,
+            formatMediaTime,
+            formatRemaining,
+            formatSpeed,
+            getAdjacentLessonId,
+            getQueueLessonId,
+            normalizeCustomTimerMinutes,
+            normalizeLessonQueue,
+            normalizeRepeatMode,
+            normalizeSpeed,
+            parseLessonId,
+          } from "../js/core.js";
+
+          const lessons = [
+            { id: 1, title: "One" },
+            { id: 2, title: "Two" },
+            { id: 4, title: "Four" },
+          ];
+
+          test("normalizes speed to 0.05 steps and clamps the supported range", () => {
+            assert.equal(normalizeSpeed(0.83), 0.85);
+            assert.equal(normalizeSpeed(0.1), 0.5);
+            assert.equal(normalizeSpeed(2), 1.5);
+            assert.equal(normalizeSpeed("bad"), 1);
+            assert.equal(formatSpeed(0.8), "0.8×");
+            assert.equal(formatSpeed(1), "1.0×");
+          });
+
+          test("formats player and timer durations", () => {
+            assert.equal(formatMediaTime(0), "0:00");
+            assert.equal(formatMediaTime(65.9), "1:05");
+            assert.equal(formatMediaTime(3661), "1:01:01");
+            assert.equal(formatRemaining(61_001), "01:02");
+            assert.equal(formatRemaining(3_661_000), "1:01:01");
+          });
+
+          test("resolves valid and fallback lesson IDs", () => {
+            assert.equal(parseLessonId("2", lessons, 1), 2);
+            assert.equal(parseLessonId("3", lessons, 4), 4);
+            assert.equal(parseLessonId("bad", lessons, 99), 1);
+          });
+
+          test("finds adjacent lessons without assuming IDs are consecutive", () => {
+            assert.equal(getAdjacentLessonId(lessons, 2, -1), 1);
+            assert.equal(getAdjacentLessonId(lessons, 2, 1), 4);
+            assert.equal(getAdjacentLessonId(lessons, 1, -1), null);
+            assert.equal(getAdjacentLessonId(lessons, 4, 1), null);
+          });
+
+          test("validates custom sleep timer minutes", () => {
+            assert.equal(normalizeCustomTimerMinutes("30"), 30);
+            assert.equal(normalizeCustomTimerMinutes(0), 1);
+            assert.equal(normalizeCustomTimerMinutes(999), 240);
+            assert.equal(normalizeCustomTimerMinutes("not-a-number"), null);
+          });
+
+          test("normalizes legacy and explicit repeat modes", () => {
+            assert.equal(normalizeRepeatMode("queue"), "queue");
+            assert.equal(normalizeRepeatMode("bad", true), "one");
+            assert.equal(normalizeRepeatMode(undefined, false), "off");
+          });
+
+          test("normalizes, orders and wraps playlist lessons", () => {
+            assert.deepEqual(normalizeLessonQueue([4, 2, 2, 99, 1], lessons), [1, 2, 4]);
+            assert.equal(getQueueLessonId([1, 2, 4], 2, 1), 4);
+            assert.equal(getQueueLessonId([1, 2, 4], 4, 1), 1);
+            assert.equal(getQueueLessonId([1, 2, 4], 1, -1), 4);
+            assert.equal(getQueueLessonId([1, 2, 4], 99, 1), 1);
+          });
+
+          test("formats consecutive and custom playlist summaries", () => {
+            assert.equal(formatLessonQueue([]), "未设置播放列表");
+            assert.equal(formatLessonQueue([1, 2, 3, 4, 5]), "Lesson 1–5 · 5 课");
+            assert.equal(formatLessonQueue([2, 4, 5]), "Lesson 2、4、5 · 3 课");
+          });
+          '''
+          Path("tests/core.test.mjs").write_text(textwrap.dedent(core_tests), encoding="utf-8")
+
+          old_playback = '''          <section class="control-block" aria-labelledby="playbackHeading">
+            <h3 id="playbackHeading">重复与跳转</h3>
+            <div class="action-row">
+              <button id="seekBackward" class="secondary-button" type="button">↶ 10 秒</button>
+              <button id="loopToggle" class="toggle-button" type="button" aria-pressed="false">循环本课：关</button>
+              <button id="seekForward" class="secondary-button" type="button">10 秒 ↷</button>
+            </div>
+          </section>'''
+          new_playback = '''          <section class="control-block playback-control-block" aria-labelledby="playbackHeading">
+            <div class="control-title-row playlist-title-row">
+              <h3 id="playbackHeading">重复与播放列表</h3>
+              <output id="playlistSummary" class="playlist-summary">Lesson 1–5 · 5 课</output>
+            </div>
+
+            <div id="repeatModeControls" class="repeat-mode-row" role="group" aria-label="播放结束后的行为">
+              <button class="chip" type="button" data-repeat-mode="off" aria-pressed="true">不循环</button>
+              <button class="chip" type="button" data-repeat-mode="one" aria-pressed="false">单课循环</button>
+              <button class="chip" type="button" data-repeat-mode="queue" aria-pressed="false">列表循环</button>
+            </div>
+            <p id="queueModeNote" class="subtle playlist-mode-note">列表循环按课程编号播放，仅用于音频。</p>
+
+            <div class="action-row playlist-action-row">
+              <button id="seekBackward" class="secondary-button" type="button">↶ 10 秒</button>
+              <button id="editPlaylist" class="secondary-button playlist-edit-button" type="button">选择课程</button>
+              <button id="seekForward" class="secondary-button" type="button">10 秒 ↷</button>
+            </div>
+
+            <div id="playlistEditor" class="playlist-editor" hidden>
+              <div class="playlist-editor-heading">
+                <div>
+                  <h4>选择循环课程</h4>
+                  <p class="subtle">可快速选择连续范围，也可逐课增删；播放顺序按课程编号排列。</p>
+                </div>
+                <button id="closePlaylistEditor" class="text-button" type="button">关闭</button>
+              </div>
+
+              <div class="playlist-range-row">
+                <label for="playlistRangeStart">从</label>
+                <select id="playlistRangeStart" aria-label="范围开始课程"></select>
+                <label for="playlistRangeEnd">到</label>
+                <select id="playlistRangeEnd" aria-label="范围结束课程"></select>
+                <button id="applyPlaylistRange" class="secondary-button" type="button">应用范围</button>
+              </div>
+
+              <div id="playlistLessonGrid" class="playlist-lesson-grid" aria-label="手动选择课程"></div>
+              <p id="playlistSelectionStatus" class="playlist-selection-status" aria-live="polite"></p>
+
+              <div class="playlist-editor-actions">
+                <button id="clearPlaylist" class="text-button" type="button">清空</button>
+                <button id="cancelPlaylist" class="secondary-button" type="button">取消</button>
+                <button id="savePlaylist" class="secondary-button" type="button">保存</button>
+                <button id="saveAndPlayPlaylist" class="toggle-button" type="button">保存并播放</button>
+              </div>
+            </div>
+          </section>'''
+          replace_once("index.html", old_playback, new_playback)
+
+          replace_once(
+              "js/app.js",
+              '''  formatRemaining,
+  formatSpeed,
+  getAdjacentLessonId,
+  normalizeCustomTimerMinutes,
+  normalizeSpeed,
+  parseLessonId,''',
+              '''  formatLessonQueue,
+  formatRemaining,
+  formatSpeed,
+  getAdjacentLessonId,
+  getQueueLessonId,
+  normalizeCustomTimerMinutes,
+  normalizeLessonQueue,
+  normalizeRepeatMode,
+  normalizeSpeed,
+  parseLessonId,''',
+          )
+          replace_once("js/app.js", 'const AUDIO_DOCK_QUERY = "(max-width: 620px)";\n', "")
+          replace_once(
+              "js/app.js",
+              '''  speed: 0.8,
+  loop: false,
+  mode: "audio",
+  fontScale: 1,
+  currentLesson: 1,''',
+              '''  speed: 0.8,
+  repeatMode: "off",
+  queueLessonIds: [1, 2, 3, 4, 5],
+  mode: "audio",
+  fontScale: 1,
+  currentLesson: 1,''',
+          )
+          replace_once(
+              "js/app.js",
+              '''  seekBackward: $("#seekBackward"),
+  seekForward: $("#seekForward"),
+  loopToggle: $("#loopToggle"),
+  timerPresets:''',
+              '''  seekBackward: $("#seekBackward"),
+  seekForward: $("#seekForward"),
+  repeatModeControls: $("#repeatModeControls"),
+  playlistSummary: $("#playlistSummary"),
+  queueModeNote: $("#queueModeNote"),
+  editPlaylist: $("#editPlaylist"),
+  playlistEditor: $("#playlistEditor"),
+  closePlaylistEditor: $("#closePlaylistEditor"),
+  playlistRangeStart: $("#playlistRangeStart"),
+  playlistRangeEnd: $("#playlistRangeEnd"),
+  applyPlaylistRange: $("#applyPlaylistRange"),
+  playlistLessonGrid: $("#playlistLessonGrid"),
+  playlistSelectionStatus: $("#playlistSelectionStatus"),
+  clearPlaylist: $("#clearPlaylist"),
+  cancelPlaylist: $("#cancelPlaylist"),
+  savePlaylist: $("#savePlaylist"),
+  saveAndPlayPlaylist: $("#saveAndPlayPlaylist"),
+  timerPresets:''',
+          )
+          replace_once(
+              "js/app.js",
+              '''const lastPositionWrite = { audio: 0, video: 0 };
+const audioDockMedia = window.matchMedia(AUDIO_DOCK_QUERY);
+let lastSessionPositionUpdate = 0;
+let audioDockActivated = false;
+let audioDockSlotAboveViewport = false;
+let audioDockSuspended = false;
+let audioDockObserver = null;''',
+              '''const lastPositionWrite = { audio: 0, video: 0 };
+let lastSessionPositionUpdate = 0;
+let audioDockActivated = false;
+let audioDockSlotAboveViewport = false;
+let audioDockSuspended = false;
+let audioDockObserver = null;
+let playlistDraft = new Set();''',
+          )
+
+          dock_block = r'''function updateAudioDockMetrics() {
+            if (!dom.audioDock.classList.contains("is-docked")) return;
+            const height = Math.ceil(dom.audioDock.getBoundingClientRect().height);
+            if (height > 0) {
+              document.documentElement.style.setProperty("--audio-dock-height", `${height}px`);
+            }
+          }
+
+          function setAudioDocked(value) {
+            const docked = Boolean(value);
+            if (dom.audioDock.classList.contains("is-docked") === docked) return;
+
+            if (docked) {
+              const placeholderHeight = Math.ceil(dom.audioDock.getBoundingClientRect().height);
+              if (placeholderHeight > 0) dom.audioDockSlot.style.height = `${placeholderHeight}px`;
+              dom.audioDock.classList.add("is-docked");
+              dom.audioDock.setAttribute("aria-label", "浮动音频播放器");
+              document.body.classList.add("has-audio-dock");
+              requestAnimationFrame(updateAudioDockMetrics);
+              return;
+            }
+
+            dom.audioDock.classList.remove("is-docked");
+            dom.audioDock.removeAttribute("aria-label");
+            dom.audioDockSlot.style.removeProperty("height");
+            document.body.classList.remove("has-audio-dock");
+            document.documentElement.style.removeProperty("--audio-dock-height");
+          }
+
+          function updateAudioDock() {
+            const shouldDock =
+              audioDockActivated &&
+              !audioDockSuspended &&
+              activeMode === "audio" &&
+              audioDockSlotAboveViewport;
+            setAudioDocked(shouldDock);
+          }
+
+          function currentQueuePositionLabel() {
+            if (preferences.repeatMode !== "queue" || !currentLesson) return "";
+            const queue = preferences.queueLessonIds;
+            const index = queue.indexOf(currentLesson.id);
+            return index >= 0 ? `${index + 1}/${queue.length}` : "";
+          }
+
+          function updateAudioDockTitle() {
+            const queuePosition = currentQueuePositionLabel();
+            const title = currentLesson
+              ? `Lesson ${currentLesson.id} · ${currentLesson.title}${queuePosition ? ` · ${queuePosition}` : ""}`
+              : "VOA Level 2";
+            dom.audioDockTitle.textContent = title;
+            dom.audioDockTitle.title = title;
+          }
+
+          function resetAudioDock() {
+            audioDockActivated = false;
+            setAudioDocked(false);
+            audioDockSlotAboveViewport = dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
+          }
+
+          function setAudioDockSuspended(value) {
+            audioDockSuspended = Boolean(value);
+            updateAudioDock();
+          }
+
+          function setupAudioDock() {
+            const updateSlotState = () => {
+              const rect = dom.audioDockSlot.getBoundingClientRect();
+              audioDockSlotAboveViewport = rect.bottom <= 0;
+              updateAudioDock();
+              updateAudioDockMetrics();
+            };
+
+            if ("IntersectionObserver" in window) {
+              audioDockObserver = new IntersectionObserver(([entry]) => {
+                audioDockSlotAboveViewport =
+                  !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
+                updateAudioDock();
+              });
+              audioDockObserver.observe(dom.audioDockSlot);
+            } else {
+              window.addEventListener("scroll", updateSlotState, { passive: true });
+            }
+
+            window.addEventListener("resize", updateSlotState);
+            window.visualViewport?.addEventListener("resize", updateSlotState);
+            updateSlotState();
+          }'''
+          replace_regex(
+              "js/app.js",
+              r'function updateAudioDockMetrics\(\) \{.*?\n\}\n\nfunction setMode',
+              textwrap.dedent(dock_block).rstrip() + "\n\nfunction setMode",
+          )
+
+          replace_once(
+              "js/app.js",
+              '''  updateMediaMetadata();
+  updatePlaybackState();
+  updateAudioDock();
+}''',
+              '''  updateMediaMetadata();
+  updatePlaybackState();
+  renderRepeatControls();
+  updateAudioDock();
+}''',
+          )
+
+          playlist_block = r'''function applyRepeatModeToMedia() {
+            const loopCurrentLesson = preferences.repeatMode === "one";
+            dom.audio.loop = loopCurrentLesson;
+            dom.video.loop = loopCurrentLesson;
+          }
+
+          function renderRepeatControls() {
+            for (const button of dom.repeatModeControls.querySelectorAll("[data-repeat-mode]")) {
+              const selected = button.dataset.repeatMode === preferences.repeatMode;
+              button.classList.toggle("is-active", selected);
+              button.setAttribute("aria-pressed", String(selected));
+            }
+            dom.playlistSummary.textContent = formatLessonQueue(preferences.queueLessonIds);
+            dom.queueModeNote.textContent =
+              preferences.repeatMode === "queue"
+                ? activeMode === "audio"
+                  ? "列表循环已开启：当前课程结束后自动播放列表中的下一课。"
+                  : "列表循环仅自动切换音频；当前视频结束后会停止。"
+                : "列表循环按课程编号播放，仅用于音频。";
+            updateAudioDockTitle();
+          }
+
+          function setRepeatMode(value, { persist = true } = {}) {
+            preferences.repeatMode = normalizeRepeatMode(value);
+            applyRepeatModeToMedia();
+            renderRepeatControls();
+            updateMediaMetadata();
+            if (persist) savePreferences();
+          }
+
+          function renderPlaylistRangeOptions() {
+            const start = document.createDocumentFragment();
+            const end = document.createDocumentFragment();
+            for (const lesson of lessons) {
+              for (const fragment of [start, end]) {
+                const option = document.createElement("option");
+                option.value = String(lesson.id);
+                option.textContent = `Lesson ${lesson.id}`;
+                fragment.append(option);
+              }
+            }
+            dom.playlistRangeStart.replaceChildren(start);
+            dom.playlistRangeEnd.replaceChildren(end);
+          }
+
+          function renderPlaylistEditor() {
+            const fragment = document.createDocumentFragment();
+            for (const lesson of lessons) {
+              const button = document.createElement("button");
+              const selected = playlistDraft.has(lesson.id);
+              button.type = "button";
+              button.className = "playlist-lesson-button";
+              button.dataset.lessonId = String(lesson.id);
+              button.textContent = String(lesson.id);
+              button.title = `Lesson ${lesson.id} · ${lesson.title}`;
+              button.setAttribute("aria-label", `Lesson ${lesson.id} · ${lesson.title}`);
+              button.setAttribute("aria-pressed", String(selected));
+              button.classList.toggle("is-selected", selected);
+              fragment.append(button);
+            }
+            dom.playlistLessonGrid.replaceChildren(fragment);
+            const ids = [...playlistDraft].sort((a, b) => a - b);
+            dom.playlistSelectionStatus.textContent = ids.length
+              ? `已选 ${ids.length} 课：${ids.join("、")}`
+              : "尚未选择课程。列表循环至少需要两课。";
+            const invalid = ids.length < 2;
+            dom.savePlaylist.disabled = invalid;
+            dom.saveAndPlayPlaylist.disabled = invalid;
+          }
+
+          function openPlaylistEditor() {
+            playlistDraft = new Set(preferences.queueLessonIds);
+            if (playlistDraft.size === 0 && currentLesson) playlistDraft.add(currentLesson.id);
+            const ids = [...playlistDraft].sort((a, b) => a - b);
+            dom.playlistRangeStart.value = String(ids[0] ?? lessons[0]?.id ?? 1);
+            dom.playlistRangeEnd.value = String(ids.at(-1) ?? lessons[Math.min(4, lessons.length - 1)]?.id ?? 1);
+            renderPlaylistEditor();
+            dom.playlistEditor.hidden = false;
+            dom.editPlaylist.setAttribute("aria-expanded", "true");
+          }
+
+          function closePlaylistEditor() {
+            dom.playlistEditor.hidden = true;
+            dom.editPlaylist.setAttribute("aria-expanded", "false");
+          }
+
+          function applyPlaylistRange() {
+            const start = Number(dom.playlistRangeStart.value);
+            const end = Number(dom.playlistRangeEnd.value);
+            const min = Math.min(start, end);
+            const max = Math.max(start, end);
+            playlistDraft = new Set(
+              lessons.filter((lesson) => lesson.id >= min && lesson.id <= max).map((lesson) => lesson.id),
+            );
+            renderPlaylistEditor();
+          }
+
+          function savePlaylistSelection({ play = false } = {}) {
+            const queue = normalizeLessonQueue([...playlistDraft], lessons);
+            if (queue.length < 2) {
+              showToast("列表循环至少需要选择两课。 ");
+              return;
+            }
+            preferences.queueLessonIds = queue;
+            savePreferences();
+            renderRepeatControls();
+            closePlaylistEditor();
+
+            if (play) {
+              activateQueueMode({ forcePlay: true });
+              return;
+            }
+            if (preferences.repeatMode === "queue" && !queue.includes(currentLesson?.id)) {
+              setRepeatMode("off");
+              showToast("当前课程不在新列表中，已暂时关闭列表循环。 ");
+            }
+          }
+
+          function activateQueueMode({ forcePlay = false } = {}) {
+            const queue = normalizeLessonQueue(preferences.queueLessonIds, lessons);
+            if (queue.length < 2) {
+              openPlaylistEditor();
+              showToast("请先选择至少两课。 ");
+              return;
+            }
+            preferences.queueLessonIds = queue;
+            const wasPlaying = activeMode === "audio" && !dom.audio.paused;
+            setMode("audio");
+            setRepeatMode("queue");
+            const targetId = queue.includes(currentLesson?.id) ? currentLesson.id : queue[0];
+            if (targetId !== currentLesson?.id) {
+              loadLesson(targetId, {
+                historyMode: "replace",
+                autoplay: forcePlay || wasPlaying,
+                resumeAudio: false,
+                preserveDock: audioDockActivated,
+                manual: false,
+              });
+              return;
+            }
+            if (forcePlay) dom.audio.play().catch(() => showToast("请手动点击播放。"));
+          }'''
+          replace_regex(
+              "js/app.js",
+              r'function setLoop\(.*?\n\}\n\nfunction setFontScale',
+              textwrap.dedent(playlist_block).rstrip() + "\n\nfunction setFontScale",
+          )
+
+          source_block = r'''function setSource(item, mode, url, lessonId, { resume = true } = {}) {
+            item.pause();
+            item.dataset.mode = mode;
+            item.dataset.lessonId = String(lessonId);
+            item.dataset.resumePosition = String(resume);
+            item.removeAttribute("src");
+            if (url) item.src = url;
+            item.load();
+          }
+
+          function loadLesson(
+            id,
+            {
+              historyMode = "push",
+              autoplay = false,
+              resumeAudio = true,
+              preserveDock = false,
+              manual = true,
+              saveCurrent = true,
+            } = {},
+          ) {
+            const lesson = lessons.find((candidate) => candidate.id === id);
+            if (!lesson) return;
+
+            if (manual && preferences.repeatMode === "queue" && !preferences.queueLessonIds.includes(id)) {
+              setRepeatMode("off");
+              showToast("所选课程不在播放列表中，已暂时关闭列表循环。 ");
+            }
+            if (!preserveDock) resetAudioDock();
+            if (saveCurrent) {
+              savePosition(dom.audio, "audio", true);
+              savePosition(dom.video, "video", true);
+            }
+            pauseAll();
+            dom.mediaError.hidden = true;
+
+            currentLesson = lesson;
+            preferences.currentLesson = lesson.id;
+            savePreferences();
+
+            if (!resumeAudio) {
+              positions[String(lesson.id)] ??= {};
+              positions[String(lesson.id)].audio = 0;
+              writeJson(KEYS.positions, positions);
+            }
+
+            dom.lessonEyebrow.textContent = `Lesson ${lesson.id} of ${lessons.length}`;
+            dom.lessonTitle.textContent = lesson.title;
+            dom.completed.checked = completed.has(lesson.id);
+            dom.sourceLink.href = lesson.sourceUrl;
+            document.title = `Lesson ${lesson.id}: ${lesson.title} · VOA Level 2`;
+            renderTranscript(lesson.transcript);
+            renderLessonOptions();
+            updateNavigation();
+            updateUrl(lesson.id, historyMode);
+
+            setSource(dom.audio, "audio", lesson.audioUrl, lesson.id, { resume: resumeAudio });
+            setSource(dom.video, "video", lesson.videoUrl, lesson.id, { resume: true });
+            setSpeed(preferences.speed, { persist: false });
+            applyRepeatModeToMedia();
+            renderRepeatControls();
+            updateMediaMetadata();
+            updateAudioDockTitle();
+
+            if (autoplay) {
+              const item = currentMedia();
+              const play = () => item.play().catch(() => showToast("自动播放未能继续，请点击播放。"));
+              if (item.readyState >= 1) play();
+              else item.addEventListener("loadedmetadata", play, { once: true });
+            }
+          }
+
+          function navigate(direction, autoplay = false) {
+            if (!currentLesson) return;
+            const id = getAdjacentLessonId(lessons, currentLesson.id, direction);
+            if (id !== null) loadLesson(id, { autoplay });
+          }
+
+          function navigatePlayback(direction) {
+            if (
+              preferences.repeatMode === "queue" &&
+              activeMode === "audio" &&
+              preferences.queueLessonIds.length >= 2
+            ) {
+              const id = getQueueLessonId(preferences.queueLessonIds, currentLesson?.id, direction);
+              if (id !== null) {
+                loadLesson(id, {
+                  historyMode: "replace",
+                  autoplay: true,
+                  resumeAudio: false,
+                  preserveDock: audioDockActivated,
+                  manual: false,
+                });
+              }
+              return;
+            }
+            navigate(direction, true);
+          }'''
+          replace_regex(
+              "js/app.js",
+              r'function setSource\(.*?\n\}\n\nfunction navigate\(.*?\n\}',
+              textwrap.dedent(source_block).rstrip(),
+          )
+
+          replace_once(
+              "js/app.js",
+              '''    previoustrack: () => navigate(-1, true),
+    nexttrack: () => navigate(1, true),''',
+              '''    previoustrack: () => navigatePlayback(-1),
+    nexttrack: () => navigatePlayback(1),''',
+          )
+
+          media_block = r'''function markLessonCompleted(item, mode) {
+            const lessonId = Number(item.dataset.lessonId);
+            if (!currentLesson || lessonId !== currentLesson.id) return false;
+            completed.add(lessonId);
+            writeJson(KEYS.completed, [...completed].sort((a, b) => a - b));
+            dom.completed.checked = true;
+            positions[String(lessonId)] ??= {};
+            positions[String(lessonId)][mode] = 0;
+            writeJson(KEYS.positions, positions);
+            renderLessonOptions();
+            return true;
+          }
+
+          function bindMedia(item, mode) {
+            item.dataset.mode = mode;
+            item.addEventListener("loadedmetadata", () => {
+              item.playbackRate = preferences.speed;
+              item.defaultPlaybackRate = preferences.speed;
+              item.loop = preferences.repeatMode === "one";
+              if ("preservesPitch" in item) item.preservesPitch = true;
+              if (item.dataset.resumePosition === "false") {
+                try {
+                  item.currentTime = 0;
+                } catch {
+                  // Some remote media becomes seekable after metadata settles.
+                }
+              } else {
+                restorePosition(item, mode);
+              }
+              delete item.dataset.resumePosition;
+            });
+            item.addEventListener("play", () => {
+              setMode(mode, { pausePrevious: false });
+              if (mode === "audio") {
+                audioDockActivated = true;
+                audioDockSlotAboveViewport = dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
+                updateAudioDock();
+              }
+              media[mode === "audio" ? "video" : "audio"].pause();
+              dom.mediaError.hidden = true;
+              checkTimer();
+              updatePlaybackState();
+            });
+            item.addEventListener("pause", () => {
+              savePosition(item, mode, true);
+              updatePlaybackState();
+            });
+            item.addEventListener("timeupdate", () => {
+              savePosition(item, mode);
+              checkTimer();
+              if (item === currentMedia()) updateSessionPosition(item);
+            });
+            item.addEventListener("ratechange", () => updateSessionPosition(item, true));
+            item.addEventListener("ended", () => {
+              const completedCurrentLesson = markLessonCompleted(item, mode);
+              if (checkTimer()) return;
+              if (
+                completedCurrentLesson &&
+                mode === "audio" &&
+                preferences.repeatMode === "queue" &&
+                preferences.queueLessonIds.length >= 2
+              ) {
+                const nextId = getQueueLessonId(preferences.queueLessonIds, currentLesson.id, 1);
+                if (nextId !== null) {
+                  loadLesson(nextId, {
+                    historyMode: "replace",
+                    autoplay: true,
+                    resumeAudio: false,
+                    preserveDock: true,
+                    manual: false,
+                    saveCurrent: false,
+                  });
+                }
+              }
+            });
+            item.addEventListener("canplay", () => {
+              dom.mediaError.hidden = true;
+            });
+            item.addEventListener("error", () => {
+              if (item.currentSrc && currentLesson && Number(item.dataset.lessonId) === currentLesson.id) {
+                dom.mediaError.hidden = false;
+              }
+            });
+          }'''
+          replace_regex(
+              "js/app.js",
+              r'function bindMedia\(item, mode\) \{.*?\n\}\n\nfunction bindEvents',
+              textwrap.dedent(media_block).rstrip() + "\n\nfunction bindEvents",
+          )
+
+          events_block = r'''function bindEvents() {
+            dom.previousLesson.addEventListener("click", () => navigate(-1));
+            dom.nextLesson.addEventListener("click", () => navigate(1));
+            dom.lessonSelect.addEventListener("change", () => loadLesson(Number(dom.lessonSelect.value)));
+            dom.audioTab.addEventListener("click", () => setMode("audio"));
+            dom.videoTab.addEventListener("click", () => {
+              setMode("video");
+              if (preferences.repeatMode === "queue") {
+                showToast("列表循环仅自动切换音频；返回音频模式后继续生效。 ");
+              }
+            });
+            dom.speedPresets.addEventListener("click", (event) => {
+              const button = event.target.closest("[data-speed]");
+              if (button) setSpeed(Number(button.dataset.speed));
+            });
+            dom.speedDown.addEventListener("click", () => setSpeed(preferences.speed - SPEED_STEP));
+            dom.speedUp.addEventListener("click", () => setSpeed(preferences.speed + SPEED_STEP));
+            dom.seekBackward.addEventListener("click", () => seek(-10));
+            dom.seekForward.addEventListener("click", () => seek(10));
+            dom.dockSeekBackward.addEventListener("click", () => seek(-10));
+            dom.dockSeekForward.addEventListener("click", () => seek(10));
+            dom.repeatModeControls.addEventListener("click", (event) => {
+              const button = event.target.closest("[data-repeat-mode]");
+              if (!button) return;
+              if (button.dataset.repeatMode === "queue") activateQueueMode();
+              else setRepeatMode(button.dataset.repeatMode);
+            });
+            dom.editPlaylist.addEventListener("click", openPlaylistEditor);
+            dom.closePlaylistEditor.addEventListener("click", closePlaylistEditor);
+            dom.cancelPlaylist.addEventListener("click", closePlaylistEditor);
+            dom.applyPlaylistRange.addEventListener("click", applyPlaylistRange);
+            dom.playlistLessonGrid.addEventListener("click", (event) => {
+              const button = event.target.closest("[data-lesson-id]");
+              if (!button) return;
+              const lessonId = Number(button.dataset.lessonId);
+              if (playlistDraft.has(lessonId)) playlistDraft.delete(lessonId);
+              else playlistDraft.add(lessonId);
+              renderPlaylistEditor();
+            });
+            dom.clearPlaylist.addEventListener("click", () => {
+              playlistDraft.clear();
+              renderPlaylistEditor();
+            });
+            dom.savePlaylist.addEventListener("click", () => savePlaylistSelection());
+            dom.saveAndPlayPlaylist.addEventListener("click", () => savePlaylistSelection({ play: true }));
+            dom.timerPresets.addEventListener("click", (event) => {
+              const button = event.target.closest("[data-minutes]");
+              if (button) startTimer(Number(button.dataset.minutes));
+            });
+            dom.setCustomTimer.addEventListener("click", () => {
+              const minutes = normalizeCustomTimerMinutes(dom.customMinutes.value);
+              if (minutes === null) return showToast("请输入 1–240 分钟。 ");
+              dom.customMinutes.value = String(minutes);
+              startTimer(minutes);
+            });
+            dom.customMinutes.addEventListener("keydown", (event) => {
+              if (event.key === "Enter") dom.setCustomTimer.click();
+            });
+            dom.cancelTimer.addEventListener("click", () => clearTimer(true));
+            dom.completed.addEventListener("change", () => {
+              if (!currentLesson) return;
+              if (dom.completed.checked) completed.add(currentLesson.id);
+              else completed.delete(currentLesson.id);
+              writeJson(KEYS.completed, [...completed].sort((a, b) => a - b));
+              renderLessonOptions();
+            });
+            dom.fontDown.addEventListener("click", () => setFontScale(preferences.fontScale - 0.1));
+            dom.fontUp.addEventListener("click", () => setFontScale(preferences.fontScale + 0.1));
+            window.addEventListener("popstate", () => {
+              const id = parseLessonId(new URL(location.href).searchParams.get("lesson"), lessons, preferences.currentLesson);
+              if (id !== currentLesson?.id) loadLesson(id, { historyMode: "none" });
+            });
+            window.addEventListener("beforeunload", () => {
+              savePosition(dom.audio, "audio", true);
+              savePosition(dom.video, "video", true);
+            });
+            document.addEventListener("focusin", (event) => {
+              if (event.target.matches?.("input, textarea")) setAudioDockSuspended(true);
+            });
+            document.addEventListener("focusout", (event) => {
+              if (!event.target.matches?.("input, textarea")) return;
+              requestAnimationFrame(() => {
+                const keyboardInputFocused =
+                  document.activeElement?.matches?.("input, textarea") ?? false;
+                setAudioDockSuspended(keyboardInputFocused);
+              });
+            });
+            window.addEventListener("pageshow", checkTimer);
+            window.addEventListener("focus", checkTimer);
+            document.addEventListener("visibilitychange", checkTimer);
+          }'''
+          replace_regex(
+              "js/app.js",
+              r'function bindEvents\(\) \{.*?\n\}\n\nasync function init',
+              textwrap.dedent(events_block).rstrip() + "\n\nasync function init",
+          )
+
+          replace_once(
+              "js/app.js",
+              '''function checkTimer() {
+  if (!timer.deadline) return renderTimer();
+  if (Date.now() >= timer.deadline) {
+    pauseAll();
+    clearTimer(false);
+    showToast("睡眠定时结束，播放已暂停。 ");
+    return;
+  }
+  renderTimer();
+}''',
+              '''function checkTimer() {
+  if (!timer.deadline) {
+    renderTimer();
+    return false;
+  }
+  if (Date.now() >= timer.deadline) {
+    pauseAll();
+    clearTimer(false);
+    showToast("睡眠定时结束，播放已暂停。 ");
+    return true;
+  }
+  renderTimer();
+  return false;
+}''',
+          )
+
+          replace_once(
+              "js/app.js",
+              '''    preferences.speed = normalizeSpeed(preferences.speed);
+    preferences.fontScale = clamp(Number(preferences.fontScale) || 1, 0.9, 1.4);
+    activeMode = preferences.mode === "video" ? "video" : "audio";
+    setMode(activeMode, { persist: false, pausePrevious: false });
+    setSpeed(preferences.speed, { persist: false });
+    setLoop(Boolean(preferences.loop), { persist: false });
+    setFontScale(preferences.fontScale, { persist: false });
+    renderLessonOptions();
+
+    const requested = new URL(location.href).searchParams.get("lesson");
+    const id = parseLessonId(requested, lessons, preferences.currentLesson);
+    loadLesson(id, { historyMode: "replace" });''',
+              '''    preferences.speed = normalizeSpeed(preferences.speed);
+    preferences.fontScale = clamp(Number(preferences.fontScale) || 1, 0.9, 1.4);
+    preferences.repeatMode = normalizeRepeatMode(preferences.repeatMode, preferences.loop);
+    preferences.queueLessonIds = normalizeLessonQueue(preferences.queueLessonIds, lessons);
+    if (preferences.queueLessonIds.length < 2) {
+      preferences.queueLessonIds = lessons.slice(0, Math.min(5, lessons.length)).map((lesson) => lesson.id);
+    }
+    delete preferences.loop;
+    activeMode = preferences.mode === "video" ? "video" : "audio";
+    setMode(activeMode, { persist: false, pausePrevious: false });
+    setSpeed(preferences.speed, { persist: false });
+    setRepeatMode(preferences.repeatMode, { persist: false });
+    setFontScale(preferences.fontScale, { persist: false });
+    renderPlaylistRangeOptions();
+    renderLessonOptions();
+
+    const requested = new URL(location.href).searchParams.get("lesson");
+    let id = parseLessonId(requested, lessons, preferences.currentLesson);
+    if (preferences.repeatMode === "queue" && !preferences.queueLessonIds.includes(id)) {
+      id = preferences.queueLessonIds[0];
+    }
+    loadLesson(id, { historyMode: "replace", manual: false });
+    savePreferences();''',
+          )
+
+          css_addition = r'''
+
+          .playlist-title-row {
+            align-items: flex-start;
+          }
+
+          .playlist-summary {
+            max-width: 54%;
+            color: var(--accent-strong);
+            font-size: 0.78rem;
+            font-weight: 800;
+            line-height: 1.35;
+            text-align: right;
+          }
+
+          .repeat-mode-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+          }
+
+          .playlist-mode-note {
+            margin-top: 10px;
+          }
+
+          .playlist-editor {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+          }
+
+          .playlist-editor-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+          }
+
+          .playlist-editor-heading h4 {
+            margin: 0;
+            font-size: 0.92rem;
+          }
+
+          .playlist-range-row {
+            display: grid;
+            grid-template-columns: auto minmax(82px, 1fr) auto minmax(82px, 1fr) auto;
+            gap: 8px;
+            align-items: center;
+            margin-top: 14px;
+          }
+
+          .playlist-range-row label {
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-weight: 750;
+          }
+
+          .playlist-range-row select {
+            min-width: 0;
+            min-height: 42px;
+            padding: 0 30px 0 9px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--surface);
+          }
+
+          .playlist-lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(46px, 1fr));
+            gap: 7px;
+            margin-top: 14px;
+          }
+
+          .playlist-lesson-button {
+            min-height: 40px;
+            padding: 0 6px;
+            font-size: 0.8rem;
+            font-weight: 800;
+          }
+
+          .playlist-lesson-button.is-selected,
+          .playlist-lesson-button[aria-pressed="true"] {
+            border-color: var(--accent);
+            color: var(--accent-strong);
+            background: var(--accent-soft);
+          }
+
+          .playlist-selection-status {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+            line-height: 1.5;
+          }
+
+          .playlist-editor-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 12px;
+          }
+
+          @media (min-width: 621px) {
+            .audio-dock.is-docked {
+              position: fixed;
+              z-index: 45;
+              left: 50%;
+              bottom: 16px;
+              width: min(calc(100% - 32px), var(--content-width));
+              padding: 10px 12px;
+              transform: translateX(-50%);
+              border: 1px solid rgba(255, 255, 255, 0.16);
+              border-radius: 17px;
+              background: rgba(17, 24, 39, 0.97);
+              box-shadow: 0 18px 44px rgba(17, 24, 39, 0.3);
+              -webkit-backdrop-filter: blur(18px);
+              backdrop-filter: blur(18px);
+            }
+
+            .audio-dock.is-docked .audio-dock-toolbar {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 12px;
+              margin-bottom: 7px;
+            }
+
+            .audio-dock.is-docked audio {
+              min-height: 48px;
+            }
+
+            body.has-audio-dock .page-shell {
+              padding-bottom: calc(var(--audio-dock-height) + 56px);
+            }
+
+            body.has-audio-dock .toast {
+              bottom: calc(var(--audio-dock-height) + 34px);
+            }
+          }
+
+          @media (max-width: 620px) {
+            .playlist-summary {
+              max-width: 48%;
+              font-size: 0.73rem;
+            }
+
+            .playlist-action-row .playlist-edit-button {
+              grid-column: 1 / -1;
+              grid-row: 1;
+            }
+
+            .playlist-range-row {
+              grid-template-columns: auto 1fr auto 1fr;
+            }
+
+            .playlist-range-row #applyPlaylistRange {
+              grid-column: 1 / -1;
+            }
+
+            .playlist-editor-actions > * {
+              flex: 1 1 calc(50% - 8px);
+            }
+          }
+          '''
+          replace_once(
+              "css/styles.css",
+              "\n@media (prefers-reduced-motion: reduce) {",
+              textwrap.dedent(css_addition) + "\n@media (prefers-reduced-motion: reduce) {",
+          )
+
+          replace_once(
+              "README.md",
+              "- 手机阅读字幕时，已启动的同一个音频播放器会固定在底部，并提供前后 10 秒跳转；\n- Media Session 渐进增强。",
+              "- 手机和电脑阅读字幕时，已启动的同一个音频播放器会固定在底部，并提供前后 10 秒跳转；\n- 支持不循环、单课循环和自选课程列表循环，例如 `1–5` 或 `2、4、5`；\n- Media Session 渐进增强。",
+          )
+          replace_once(
+              "AGENTS.md",
+              "- a mobile bottom audio dock that reuses the single native `<audio>` while reading transcripts;\n- progressive Media Session support.",
+              "- a responsive bottom audio dock that reuses the single native `<audio>` while reading transcripts;\n- an audio-only lesson queue with off, repeat-one, and repeat-queue modes;\n- progressive Media Session support.",
+          )
+          replace_once("docs/REQUIREMENTS.md", "版本：0.4\n", "版本：0.5\n")
+          replace_once(
+              "docs/REQUIREMENTS.md",
+              "- 手机向下阅读字幕时，原播放器离开视口，暂停、继续和后退操作不够方便。",
+              "- 手机或电脑向下阅读字幕时，原播放器离开视口，暂停、继续和后退操作不够方便；\n- 熟悉多课后，需要按连续范围或自选课程进行音频列表循环。",
+          )
+          replace_once(
+              "docs/REQUIREMENTS.md",
+              "- 浮动播放器避让 iPhone 底部安全区域，并为字幕末尾和 Toast 留出空间。",
+              "- 浮动播放器避让 iPhone 底部安全区域，并为字幕末尾和 Toast 留出空间。\n- 桌面端同样启用浮动播放器，最大宽度与正文一致并居中悬浮。\n- 播放模式包括不循环、单课循环和列表循环。\n- 列表循环仅用于音频，支持连续范围和任意课程组合，顺序按课程编号排列。\n- 自动切课从下一课的 0:00 开始，最后一课结束后回到列表第一课。\n- 播放列表、播放模式和当前课程保存在 `localStorage`。\n- iPhone Safari 26.5、iOS 18.7 的 0.8 倍速锁屏测试已验证同一个 `<audio>` 可在 `ended` 后自动换源并继续播放。",
+          )
+
+          static_test = Path("tests/test_static_site.py")
+          static_text = static_test.read_text(encoding="utf-8").rstrip()
+          if "test_audio_playlist_controls_and_desktop_dock" not in static_text:
+              static_text += r'''
+
+
+          def test_audio_playlist_controls_and_desktop_dock():
+              html = (ROOT / "index.html").read_text(encoding="utf-8")
+              css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
+              script = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
+              soup = BeautifulSoup(html, "html.parser")
+
+              for element_id in (
+                  "repeatModeControls",
+                  "playlistSummary",
+                  "editPlaylist",
+                  "playlistEditor",
+                  "playlistRangeStart",
+                  "playlistRangeEnd",
+                  "playlistLessonGrid",
+                  "saveAndPlayPlaylist",
+              ):
+                  assert soup.find(id=element_id) is not None, element_id
+              assert len(soup.find_all("audio")) == 1
+              assert "@media (min-width: 621px)" in css
+              assert "repeatMode" in script
+              assert "queueLessonIds" in script
+              assert "getQueueLessonId" in script
+          '''
+          static_test.write_text(textwrap.dedent(static_text).rstrip() + "\n", encoding="utf-8")
+          PY
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install -r scripts/requirements.txt
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run static and unit tests
+        run: |
+          node --check js/app.js
+          node --check js/core.js
+          npm test
+          python -m pytest -q
+          python -m json.tool data/lessons.json > /dev/null
+          git diff --check
+
+      - name: Run browser smoke test
+        shell: bash
+        run: |
+          python -m http.server 8000 > /tmp/voa-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          cat > /tmp/playlist-smoke.cjs <<'JS'
+          const assert = require("node:assert/strict");
+          const { chromium } = require("playwright");
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({ viewport: { width: 1100, height: 800 } });
+            await page.goto("http://127.0.0.1:8000/?lesson=1", { waitUntil: "networkidle" });
+            await page.waitForFunction(() => document.querySelectorAll("#lessonSelect option").length === 30);
+
+            assert.equal(await page.locator("audio").count(), 1);
+            await page.evaluate(() => document.querySelector("#audioPlayer").dispatchEvent(new Event("play")));
+            await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight * 0.72));
+            await page.waitForFunction(() => document.querySelector("#audioDock").classList.contains("is-docked"));
+            assert.equal(await page.locator("#audioDock").evaluate((el) => getComputedStyle(el).position), "fixed");
+
+            await page.click("#editPlaylist");
+            await page.selectOption("#playlistRangeStart", "1");
+            await page.selectOption("#playlistRangeEnd", "3");
+            await page.click("#applyPlaylistRange");
+            await page.click("#savePlaylist");
+            assert.match(await page.textContent("#playlistSummary"), /Lesson 1–3/);
+            await page.click('[data-repeat-mode="queue"]');
+            assert.equal(await page.getAttribute('[data-repeat-mode="queue"]', "aria-pressed"), "true");
+
+            await page.evaluate(() => document.querySelector("#audioPlayer").dispatchEvent(new Event("ended")));
+            await page.waitForFunction(() => new URL(location.href).searchParams.get("lesson") === "2");
+            assert.match(await page.textContent("#audioDockTitle"), /2\/3/);
+
+            await page.click("#videoTab");
+            await page.waitForFunction(() => !document.querySelector("#audioDock").classList.contains("is-docked"));
+            await browser.close();
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          JS
+          node /tmp/playlist-smoke.cjs
+
+      - name: Commit implementation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html css/styles.css js/app.js js/core.js tests/core.test.mjs tests/test_static_site.py README.md AGENTS.md docs/REQUIREMENTS.md
+          git commit -m "feat: add lesson playlist looping and desktop audio dock"
+          git push origin HEAD:feature/audio-playlist-desktop-dock
