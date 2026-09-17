@@ -42,6 +42,10 @@ jobs:
           end = source.index(end_marker, start)
           lines = source[start:end].splitlines()
           script = "\n".join(line[10:] if line.startswith("          ") else line for line in lines) + "\n"
+          script = script.replace(
+              'replace_once("index.html", old_playback, new_playback)',
+              'replace_regex("index.html", r\'          <section class="control-block" aria-labelledby="playbackHeading">.*?          </section>\', textwrap.indent(textwrap.dedent(new_playback).strip(), "          "))',
+          )
           Path("/tmp/apply_audio_playlist_patch.py").write_text(script, encoding="utf-8")
           PY
           python /tmp/apply_audio_playlist_patch.py
