@@ -119,6 +119,7 @@ let audioDockSlotAboveViewport = false;
 let audioDockSuspended = false;
 let audioDockObserver = null;
 let playlistDraft = new Set();
+let autoplayGeneration = 0;
 
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -566,6 +567,7 @@ function loadLesson(
 ) {
   const lesson = lessons.find((candidate) => candidate.id === id);
   if (!lesson) return;
+  const loadGeneration = ++autoplayGeneration;
 
   if (manual && preferences.repeatMode === "queue" && !preferences.queueLessonIds.includes(id)) {
     setRepeatMode("off");
@@ -609,7 +611,11 @@ function loadLesson(
 
   if (autoplay) {
     const item = currentMedia();
-    const play = () => item.play().catch(() => showToast("自动播放未能继续，请点击播放。"));
+    const play = () => {
+      if (loadGeneration !== autoplayGeneration) return;
+      if (checkTimer()) return;
+      item.play().catch(() => showToast("自动播放未能继续，请点击播放。"));
+    };
     if (item.readyState >= 1) play();
     else item.addEventListener("loadedmetadata", play, { once: true });
   }
@@ -689,6 +695,7 @@ function checkTimer() {
     return false;
   }
   if (Date.now() >= timer.deadline) {
+    autoplayGeneration += 1;
     pauseAll();
     clearTimer(false);
     showToast("睡眠定时结束，播放已暂停。 ");
@@ -973,7 +980,12 @@ async function init() {
 
     preferences.speed = normalizeSpeed(preferences.speed);
     preferences.fontScale = clamp(Number(preferences.fontScale) || 1, 0.9, 1.4);
-    preferences.repeatMode = normalizeRepeatMode(preferences.repeatMode, preferences.loop);
+    preferences.repeatMode = normalizeRepeatMode(
+      Object.prototype.hasOwnProperty.call(storedPreferences, "repeatMode")
+        ? storedPreferences.repeatMode
+        : undefined,
+      Boolean(storedPreferences.loop),
+    );
     preferences.queueLessonIds = normalizeLessonQueue(preferences.queueLessonIds, lessons);
     if (preferences.queueLessonIds.length < 2) {
       preferences.queueLessonIds = lessons.slice(0, Math.min(5, lessons.length)).map((lesson) => lesson.id);
