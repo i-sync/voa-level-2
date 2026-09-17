@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#172033" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>iPhone 锁屏自动切换音频测试</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #f4f6f8;
+        --surface: #fff;
+        --ink: #18212f;
+        --muted: #687386;
+        --line: #dfe4ea;
+        --accent: #a72a27;
+        --accent-soft: #fff0ed;
+        --success: #177047;
+        --warning: #8b5e0a;
+        --danger: #a52222;
+        --dark: #172033;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { background: var(--page); }
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--ink);
+        background: radial-gradient(circle at top right, rgba(167, 42, 39, 0.1), transparent 28rem), var(--page);
+        line-height: 1.55;
+      }
+      button, select { font: inherit; }
+      button { cursor: pointer; }
+      button:disabled { cursor: not-allowed; opacity: 0.45; }
+      a { color: #84201e; text-underline-offset: 0.18em; }
+
+      .shell {
+        width: min(calc(100% - 24px), 780px);
+        margin: 0 auto;
+        padding: calc(24px + env(safe-area-inset-top)) 0 calc(48px + env(safe-area-inset-bottom));
+      }
+      .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .back { font-size: 0.88rem; font-weight: 750; }
+      .badge {
+        padding: 5px 10px;
+        border: 1px solid #e5b9b5;
+        border-radius: 999px;
+        color: #84201e;
+        background: var(--accent-soft);
+        font-size: 0.72rem;
+        font-weight: 850;
+        letter-spacing: 0.05em;
+      }
+      h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2rem, 8vw, 3.4rem);
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+      }
+      .lead { max-width: 66ch; margin: 14px 0 22px; color: var(--muted); }
+      .card {
+        margin-bottom: 16px;
+        padding: clamp(17px, 4vw, 25px);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 16px 42px rgba(31, 42, 68, 0.07);
+      }
+      .card h2 { margin: 0 0 12px; font-size: 1.2rem; }
+      .steps { margin: 0; padding-left: 1.35rem; }
+      .steps li + li { margin-top: 8px; }
+      .warning {
+        padding: 12px 14px;
+        border: 1px solid #e7ce8a;
+        border-radius: 12px;
+        color: #6e520d;
+        background: #fff9e5;
+        font-size: 0.88rem;
+      }
+      .settings {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      label { display: grid; gap: 6px; color: var(--muted); font-size: 0.8rem; font-weight: 750; }
+      select {
+        width: 100%;
+        min-height: 44px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        color: var(--ink);
+        background: #fff;
+      }
+      .player-box {
+        padding: 15px;
+        border-radius: 15px;
+        color: #fff;
+        background: var(--dark);
+      }
+      .track-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .track-row strong {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .tone-label { color: #c9d2e2; font-size: 0.78rem; white-space: nowrap; }
+      audio { display: block; width: 100%; min-height: 54px; }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .primary, .secondary, .text-button {
+        min-height: 46px;
+        border-radius: 11px;
+        font-weight: 800;
+      }
+      .primary { border: 1px solid var(--accent); color: #fff; background: var(--accent); }
+      .secondary { border: 1px solid var(--line); color: var(--ink); background: #fff; }
+      .text-button { border: 0; color: #84201e; background: transparent; }
+      .full { grid-column: 1 / -1; }
+
+      .status {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .metric {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fafbfc;
+      }
+      .metric span { display: block; color: var(--muted); font-size: 0.72rem; font-weight: 750; }
+      .metric strong { display: block; margin-top: 3px; font-size: 1.08rem; font-variant-numeric: tabular-nums; }
+      .result {
+        margin-top: 12px;
+        padding: 13px 14px;
+        border-radius: 12px;
+        font-weight: 800;
+      }
+      .result.idle { color: var(--muted); background: #f1f3f5; }
+      .result.running { color: #174b86; background: #eaf3ff; }
+      .result.pass { color: var(--success); background: #eaf7f0; }
+      .result.problem { color: var(--danger); background: #fff0f0; }
+
+      .log-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .log-head h2 { margin: 0; }
+      pre {
+        max-height: 360px;
+        margin: 0;
+        padding: 14px;
+        overflow: auto;
+        border-radius: 12px;
+        color: #dce6f5;
+        background: #111827;
+        font: 0.76rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .footnote { color: var(--muted); font-size: 0.78rem; }
+
+      @media (max-width: 520px) {
+        .settings, .status { grid-template-columns: 1fr; }
+        .shell { width: min(calc(100% - 18px), 780px); }
+        .card { border-radius: 17px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="topline">
+        <a class="back" href="./">← 返回正式播放器</a>
+        <span class="badge">隐藏测试页</span>
+      </div>
+
+      <h1>iPhone 锁屏自动切换音频测试</h1>
+      <p class="lead">
+        这个页面只验证一个问题：Safari 锁屏以后，一段音频自然结束时，网页能否把<strong>同一个原生 audio</strong>
+        切换到下一段并继续发声。测试不会修改正式播放器的数据或设置。
+      </p>
+
+      <section class="card">
+        <h2>测试方法</h2>
+        <ol class="steps">
+          <li>第一次建议选择 <strong>1.0×、播放 8 段</strong>。</li>
+          <li>点击“开始 A/B 锁屏测试”，听到 A 的低音提示后立即锁屏。</li>
+          <li>不要回到 Safari。预期依次听到：A 低音 → B 高音 → A → B，约 2 分 20 秒后自动停止。</li>
+          <li>第二次测试时，在锁屏界面暂停 5 秒，再直接点继续，观察是否需要解锁。</li>
+          <li>解锁返回本页，查看结果和事件日志；可复制报告发给我分析。</li>
+        </ol>
+        <p class="warning">
+          只有听到 A、B 多次交替才算通过。锁屏标题变成 Track B，但没有声音，仍然算失败。
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="settings">
+          <label>
+            播放速度
+            <select id="speedSelect">
+              <option value="1" selected>1.0×（先测这个）</option>
+              <option value="0.8">0.8×（再测实际学习速度）</option>
+            </select>
+          </label>
+          <label>
+            自动停止
+            <select id="segmentTarget">
+              <option value="4">播放 4 段（约 1 分钟）</option>
+              <option value="8" selected>播放 8 段（约 2 分 20 秒）</option>
+              <option value="12">播放 12 段（约 3 分 30 秒）</option>
+              <option value="0">持续播放，手动停止</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="player-box">
+          <div class="track-row">
+            <strong id="trackTitle">尚未开始</strong>
+            <span id="toneLabel" class="tone-label">A=低音 · B=高音</span>
+          </div>
+          <audio id="testAudio" controls preload="metadata"></audio>
+        </div>
+
+        <div class="actions">
+          <button id="startButton" class="primary full" type="button">开始 A/B 锁屏测试</button>
+          <button id="previousButton" class="secondary" type="button" disabled>手动切上一段</button>
+          <button id="nextButton" class="secondary" type="button" disabled>手动切下一段</button>
+          <button id="stopButton" class="secondary" type="button" disabled>停止测试</button>
+          <button id="copyButton" class="secondary" type="button">复制测试报告</button>
+          <button id="clearButton" class="text-button full" type="button">清空历史日志</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>当前结果</h2>
+        <div class="status">
+          <div class="metric"><span>已开始的音频段</span><strong id="segmentsStarted">0</strong></div>
+          <div class="metric"><span>成功自动切换</span><strong id="successfulSwitches">0</strong></div>
+          <div class="metric"><span>自动切换请求</span><strong id="switchAttempts">0</strong></div>
+          <div class="metric"><span>播放错误</span><strong id="errorCount">0</strong></div>
+        </div>
+        <div id="resultBox" class="result idle" role="status" aria-live="polite">尚未开始测试。</div>
+      </section>
+
+      <section class="card">
+        <div class="log-head">
+          <h2>持久事件日志</h2>
+          <span class="footnote">锁屏期间也写入 localStorage</span>
+        </div>
+        <pre id="eventLog">暂无日志。</pre>
+      </section>
+
+      <p class="footnote">
+        两段短音频由页面在浏览器内生成，A 是低音，B 是高音，用于先隔离验证“ended → 更换 src → play()”能否在锁屏后台继续执行。若本测试通过，再做真实 VOA 媒体的第二阶段验证。
+      </p>
+    </main>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const LOG_KEY = "voa-level2.background-playlist-test.log.v1";
+        const MAX_LOGS = 240;
+        function createToneWavUrl(frequency) {
+          const sampleRate = 16000;
+          const durationSeconds = 17;
+          const sampleCount = sampleRate * durationSeconds;
+          const bytesPerSample = 2;
+          const buffer = new ArrayBuffer(44 + sampleCount * bytesPerSample);
+          const view = new DataView(buffer);
+          const writeText = (offset, value) => {
+            for (let index = 0; index < value.length; index += 1) {
+              view.setUint8(offset + index, value.charCodeAt(index));
+            }
+          };
+          writeText(0, "RIFF");
+          view.setUint32(4, 36 + sampleCount * bytesPerSample, true);
+          writeText(8, "WAVE");
+          writeText(12, "fmt ");
+          view.setUint32(16, 16, true);
+          view.setUint16(20, 1, true);
+          view.setUint16(22, 1, true);
+          view.setUint32(24, sampleRate, true);
+          view.setUint32(28, sampleRate * bytesPerSample, true);
+          view.setUint16(32, bytesPerSample, true);
+          view.setUint16(34, 16, true);
+          writeText(36, "data");
+          view.setUint32(40, sampleCount * bytesPerSample, true);
+
+          for (let index = 0; index < sampleCount; index += 1) {
+            const time = index / sampleRate;
+            const cyclePosition = time % 1.5;
+            const active = cyclePosition < 0.48;
+            const local = cyclePosition / 0.48;
+            const envelope = active ? Math.sin(Math.PI * Math.min(1, local)) : 0;
+            const sample = active
+              ? Math.sin(2 * Math.PI * frequency * time) * envelope * 0.24
+              : 0;
+            view.setInt16(44 + index * 2, Math.round(sample * 32767), true);
+          }
+          return URL.createObjectURL(new Blob([buffer], { type: "audio/wav" }));
+        }
+
+        const tracks = [
+          {
+            id: "A",
+            title: "Background Test · Track A",
+            description: "低音 440 Hz",
+            src: createToneWavUrl(440),
+          },
+          {
+            id: "B",
+            title: "Background Test · Track B",
+            description: "高音 660 Hz",
+            src: createToneWavUrl(660),
+          },
+        ];
+
+        const audio = document.querySelector("#testAudio");
+        const speedSelect = document.querySelector("#speedSelect");
+        const segmentTarget = document.querySelector("#segmentTarget");
+        const startButton = document.querySelector("#startButton");
+        const stopButton = document.querySelector("#stopButton");
+        const previousButton = document.querySelector("#previousButton");
+        const nextButton = document.querySelector("#nextButton");
+        const copyButton = document.querySelector("#copyButton");
+        const clearButton = document.querySelector("#clearButton");
+        const trackTitle = document.querySelector("#trackTitle");
+        const toneLabel = document.querySelector("#toneLabel");
+        const eventLog = document.querySelector("#eventLog");
+        const resultBox = document.querySelector("#resultBox");
+        const segmentsStarted = document.querySelector("#segmentsStarted");
+        const successfulSwitches = document.querySelector("#successfulSwitches");
+        const switchAttempts = document.querySelector("#switchAttempts");
+        const errorCount = document.querySelector("#errorCount");
+
+        let logs = readLogs();
+        let running = false;
+        let currentIndex = 0;
+        let generation = 0;
+        let runStartedAt = null;
+        let startedCount = 0;
+        let switchAttemptCount = 0;
+        let successfulSwitchCount = 0;
+        let errors = 0;
+        let pendingAutomaticSwitch = false;
+        let targetSegments = 8;
+        let switchWatchdog = null;
+
+        function readLogs() {
+          try {
+            const value = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+            return Array.isArray(value) ? value.slice(-MAX_LOGS) : [];
+          } catch {
+            return [];
+          }
+        }
+
+        function writeLogs() {
+          try {
+            localStorage.setItem(LOG_KEY, JSON.stringify(logs.slice(-MAX_LOGS)));
+          } catch {
+            // The visible page still works if storage is blocked.
+          }
+        }
+
+        function timestamp() {
+          const now = new Date();
+          return `${now.toLocaleTimeString("zh-CN", { hour12: false })}.${String(now.getMilliseconds()).padStart(3, "0")}`;
+        }
+
+        function addLog(event, details = {}) {
+          const entry = {
+            time: timestamp(),
+            event,
+            track: tracks[currentIndex]?.id || null,
+            currentTime: Number.isFinite(audio.currentTime) ? Number(audio.currentTime.toFixed(2)) : null,
+            readyState: audio.readyState,
+            networkState: audio.networkState,
+            paused: audio.paused,
+            hidden: document.hidden,
+            ...details,
+          };
+          logs.push(entry);
+          logs = logs.slice(-MAX_LOGS);
+          writeLogs();
+          renderLog();
+        }
+
+        function renderLog() {
+          if (!logs.length) {
+            eventLog.textContent = "暂无日志。";
+            return;
+          }
+          eventLog.textContent = logs
+            .slice(-100)
+            .map((item) => {
+              const core = `${item.time}  ${item.event.padEnd(23)} track=${item.track ?? "-"} time=${item.currentTime ?? "-"} paused=${item.paused} hidden=${item.hidden}`;
+              const extra = Object.entries(item)
+                .filter(([key]) => !["time", "event", "track", "currentTime", "paused", "hidden", "readyState", "networkState"].includes(key))
+                .map(([key, value]) => `${key}=${String(value)}`)
+                .join(" ");
+              return extra ? `${core}  ${extra}` : core;
+            })
+            .join("\n");
+          eventLog.scrollTop = eventLog.scrollHeight;
+        }
+
+        function updateMetrics() {
+          segmentsStarted.textContent = String(startedCount);
+          switchAttempts.textContent = String(switchAttemptCount);
+          successfulSwitches.textContent = String(successfulSwitchCount);
+          errorCount.textContent = String(errors);
+        }
+
+        function setResult(kind, message) {
+          resultBox.className = `result ${kind}`;
+          resultBox.textContent = message;
+        }
+
+        function updateTrackUi() {
+          const track = tracks[currentIndex];
+          trackTitle.textContent = track.title;
+          toneLabel.textContent = `${track.id} · ${track.description}`;
+          document.title = `${track.title} · iPhone 锁屏测试`;
+        }
+
+        function updateMediaSession() {
+          if (!("mediaSession" in navigator) || typeof MediaMetadata === "undefined") return;
+          const track = tracks[currentIndex];
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: track.title,
+            artist: "VOA Level 2 Player Test",
+            album: "iOS background source-switch test",
+          });
+        }
+
+        function applySpeed() {
+          const speed = Number(speedSelect.value) || 1;
+          audio.playbackRate = speed;
+          audio.defaultPlaybackRate = speed;
+          if ("preservesPitch" in audio) audio.preservesPitch = true;
+          if ("webkitPreservesPitch" in audio) audio.webkitPreservesPitch = true;
+        }
+
+        function playCurrent(reason) {
+          applySpeed();
+          addLog("play:called", { reason, generation });
+          let promise;
+          try {
+            promise = audio.play();
+          } catch (error) {
+            errors += 1;
+            updateMetrics();
+            addLog("play:threw", { reason, error: error?.message || String(error) });
+            setResult("problem", "audio.play() 直接抛出错误。请复制报告。 ");
+            return;
+          }
+          if (promise && typeof promise.then === "function") {
+            promise.then(
+              () => addLog("play:promise-resolved", { reason, generation }),
+              (error) => {
+                errors += 1;
+                updateMetrics();
+                addLog("play:promise-rejected", { reason, error: error?.message || String(error) });
+                setResult("problem", "下一段音频的 play() 被拒绝。请复制报告。 ");
+              },
+            );
+          }
+        }
+
+        function armSwitchWatchdog(expectedGeneration) {
+          clearTimeout(switchWatchdog);
+          switchWatchdog = setTimeout(() => {
+            if (running && pendingAutomaticSwitch && generation === expectedGeneration) {
+              errors += 1;
+              updateMetrics();
+              addLog("watchdog:no-playing", { afterSeconds: 12, generation: expectedGeneration });
+              setResult("problem", "已请求切换，但 12 秒内没有收到 playing 事件。可能是锁屏后台切换失败。 ");
+            }
+          }, 12000);
+        }
+
+        function loadTrack(index, { autoplay = false, reason = "manual", automatic = false } = {}) {
+          generation += 1;
+          const thisGeneration = generation;
+          currentIndex = (index + tracks.length) % tracks.length;
+          pendingAutomaticSwitch = automatic;
+          updateTrackUi();
+          updateMediaSession();
+
+          audio.pause();
+          audio.removeAttribute("src");
+          audio.src = tracks[currentIndex].src;
+          audio.load();
+          applySpeed();
+          addLog("source:set", { reason, automatic, generation: thisGeneration, src: tracks[currentIndex].src });
+
+          if (!autoplay) return;
+          const startPlayback = () => {
+            if (!running || thisGeneration !== generation) {
+              addLog("autoplay:ignored-stale", { reason, generation: thisGeneration });
+              return;
+            }
+            playCurrent(reason);
+          };
+
+          if (audio.readyState >= HTMLMediaElement.HAVE_METADATA) {
+            startPlayback();
+          } else {
+            audio.addEventListener("loadedmetadata", startPlayback, { once: true });
+          }
+          if (automatic) armSwitchWatchdog(thisGeneration);
+        }
+
+        function startTest() {
+          logs = [];
+          writeLogs();
+          running = true;
+          currentIndex = 0;
+          startedCount = 0;
+          switchAttemptCount = 0;
+          successfulSwitchCount = 0;
+          errors = 0;
+          pendingAutomaticSwitch = false;
+          targetSegments = Number(segmentTarget.value) || 0;
+          runStartedAt = new Date().toISOString();
+          startButton.disabled = true;
+          stopButton.disabled = false;
+          previousButton.disabled = false;
+          nextButton.disabled = false;
+          speedSelect.disabled = true;
+          segmentTarget.disabled = true;
+          updateMetrics();
+          setResult("running", "测试正在运行。听到 Track A 后请立即锁屏。 ");
+          addLog("test:start", {
+            speed: speedSelect.value,
+            targetSegments,
+            userAgent: navigator.userAgent,
+          });
+          loadTrack(0, { autoplay: true, reason: "user-start", automatic: false });
+        }
+
+        function stopTest(reason = "user-stop") {
+          running = false;
+          pendingAutomaticSwitch = false;
+          clearTimeout(switchWatchdog);
+          audio.pause();
+          startButton.disabled = false;
+          stopButton.disabled = true;
+          previousButton.disabled = true;
+          nextButton.disabled = true;
+          speedSelect.disabled = false;
+          segmentTarget.disabled = false;
+          addLog("test:stop", { reason });
+
+          const expectedSwitches = targetSegments > 0 ? Math.max(0, targetSegments - 1) : 1;
+          if (reason === "target-complete" && successfulSwitchCount >= expectedSwitches && errors === 0) {
+            setResult("pass", `快速测试通过：成功自动切换 ${successfulSwitchCount} 次，未记录播放错误。仍请根据实际是否听到声音判断。`);
+          } else if (errors > 0) {
+            setResult("problem", `测试记录到 ${errors} 个问题。请复制报告。`);
+          } else {
+            setResult("idle", `测试已停止。共成功自动切换 ${successfulSwitchCount} 次。`);
+          }
+        }
+
+        function switchManually(direction) {
+          if (!running) return;
+          loadTrack(currentIndex + direction, { autoplay: true, reason: "manual-button", automatic: false });
+        }
+
+        function buildReport() {
+          return [
+            "VOA Level 2 — iPhone background playlist test",
+            `Generated: ${new Date().toISOString()}`,
+            `Run started: ${runStartedAt || "not started"}`,
+            `User agent: ${navigator.userAgent}`,
+            `Speed: ${speedSelect.value}`,
+            `Target segments: ${segmentTarget.value}`,
+            `Segments started: ${startedCount}`,
+            `Switch attempts: ${switchAttemptCount}`,
+            `Successful automatic switches: ${successfulSwitchCount}`,
+            `Errors: ${errors}`,
+            `Current track: ${tracks[currentIndex]?.id || "-"}`,
+            `Page hidden now: ${document.hidden}`,
+            "",
+            "Events:",
+            ...logs.map((entry) => JSON.stringify(entry)),
+          ].join("\n");
+        }
+
+        async function copyReport() {
+          const report = buildReport();
+          try {
+            await navigator.clipboard.writeText(report);
+            const oldText = copyButton.textContent;
+            copyButton.textContent = "已复制";
+            setTimeout(() => { copyButton.textContent = oldText; }, 1600);
+          } catch {
+            window.prompt("复制下面的测试报告：", report);
+          }
+        }
+
+        startButton.addEventListener("click", startTest);
+        stopButton.addEventListener("click", () => stopTest("user-stop"));
+        previousButton.addEventListener("click", () => switchManually(-1));
+        nextButton.addEventListener("click", () => switchManually(1));
+        copyButton.addEventListener("click", copyReport);
+        clearButton.addEventListener("click", () => {
+          logs = [];
+          writeLogs();
+          renderLog();
+          setResult("idle", "历史日志已清空。 ");
+        });
+        speedSelect.addEventListener("change", applySpeed);
+
+        audio.addEventListener("loadstart", () => addLog("media:loadstart"));
+        audio.addEventListener("loadedmetadata", () => addLog("media:loadedmetadata", { duration: Number(audio.duration.toFixed(2)) }));
+        audio.addEventListener("canplay", () => addLog("media:canplay"));
+        audio.addEventListener("play", () => addLog("media:play"));
+        audio.addEventListener("playing", () => {
+          clearTimeout(switchWatchdog);
+          startedCount += 1;
+          if (pendingAutomaticSwitch) successfulSwitchCount += 1;
+          pendingAutomaticSwitch = false;
+          updateMetrics();
+          addLog("media:playing", { startedCount, successfulSwitchCount });
+          setResult("running", `正在播放 Track ${tracks[currentIndex].id}；已成功自动切换 ${successfulSwitchCount} 次。`);
+          if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "playing";
+        });
+        audio.addEventListener("pause", () => {
+          addLog("media:pause");
+          if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "paused";
+        });
+        audio.addEventListener("waiting", () => addLog("media:waiting"));
+        audio.addEventListener("stalled", () => addLog("media:stalled"));
+        audio.addEventListener("suspend", () => addLog("media:suspend"));
+        audio.addEventListener("abort", () => addLog("media:abort"));
+        audio.addEventListener("error", () => {
+          errors += 1;
+          updateMetrics();
+          addLog("media:error", {
+            code: audio.error?.code || 0,
+            message: audio.error?.message || "unknown",
+          });
+          setResult("problem", "音频元素报告错误。请复制测试报告。 ");
+        });
+        audio.addEventListener("ended", () => {
+          addLog("media:ended", { completedTrack: tracks[currentIndex].id, startedCount });
+          if (!running) return;
+          if (targetSegments > 0 && startedCount >= targetSegments) {
+            stopTest("target-complete");
+            return;
+          }
+          switchAttemptCount += 1;
+          updateMetrics();
+          loadTrack(currentIndex + 1, {
+            autoplay: true,
+            reason: "ended-auto-next",
+            automatic: true,
+          });
+        });
+
+        document.addEventListener("visibilitychange", () => addLog("document:visibilitychange", { visibilityState: document.visibilityState }));
+        window.addEventListener("pagehide", (event) => addLog("window:pagehide", { persisted: event.persisted }));
+        window.addEventListener("pageshow", (event) => addLog("window:pageshow", { persisted: event.persisted }));
+        window.addEventListener("online", () => addLog("window:online"));
+        window.addEventListener("offline", () => addLog("window:offline"));
+
+        if ("mediaSession" in navigator) {
+          const handlers = {
+            play: () => {
+              addLog("media-session:play");
+              playCurrent("media-session-play");
+            },
+            pause: () => {
+              addLog("media-session:pause");
+              audio.pause();
+            },
+            nexttrack: () => {
+              addLog("media-session:nexttrack");
+              switchManually(1);
+            },
+            previoustrack: () => {
+              addLog("media-session:previoustrack");
+              switchManually(-1);
+            },
+          };
+          for (const [action, handler] of Object.entries(handlers)) {
+            try {
+              navigator.mediaSession.setActionHandler(action, handler);
+            } catch {
+              // Different Safari versions expose different action subsets.
+            }
+          }
+        }
+
+        applySpeed();
+        updateMetrics();
+        renderLog();
+        if (logs.length) setResult("idle", "已恢复上一次测试的持久日志，可直接复制报告或清空后重测。 ");
+      })();
+    </script>
+  </body>
+</html>
