@@ -2,11 +2,15 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  formatLessonQueue,
   formatMediaTime,
   formatRemaining,
   formatSpeed,
   getAdjacentLessonId,
+  getQueueLessonId,
   normalizeCustomTimerMinutes,
+  normalizeLessonQueue,
+  normalizeRepeatMode,
   normalizeSpeed,
   parseLessonId,
 } from "../js/core.js";
@@ -52,4 +56,24 @@ test("validates custom sleep timer minutes", () => {
   assert.equal(normalizeCustomTimerMinutes(0), 1);
   assert.equal(normalizeCustomTimerMinutes(999), 240);
   assert.equal(normalizeCustomTimerMinutes("not-a-number"), null);
+});
+
+test("normalizes legacy and explicit repeat modes", () => {
+  assert.equal(normalizeRepeatMode("queue"), "queue");
+  assert.equal(normalizeRepeatMode("bad", true), "one");
+  assert.equal(normalizeRepeatMode(undefined, false), "off");
+});
+
+test("normalizes, orders and wraps playlist lessons", () => {
+  assert.deepEqual(normalizeLessonQueue([4, 2, 2, 99, 1], lessons), [1, 2, 4]);
+  assert.equal(getQueueLessonId([1, 2, 4], 2, 1), 4);
+  assert.equal(getQueueLessonId([1, 2, 4], 4, 1), 1);
+  assert.equal(getQueueLessonId([1, 2, 4], 1, -1), 4);
+  assert.equal(getQueueLessonId([1, 2, 4], 99, 1), 1);
+});
+
+test("formats consecutive and custom playlist summaries", () => {
+  assert.equal(formatLessonQueue([]), "未设置播放列表");
+  assert.equal(formatLessonQueue([1, 2, 3, 4, 5]), "Lesson 1–5 · 5 课");
+  assert.equal(formatLessonQueue([2, 4, 5]), "Lesson 2、4、5 · 3 课");
 });

@@ -124,12 +124,51 @@
             </div>
           </section>
 
-          <section class="control-block" aria-labelledby="playbackHeading">
-            <h3 id="playbackHeading">重复与跳转</h3>
-            <div class="action-row">
+          <section class="control-block playback-control-block" aria-labelledby="playbackHeading">
+            <div class="control-title-row playlist-title-row">
+              <h3 id="playbackHeading">重复与播放列表</h3>
+              <output id="playlistSummary" class="playlist-summary">Lesson 1–5 · 5 课</output>
+            </div>
+
+            <div id="repeatModeControls" class="repeat-mode-row" role="group" aria-label="播放结束后的行为">
+              <button class="chip" type="button" data-repeat-mode="off" aria-pressed="true">不循环</button>
+              <button class="chip" type="button" data-repeat-mode="one" aria-pressed="false">单课循环</button>
+              <button class="chip" type="button" data-repeat-mode="queue" aria-pressed="false">列表循环</button>
+            </div>
+            <p id="queueModeNote" class="subtle playlist-mode-note">列表循环按课程编号播放，仅用于音频。</p>
+
+            <div class="action-row playlist-action-row">
               <button id="seekBackward" class="secondary-button" type="button">↶ 10 秒</button>
-              <button id="loopToggle" class="toggle-button" type="button" aria-pressed="false">循环本课：关</button>
+              <button id="editPlaylist" class="secondary-button playlist-edit-button" type="button">选择课程</button>
               <button id="seekForward" class="secondary-button" type="button">10 秒 ↷</button>
+            </div>
+
+            <div id="playlistEditor" class="playlist-editor" hidden>
+              <div class="playlist-editor-heading">
+                <div>
+                  <h4>选择循环课程</h4>
+                  <p class="subtle">可快速选择连续范围，也可逐课增删；播放顺序按课程编号排列。</p>
+                </div>
+                <button id="closePlaylistEditor" class="text-button" type="button">关闭</button>
+              </div>
+
+              <div class="playlist-range-row">
+                <label for="playlistRangeStart">从</label>
+                <select id="playlistRangeStart" aria-label="范围开始课程"></select>
+                <label for="playlistRangeEnd">到</label>
+                <select id="playlistRangeEnd" aria-label="范围结束课程"></select>
+                <button id="applyPlaylistRange" class="secondary-button" type="button">应用范围</button>
+              </div>
+
+              <div id="playlistLessonGrid" class="playlist-lesson-grid" aria-label="手动选择课程"></div>
+              <p id="playlistSelectionStatus" class="playlist-selection-status" aria-live="polite"></p>
+
+              <div class="playlist-editor-actions">
+                <button id="clearPlaylist" class="text-button" type="button">清空</button>
+                <button id="cancelPlaylist" class="secondary-button" type="button">取消</button>
+                <button id="savePlaylist" class="secondary-button" type="button">保存</button>
+                <button id="saveAndPlayPlaylist" class="toggle-button" type="button">保存并播放</button>
+              </div>
             </div>
           </section>
         </div>

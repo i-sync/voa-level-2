@@ -3,16 +3,19 @@ import {
   SPEED_MIN,
   SPEED_STEP,
   clamp,
+  formatLessonQueue,
   formatRemaining,
   formatSpeed,
   getAdjacentLessonId,
+  getQueueLessonId,
   normalizeCustomTimerMinutes,
+  normalizeLessonQueue,
+  normalizeRepeatMode,
   normalizeSpeed,
   parseLessonId,
 } from "./core.js";
 
 const RESUME_END_GUARD_SECONDS = 8;
-const AUDIO_DOCK_QUERY = "(max-width: 620px)";
 
 const KEYS = {
   preferences: "voa-level2.preferences.v1",
@@ -23,7 +26,8 @@ const KEYS = {
 
 const DEFAULTS = {
   speed: 0.8,
-  loop: false,
+  repeatMode: "off",
+  queueLessonIds: [1, 2, 3, 4, 5],
   mode: "audio",
   fontScale: 1,
   currentLesson: 1,
@@ -57,7 +61,21 @@ const dom = {
   speedUp: $("#speedUp"),
   seekBackward: $("#seekBackward"),
   seekForward: $("#seekForward"),
-  loopToggle: $("#loopToggle"),
+  repeatModeControls: $("#repeatModeControls"),
+  playlistSummary: $("#playlistSummary"),
+  queueModeNote: $("#queueModeNote"),
+  editPlaylist: $("#editPlaylist"),
+  playlistEditor: $("#playlistEditor"),
+  closePlaylistEditor: $("#closePlaylistEditor"),
+  playlistRangeStart: $("#playlistRangeStart"),
+  playlistRangeEnd: $("#playlistRangeEnd"),
+  applyPlaylistRange: $("#applyPlaylistRange"),
+  playlistLessonGrid: $("#playlistLessonGrid"),
+  playlistSelectionStatus: $("#playlistSelectionStatus"),
+  clearPlaylist: $("#clearPlaylist"),
+  cancelPlaylist: $("#cancelPlaylist"),
+  savePlaylist: $("#savePlaylist"),
+  saveAndPlayPlaylist: $("#saveAndPlayPlaylist"),
   timerPresets: $("#timerPresets"),
   timerStatus: $("#timerStatus"),
   customMinutes: $("#customMinutes"),
@@ -95,12 +113,13 @@ let timerInterval = null;
 let timerTimeout = null;
 let toastTimeout = null;
 const lastPositionWrite = { audio: 0, video: 0 };
-const audioDockMedia = window.matchMedia(AUDIO_DOCK_QUERY);
 let lastSessionPositionUpdate = 0;
 let audioDockActivated = false;
 let audioDockSlotAboveViewport = false;
 let audioDockSuspended = false;
 let audioDockObserver = null;
+let playlistDraft = new Set();
+let autoplayGeneration = 0;
 
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -168,9 +187,7 @@ function setAudioDocked(value) {
 
   if (docked) {
     const placeholderHeight = Math.ceil(dom.audioDock.getBoundingClientRect().height);
-    if (placeholderHeight > 0) {
-      dom.audioDockSlot.style.height = `${placeholderHeight}px`;
-    }
+    if (placeholderHeight > 0) dom.audioDockSlot.style.height = `${placeholderHeight}px`;
     dom.audioDock.classList.add("is-docked");
     dom.audioDock.setAttribute("aria-label", "浮动音频播放器");
     document.body.classList.add("has-audio-dock");
@@ -187,7 +204,6 @@ function setAudioDocked(value) {
 
 function updateAudioDock() {
   const shouldDock =
-    audioDockMedia.matches &&
     audioDockActivated &&
     !audioDockSuspended &&
     activeMode === "audio" &&
@@ -195,9 +211,17 @@ function updateAudioDock() {
   setAudioDocked(shouldDock);
 }
 
+function currentQueuePositionLabel() {
+  if (preferences.repeatMode !== "queue" || !currentLesson) return "";
+  const queue = preferences.queueLessonIds;
+  const index = queue.indexOf(currentLesson.id);
+  return index >= 0 ? `${index + 1}/${queue.length}` : "";
+}
+
 function updateAudioDockTitle() {
+  const queuePosition = currentQueuePositionLabel();
   const title = currentLesson
-    ? `Lesson ${currentLesson.id} · ${currentLesson.title}`
+    ? `Lesson ${currentLesson.id} · ${currentLesson.title}${queuePosition ? ` · ${queuePosition}` : ""}`
     : "VOA Level 2";
   dom.audioDockTitle.textContent = title;
   dom.audioDockTitle.title = title;
@@ -233,18 +257,8 @@ function setupAudioDock() {
     window.addEventListener("scroll", updateSlotState, { passive: true });
   }
 
-  const handleViewportChange = () => {
-    updateSlotState();
-    updateAudioDockMetrics();
-  };
-
-  if (typeof audioDockMedia.addEventListener === "function") {
-    audioDockMedia.addEventListener("change", handleViewportChange);
-  } else {
-    audioDockMedia.addListener(handleViewportChange);
-  }
-  window.addEventListener("resize", handleViewportChange);
-  window.visualViewport?.addEventListener("resize", handleViewportChange);
+  window.addEventListener("resize", updateSlotState);
+  window.visualViewport?.addEventListener("resize", updateSlotState);
   updateSlotState();
 }
 
@@ -268,6 +282,7 @@ function setMode(mode, { persist = true, pausePrevious = true } = {}) {
   }
   updateMediaMetadata();
   updatePlaybackState();
+  renderRepeatControls();
   updateAudioDock();
 }
 
@@ -291,13 +306,147 @@ function setSpeed(value, { persist = true } = {}) {
   if (persist) savePreferences();
 }
 
-function setLoop(value, { persist = true } = {}) {
-  preferences.loop = Boolean(value);
-  dom.audio.loop = preferences.loop;
-  dom.video.loop = preferences.loop;
-  dom.loopToggle.setAttribute("aria-pressed", String(preferences.loop));
-  dom.loopToggle.textContent = `循环本课：${preferences.loop ? "开" : "关"}`;
+function applyRepeatModeToMedia() {
+  const loopCurrentLesson = preferences.repeatMode === "one";
+  dom.audio.loop = loopCurrentLesson;
+  dom.video.loop = loopCurrentLesson;
+}
+
+function renderRepeatControls() {
+  for (const button of dom.repeatModeControls.querySelectorAll("[data-repeat-mode]")) {
+    const selected = button.dataset.repeatMode === preferences.repeatMode;
+    button.classList.toggle("is-active", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  }
+  dom.playlistSummary.textContent = formatLessonQueue(preferences.queueLessonIds);
+  dom.queueModeNote.textContent =
+    preferences.repeatMode === "queue"
+      ? activeMode === "audio"
+        ? "列表循环已开启：当前课程结束后自动播放列表中的下一课。"
+        : "列表循环仅自动切换音频；当前视频结束后会停止。"
+      : "列表循环按课程编号播放，仅用于音频。";
+  updateAudioDockTitle();
+}
+
+function setRepeatMode(value, { persist = true } = {}) {
+  preferences.repeatMode = normalizeRepeatMode(value);
+  applyRepeatModeToMedia();
+  renderRepeatControls();
+  updateMediaMetadata();
   if (persist) savePreferences();
+}
+
+function renderPlaylistRangeOptions() {
+  const start = document.createDocumentFragment();
+  const end = document.createDocumentFragment();
+  for (const lesson of lessons) {
+    for (const fragment of [start, end]) {
+      const option = document.createElement("option");
+      option.value = String(lesson.id);
+      option.textContent = `Lesson ${lesson.id}`;
+      fragment.append(option);
+    }
+  }
+  dom.playlistRangeStart.replaceChildren(start);
+  dom.playlistRangeEnd.replaceChildren(end);
+}
+
+function renderPlaylistEditor() {
+  const fragment = document.createDocumentFragment();
+  for (const lesson of lessons) {
+    const button = document.createElement("button");
+    const selected = playlistDraft.has(lesson.id);
+    button.type = "button";
+    button.className = "playlist-lesson-button";
+    button.dataset.lessonId = String(lesson.id);
+    button.textContent = String(lesson.id);
+    button.title = `Lesson ${lesson.id} · ${lesson.title}`;
+    button.setAttribute("aria-label", `Lesson ${lesson.id} · ${lesson.title}`);
+    button.setAttribute("aria-pressed", String(selected));
+    button.classList.toggle("is-selected", selected);
+    fragment.append(button);
+  }
+  dom.playlistLessonGrid.replaceChildren(fragment);
+  const ids = [...playlistDraft].sort((a, b) => a - b);
+  dom.playlistSelectionStatus.textContent = ids.length
+    ? `已选 ${ids.length} 课：${ids.join("、")}`
+    : "尚未选择课程。列表循环至少需要两课。";
+  const invalid = ids.length < 2;
+  dom.savePlaylist.disabled = invalid;
+  dom.saveAndPlayPlaylist.disabled = invalid;
+}
+
+function openPlaylistEditor() {
+  playlistDraft = new Set(preferences.queueLessonIds);
+  if (playlistDraft.size === 0 && currentLesson) playlistDraft.add(currentLesson.id);
+  const ids = [...playlistDraft].sort((a, b) => a - b);
+  dom.playlistRangeStart.value = String(ids[0] ?? lessons[0]?.id ?? 1);
+  dom.playlistRangeEnd.value = String(ids.at(-1) ?? lessons[Math.min(4, lessons.length - 1)]?.id ?? 1);
+  renderPlaylistEditor();
+  dom.playlistEditor.hidden = false;
+  dom.editPlaylist.setAttribute("aria-expanded", "true");
+}
+
+function closePlaylistEditor() {
+  dom.playlistEditor.hidden = true;
+  dom.editPlaylist.setAttribute("aria-expanded", "false");
+}
+
+function applyPlaylistRange() {
+  const start = Number(dom.playlistRangeStart.value);
+  const end = Number(dom.playlistRangeEnd.value);
+  const min = Math.min(start, end);
+  const max = Math.max(start, end);
+  playlistDraft = new Set(
+    lessons.filter((lesson) => lesson.id >= min && lesson.id <= max).map((lesson) => lesson.id),
+  );
+  renderPlaylistEditor();
+}
+
+function savePlaylistSelection({ play = false } = {}) {
+  const queue = normalizeLessonQueue([...playlistDraft], lessons);
+  if (queue.length < 2) {
+    showToast("列表循环至少需要选择两课。 ");
+    return;
+  }
+  preferences.queueLessonIds = queue;
+  savePreferences();
+  renderRepeatControls();
+  closePlaylistEditor();
+
+  if (play) {
+    activateQueueMode({ forcePlay: true });
+    return;
+  }
+  if (preferences.repeatMode === "queue" && !queue.includes(currentLesson?.id)) {
+    setRepeatMode("off");
+    showToast("当前课程不在新列表中，已暂时关闭列表循环。 ");
+  }
+}
+
+function activateQueueMode({ forcePlay = false } = {}) {
+  const queue = normalizeLessonQueue(preferences.queueLessonIds, lessons);
+  if (queue.length < 2) {
+    openPlaylistEditor();
+    showToast("请先选择至少两课。 ");
+    return;
+  }
+  preferences.queueLessonIds = queue;
+  const wasPlaying = activeMode === "audio" && !dom.audio.paused;
+  setMode("audio");
+  setRepeatMode("queue");
+  const targetId = queue.includes(currentLesson?.id) ? currentLesson.id : queue[0];
+  if (targetId !== currentLesson?.id) {
+    loadLesson(targetId, {
+      historyMode: "replace",
+      autoplay: forcePlay || wasPlaying,
+      resumeAudio: false,
+      preserveDock: audioDockActivated,
+      manual: false,
+    });
+    return;
+  }
+  if (forcePlay) dom.audio.play().catch(() => showToast("请手动点击播放。"));
 }
 
 function setFontScale(value, { persist = true } = {}) {
@@ -395,29 +544,52 @@ function updateUrl(id, mode) {
   history[mode === "push" ? "pushState" : "replaceState"]({ lessonId: id }, "", url);
 }
 
-function setSource(item, mode, url, lessonId) {
+function setSource(item, mode, url, lessonId, { resume = true } = {}) {
   item.pause();
   item.dataset.mode = mode;
   item.dataset.lessonId = String(lessonId);
+  item.dataset.resumePosition = String(resume);
   item.removeAttribute("src");
   if (url) item.src = url;
   item.load();
 }
 
-function loadLesson(id, { historyMode = "push", autoplay = false } = {}) {
+function loadLesson(
+  id,
+  {
+    historyMode = "push",
+    autoplay = false,
+    resumeAudio = true,
+    preserveDock = false,
+    manual = true,
+    saveCurrent = true,
+  } = {},
+) {
   const lesson = lessons.find((candidate) => candidate.id === id);
   if (!lesson) return;
+  const loadGeneration = ++autoplayGeneration;
 
-  resetAudioDock();
-  savePosition(dom.audio, "audio", true);
-  savePosition(dom.video, "video", true);
+  if (manual && preferences.repeatMode === "queue" && !preferences.queueLessonIds.includes(id)) {
+    setRepeatMode("off");
+    showToast("所选课程不在播放列表中，已暂时关闭列表循环。 ");
+  }
+  if (!preserveDock) resetAudioDock();
+  if (saveCurrent) {
+    savePosition(dom.audio, "audio", true);
+    savePosition(dom.video, "video", true);
+  }
   pauseAll();
   dom.mediaError.hidden = true;
 
   currentLesson = lesson;
-  updateAudioDockTitle();
   preferences.currentLesson = lesson.id;
   savePreferences();
+
+  if (!resumeAudio) {
+    positions[String(lesson.id)] ??= {};
+    positions[String(lesson.id)].audio = 0;
+    writeJson(KEYS.positions, positions);
+  }
 
   dom.lessonEyebrow.textContent = `Lesson ${lesson.id} of ${lessons.length}`;
   dom.lessonTitle.textContent = lesson.title;
@@ -429,15 +601,21 @@ function loadLesson(id, { historyMode = "push", autoplay = false } = {}) {
   updateNavigation();
   updateUrl(lesson.id, historyMode);
 
-  setSource(dom.audio, "audio", lesson.audioUrl, lesson.id);
-  setSource(dom.video, "video", lesson.videoUrl, lesson.id);
+  setSource(dom.audio, "audio", lesson.audioUrl, lesson.id, { resume: resumeAudio });
+  setSource(dom.video, "video", lesson.videoUrl, lesson.id, { resume: true });
   setSpeed(preferences.speed, { persist: false });
-  setLoop(preferences.loop, { persist: false });
+  applyRepeatModeToMedia();
+  renderRepeatControls();
   updateMediaMetadata();
+  updateAudioDockTitle();
 
   if (autoplay) {
     const item = currentMedia();
-    const play = () => item.play().catch(() => showToast("请手动点击播放。"));
+    const play = () => {
+      if (loadGeneration !== autoplayGeneration) return;
+      if (checkTimer()) return;
+      item.play().catch(() => showToast("自动播放未能继续，请点击播放。"));
+    };
     if (item.readyState >= 1) play();
     else item.addEventListener("loadedmetadata", play, { once: true });
   }
@@ -447,6 +625,27 @@ function navigate(direction, autoplay = false) {
   if (!currentLesson) return;
   const id = getAdjacentLessonId(lessons, currentLesson.id, direction);
   if (id !== null) loadLesson(id, { autoplay });
+}
+
+function navigatePlayback(direction) {
+  if (
+    preferences.repeatMode === "queue" &&
+    activeMode === "audio" &&
+    preferences.queueLessonIds.length >= 2
+  ) {
+    const id = getQueueLessonId(preferences.queueLessonIds, currentLesson?.id, direction);
+    if (id !== null) {
+      loadLesson(id, {
+        historyMode: "replace",
+        autoplay: true,
+        resumeAudio: false,
+        preserveDock: audioDockActivated,
+        manual: false,
+      });
+    }
+    return;
+  }
+  navigate(direction, true);
 }
 
 function seek(seconds) {
@@ -491,14 +690,19 @@ function scheduleTimer() {
 }
 
 function checkTimer() {
-  if (!timer.deadline) return renderTimer();
+  if (!timer.deadline) {
+    renderTimer();
+    return false;
+  }
   if (Date.now() >= timer.deadline) {
+    autoplayGeneration += 1;
     pauseAll();
     clearTimer(false);
     showToast("睡眠定时结束，播放已暂停。 ");
-    return;
+    return true;
   }
   renderTimer();
+  return false;
 }
 
 function renderTimer() {
@@ -571,8 +775,8 @@ function registerMediaSession() {
         item.currentTime = clamp(details.seekTime, 0, item.duration);
       }
     },
-    previoustrack: () => navigate(-1, true),
-    nexttrack: () => navigate(1, true),
+    previoustrack: () => navigatePlayback(-1),
+    nexttrack: () => navigatePlayback(1),
   };
   for (const [action, handler] of Object.entries(handlers)) {
     try {
@@ -583,21 +787,42 @@ function registerMediaSession() {
   }
 }
 
+function markLessonCompleted(item, mode) {
+  const lessonId = Number(item.dataset.lessonId);
+  if (!currentLesson || lessonId !== currentLesson.id) return false;
+  completed.add(lessonId);
+  writeJson(KEYS.completed, [...completed].sort((a, b) => a - b));
+  dom.completed.checked = true;
+  positions[String(lessonId)] ??= {};
+  positions[String(lessonId)][mode] = 0;
+  writeJson(KEYS.positions, positions);
+  renderLessonOptions();
+  return true;
+}
+
 function bindMedia(item, mode) {
   item.dataset.mode = mode;
   item.addEventListener("loadedmetadata", () => {
     item.playbackRate = preferences.speed;
     item.defaultPlaybackRate = preferences.speed;
-    item.loop = preferences.loop;
+    item.loop = preferences.repeatMode === "one";
     if ("preservesPitch" in item) item.preservesPitch = true;
-    restorePosition(item, mode);
+    if (item.dataset.resumePosition === "false") {
+      try {
+        item.currentTime = 0;
+      } catch {
+        // Some remote media becomes seekable after metadata settles.
+      }
+    } else {
+      restorePosition(item, mode);
+    }
+    delete item.dataset.resumePosition;
   });
   item.addEventListener("play", () => {
     setMode(mode, { pausePrevious: false });
     if (mode === "audio") {
       audioDockActivated = true;
-      audioDockSlotAboveViewport =
-        dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
+      audioDockSlotAboveViewport = dom.audioDockSlot.getBoundingClientRect().bottom <= 0;
       updateAudioDock();
     }
     media[mode === "audio" ? "video" : "audio"].pause();
@@ -616,16 +841,26 @@ function bindMedia(item, mode) {
   });
   item.addEventListener("ratechange", () => updateSessionPosition(item, true));
   item.addEventListener("ended", () => {
-    if (!preferences.loop && currentLesson && Number(item.dataset.lessonId) === currentLesson.id) {
-      completed.add(currentLesson.id);
-      writeJson(KEYS.completed, [...completed].sort((a, b) => a - b));
-      dom.completed.checked = true;
-      positions[String(currentLesson.id)] ??= {};
-      positions[String(currentLesson.id)][mode] = 0;
-      writeJson(KEYS.positions, positions);
-      renderLessonOptions();
+    const completedCurrentLesson = markLessonCompleted(item, mode);
+    if (checkTimer()) return;
+    if (
+      completedCurrentLesson &&
+      mode === "audio" &&
+      preferences.repeatMode === "queue" &&
+      preferences.queueLessonIds.length >= 2
+    ) {
+      const nextId = getQueueLessonId(preferences.queueLessonIds, currentLesson.id, 1);
+      if (nextId !== null) {
+        loadLesson(nextId, {
+          historyMode: "replace",
+          autoplay: true,
+          resumeAudio: false,
+          preserveDock: true,
+          manual: false,
+          saveCurrent: false,
+        });
+      }
     }
-    checkTimer();
   });
   item.addEventListener("canplay", () => {
     dom.mediaError.hidden = true;
@@ -642,7 +877,12 @@ function bindEvents() {
   dom.nextLesson.addEventListener("click", () => navigate(1));
   dom.lessonSelect.addEventListener("change", () => loadLesson(Number(dom.lessonSelect.value)));
   dom.audioTab.addEventListener("click", () => setMode("audio"));
-  dom.videoTab.addEventListener("click", () => setMode("video"));
+  dom.videoTab.addEventListener("click", () => {
+    setMode("video");
+    if (preferences.repeatMode === "queue") {
+      showToast("列表循环仅自动切换音频；返回音频模式后继续生效。 ");
+    }
+  });
   dom.speedPresets.addEventListener("click", (event) => {
     const button = event.target.closest("[data-speed]");
     if (button) setSpeed(Number(button.dataset.speed));
@@ -653,7 +893,30 @@ function bindEvents() {
   dom.seekForward.addEventListener("click", () => seek(10));
   dom.dockSeekBackward.addEventListener("click", () => seek(-10));
   dom.dockSeekForward.addEventListener("click", () => seek(10));
-  dom.loopToggle.addEventListener("click", () => setLoop(!preferences.loop));
+  dom.repeatModeControls.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-repeat-mode]");
+    if (!button) return;
+    if (button.dataset.repeatMode === "queue") activateQueueMode();
+    else setRepeatMode(button.dataset.repeatMode);
+  });
+  dom.editPlaylist.addEventListener("click", openPlaylistEditor);
+  dom.closePlaylistEditor.addEventListener("click", closePlaylistEditor);
+  dom.cancelPlaylist.addEventListener("click", closePlaylistEditor);
+  dom.applyPlaylistRange.addEventListener("click", applyPlaylistRange);
+  dom.playlistLessonGrid.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-lesson-id]");
+    if (!button) return;
+    const lessonId = Number(button.dataset.lessonId);
+    if (playlistDraft.has(lessonId)) playlistDraft.delete(lessonId);
+    else playlistDraft.add(lessonId);
+    renderPlaylistEditor();
+  });
+  dom.clearPlaylist.addEventListener("click", () => {
+    playlistDraft.clear();
+    renderPlaylistEditor();
+  });
+  dom.savePlaylist.addEventListener("click", () => savePlaylistSelection());
+  dom.saveAndPlayPlaylist.addEventListener("click", () => savePlaylistSelection({ play: true }));
   dom.timerPresets.addEventListener("click", (event) => {
     const button = event.target.closest("[data-minutes]");
     if (button) startTimer(Number(button.dataset.minutes));
@@ -685,17 +948,17 @@ function bindEvents() {
     savePosition(dom.audio, "audio", true);
     savePosition(dom.video, "video", true);
   });
-document.addEventListener("focusin", (event) => {
-  if (event.target.matches?.("input, textarea")) setAudioDockSuspended(true);
-});
-document.addEventListener("focusout", (event) => {
-  if (!event.target.matches?.("input, textarea")) return;
-  requestAnimationFrame(() => {
-    const keyboardInputFocused =
-      document.activeElement?.matches?.("input, textarea") ?? false;
-    setAudioDockSuspended(keyboardInputFocused);
+  document.addEventListener("focusin", (event) => {
+    if (event.target.matches?.("input, textarea")) setAudioDockSuspended(true);
   });
-});
+  document.addEventListener("focusout", (event) => {
+    if (!event.target.matches?.("input, textarea")) return;
+    requestAnimationFrame(() => {
+      const keyboardInputFocused =
+        document.activeElement?.matches?.("input, textarea") ?? false;
+      setAudioDockSuspended(keyboardInputFocused);
+    });
+  });
   window.addEventListener("pageshow", checkTimer);
   window.addEventListener("focus", checkTimer);
   document.addEventListener("visibilitychange", checkTimer);
@@ -717,16 +980,32 @@ async function init() {
 
     preferences.speed = normalizeSpeed(preferences.speed);
     preferences.fontScale = clamp(Number(preferences.fontScale) || 1, 0.9, 1.4);
+    preferences.repeatMode = normalizeRepeatMode(
+      Object.prototype.hasOwnProperty.call(storedPreferences, "repeatMode")
+        ? storedPreferences.repeatMode
+        : undefined,
+      Boolean(storedPreferences.loop),
+    );
+    preferences.queueLessonIds = normalizeLessonQueue(preferences.queueLessonIds, lessons);
+    if (preferences.queueLessonIds.length < 2) {
+      preferences.queueLessonIds = lessons.slice(0, Math.min(5, lessons.length)).map((lesson) => lesson.id);
+    }
+    delete preferences.loop;
     activeMode = preferences.mode === "video" ? "video" : "audio";
     setMode(activeMode, { persist: false, pausePrevious: false });
     setSpeed(preferences.speed, { persist: false });
-    setLoop(Boolean(preferences.loop), { persist: false });
+    setRepeatMode(preferences.repeatMode, { persist: false });
     setFontScale(preferences.fontScale, { persist: false });
+    renderPlaylistRangeOptions();
     renderLessonOptions();
 
     const requested = new URL(location.href).searchParams.get("lesson");
-    const id = parseLessonId(requested, lessons, preferences.currentLesson);
-    loadLesson(id, { historyMode: "replace" });
+    let id = parseLessonId(requested, lessons, preferences.currentLesson);
+    if (preferences.repeatMode === "queue" && !preferences.queueLessonIds.includes(id)) {
+      id = preferences.queueLessonIds[0];
+    }
+    loadLesson(id, { historyMode: "replace", manual: false });
+    savePreferences();
     restoreTimer();
   } catch (error) {
     console.error(error);

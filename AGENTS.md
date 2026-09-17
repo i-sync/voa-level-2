@@ -29,7 +29,8 @@ The current release includes:
 - transcript display;
 - local progress and preference storage;
 - previous/next lesson navigation;
-- a mobile bottom audio dock that reuses the single native `<audio>` while reading transcripts;
+- a responsive bottom audio dock that reuses the single native `<audio>` while reading transcripts;
+- an audio-only lesson queue with off, repeat-one, and repeat-queue modes;
 - progressive Media Session support.
 
 Do not add synchronized subtitles, sentence looping, accounts, cloud sync, analytics, monetization, or an app wrapper without explicit user approval.
