@@ -1,0 +1,84 @@
+name: Finalize audio playlist
+
+on:
+  push:
+    branches:
+      - feature/audio-playlist-desktop-dock
+    paths:
+      - .github/workflows/finalize-audio-playlist.yml
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply compatibility and timer fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("js/app.js")
+          text = path.read_text(encoding="utf-8")
+
+          def replace_once(old: str, new: str) -> None:
+              global text
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one match, found {count}: {old!r}")
+              text = text.replace(old, new, 1)
+
+          replace_once(
+              "let playlistDraft = new Set();",
+              "let playlistDraft = new Set();\nlet autoplayGeneration = 0;",
+          )
+          replace_once(
+              "  const lesson = lessons.find((candidate) => candidate.id === id);\n  if (!lesson) return;\n\n  if (manual",
+              "  const lesson = lessons.find((candidate) => candidate.id === id);\n  if (!lesson) return;\n  const loadGeneration = ++autoplayGeneration;\n\n  if (manual",
+          )
+          replace_once(
+              '    const item = currentMedia();\n    const play = () => item.play().catch(() => showToast("自动播放未能继续，请点击播放。"));',
+              '    const item = currentMedia();\n    const play = () => {\n      if (loadGeneration !== autoplayGeneration) return;\n      if (checkTimer()) return;\n      item.play().catch(() => showToast("自动播放未能继续，请点击播放。"));\n    };',
+          )
+          replace_once(
+              "  if (Date.now() >= timer.deadline) {\n    pauseAll();",
+              "  if (Date.now() >= timer.deadline) {\n    autoplayGeneration += 1;\n    pauseAll();",
+          )
+          replace_once(
+              "    preferences.repeatMode = normalizeRepeatMode(preferences.repeatMode, preferences.loop);",
+              '    preferences.repeatMode = normalizeRepeatMode(\n      Object.prototype.hasOwnProperty.call(storedPreferences, "repeatMode")\n        ? storedPreferences.repeatMode\n        : undefined,\n      Boolean(storedPreferences.loop),\n    );',
+          )
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Validate
+        run: |
+          python -m pip install -r scripts/requirements.txt
+          node --check js/app.js
+          node --check js/core.js
+          npm test
+          python -m pytest -q
+          python -m json.tool data/lessons.json > /dev/null
+          git diff --check
+
+      - name: Commit fixes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/app.js
+          git commit -m "fix: preserve legacy looping and cancel stale autoplay"
+          git push origin HEAD:feature/audio-playlist-desktop-dock
