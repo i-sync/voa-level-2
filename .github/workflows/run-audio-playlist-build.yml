@@ -34,14 +34,14 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          import textwrap
 
           source = Path(".github/workflows/build-audio-playlist.yml").read_text(encoding="utf-8")
           marker = "          python - <<'PY'\n"
           start = source.index(marker) + len(marker)
           end_marker = "\n          PY\n\n      - name: Install test dependencies"
           end = source.index(end_marker, start)
-          script = textwrap.dedent(source[start:end])
+          lines = source[start:end].splitlines()
+          script = "\n".join(line[10:] if line.startswith("          ") else line for line in lines) + "\n"
           Path("/tmp/apply_audio_playlist_patch.py").write_text(script, encoding="utf-8")
           PY
           python /tmp/apply_audio_playlist_patch.py
