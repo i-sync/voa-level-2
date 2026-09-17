@@ -77,3 +77,27 @@ def test_mobile_audio_dock_reuses_the_single_native_audio_player():
     assert "env(safe-area-inset-bottom)" in css
     assert "IntersectionObserver" in script
     assert "audioDockActivated" in script
+
+
+def test_audio_playlist_controls_and_desktop_dock():
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    css = (ROOT / "css" / "styles.css").read_text(encoding="utf-8")
+    script = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+
+    for element_id in (
+        "repeatModeControls",
+        "playlistSummary",
+        "editPlaylist",
+        "playlistEditor",
+        "playlistRangeStart",
+        "playlistRangeEnd",
+        "playlistLessonGrid",
+        "saveAndPlayPlaylist",
+    ):
+        assert soup.find(id=element_id) is not None, element_id
+    assert len(soup.find_all("audio")) == 1
+    assert "@media (min-width: 621px)" in css
+    assert "repeatMode" in script
+    assert "queueLessonIds" in script
+    assert "getQueueLessonId" in script
